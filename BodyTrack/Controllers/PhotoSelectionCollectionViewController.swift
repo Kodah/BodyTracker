@@ -9,12 +9,13 @@
 import UIKit
 
 let reuseIdentifier = "Cell"
+let ProgressPointSegueId = "showProgressPointId"
 
 class PhotoSelectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     let bodyReuseIdentifier = "BodyCollectionViewCellId"
     let addReuseIdentifier = "AddCollectionViewId"
-    let itemCount = 10
+    let itemCount = 3
     
     override func viewDidLoad()
     {
@@ -86,6 +87,12 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     {
         return 8
     }
+    
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    {
+        self.performSegueWithIdentifier(ProgressPointSegueId, sender: self)
+    }
+    
 }
 
 
