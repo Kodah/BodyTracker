@@ -18,7 +18,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     {
         super.viewDidLoad()
 
-         self.clearsSelectionOnViewWillAppear = false
+         self.clearsSelectionOnViewWillAppear = true
+        
     }
 
 
@@ -36,14 +37,15 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
         return 10
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
 
         cell.contentView.frame = cell.bounds
         cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
 
         cell.layer.borderColor = UIColor.purpleColor().CGColor;
-        cell.layer.borderWidth = 2.0
+        cell.layer.borderWidth = 1.0
     
         return cell
     }
@@ -62,11 +64,28 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     }
 
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat
+    {
         return 7
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat
+    {
         return 8
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
