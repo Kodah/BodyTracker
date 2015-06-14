@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Sliding View Controller-->
@@ -32,22 +33,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="s7C-m8-Etc">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="62"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MuscleTracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJo-u8-OZg">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="62"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZG-4e-yH7">
+                                    <rect key="frame" x="0.0" y="20" width="600" height="30"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MuscleTracker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYp-ul-Aa7">
+                                            <rect key="frame" x="8" y="0.0" width="584" height="30"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="wYp-ul-Aa7" secondAttribute="trailing" constant="8" id="3z6-jD-oNm"/>
+                                        <constraint firstAttribute="bottom" secondItem="wYp-ul-Aa7" secondAttribute="bottom" id="RTG-AF-WEL"/>
+                                        <constraint firstItem="wYp-ul-Aa7" firstAttribute="top" secondItem="HZG-4e-yH7" secondAttribute="top" id="i96-D1-nhH"/>
+                                        <constraint firstItem="wYp-ul-Aa7" firstAttribute="leading" secondItem="HZG-4e-yH7" secondAttribute="leading" constant="8" id="npa-8q-5Dv"/>
+                                    </constraints>
+                                </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="PJo-u8-OZg" secondAttribute="bottom" id="Dly-PZ-m0r"/>
-                                <constraint firstItem="PJo-u8-OZg" firstAttribute="leading" secondItem="s7C-m8-Etc" secondAttribute="leading" id="IvR-VP-2Va"/>
-                                <constraint firstItem="PJo-u8-OZg" firstAttribute="top" secondItem="s7C-m8-Etc" secondAttribute="top" id="Ref-DF-PBO"/>
-                                <constraint firstAttribute="trailing" secondItem="PJo-u8-OZg" secondAttribute="trailing" id="kK0-Ld-fKA"/>
+                                <constraint firstAttribute="bottom" secondItem="HZG-4e-yH7" secondAttribute="bottom" id="0Gq-Fh-Tns"/>
+                                <constraint firstAttribute="trailing" secondItem="HZG-4e-yH7" secondAttribute="trailing" id="7KQ-sL-Hee"/>
+                                <constraint firstItem="HZG-4e-yH7" firstAttribute="top" secondItem="s7C-m8-Etc" secondAttribute="top" constant="20" id="Nhl-G8-uuH"/>
+                                <constraint firstItem="HZG-4e-yH7" firstAttribute="leading" secondItem="s7C-m8-Etc" secondAttribute="leading" id="wP4-5Q-F7G"/>
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="CgM-aS-xeJ">
@@ -82,11 +96,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="8"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WJO-e6-jJW">
                             <size key="itemSize" width="286" height="275"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BodyCollectionViewCellId" id="Oxj-71-81G">
@@ -96,18 +111,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="344"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="bicep" translatesAutoresizingMaskIntoConstraints="NO" id="E3S-Ys-Ykg">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="E3S-Ys-Ykg" secondAttribute="height" multiplier="1:1" id="OkU-TM-ROe"/>
-                                            </constraints>
-                                        </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSa-sb-iCh">
                                             <rect key="frame" x="0.0" y="300" width="300" height="44"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19/07/2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-7K-xCb">
-                                                    <rect key="frame" x="8" y="13" width="254" height="17"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                    <rect key="frame" x="8" y="12" width="254" height="20"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -131,6 +140,12 @@
                                                 <constraint firstAttribute="trailing" secondItem="GXq-dx-aXD" secondAttribute="trailing" constant="8" id="tjX-Pj-ZQY"/>
                                             </constraints>
                                         </view>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="bicep" translatesAutoresizingMaskIntoConstraints="NO" id="E3S-Ys-Ykg">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="E3S-Ys-Ykg" secondAttribute="height" multiplier="1:1" id="OkU-TM-ROe"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -144,6 +159,39 @@
                                     <constraint firstItem="QSa-sb-iCh" firstAttribute="top" secondItem="E3S-Ys-Ykg" secondAttribute="bottom" id="zWt-KW-skh"/>
                                 </constraints>
                                 <size key="customSize" width="300" height="344"/>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddCollectionViewId" id="alr-1g-rif">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="244"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="Fzv-Ey-BVJ">
+                                            <rect key="frame" x="8" y="8" width="184" height="199"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add new" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTn-Xf-CcZ">
+                                            <rect key="frame" x="8" y="215" width="184" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="8Ad-i8-Ahk"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="Fzv-Ey-BVJ" firstAttribute="leading" secondItem="alr-1g-rif" secondAttribute="leadingMargin" id="Kc1-Bz-JeN"/>
+                                    <constraint firstItem="VTn-Xf-CcZ" firstAttribute="trailing" secondItem="alr-1g-rif" secondAttribute="trailingMargin" id="TuR-gp-Gee"/>
+                                    <constraint firstItem="Fzv-Ey-BVJ" firstAttribute="top" secondItem="alr-1g-rif" secondAttribute="topMargin" id="gMn-a8-iZg"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Fzv-Ey-BVJ" secondAttribute="trailing" id="kBs-FD-7Gf"/>
+                                    <constraint firstItem="VTn-Xf-CcZ" firstAttribute="top" secondItem="Fzv-Ey-BVJ" secondAttribute="bottom" constant="8" id="n5v-vk-Mtd"/>
+                                    <constraint firstItem="VTn-Xf-CcZ" firstAttribute="leading" secondItem="alr-1g-rif" secondAttribute="leadingMargin" id="wEt-zK-tvR"/>
+                                    <constraint firstItem="VTn-Xf-CcZ" firstAttribute="bottom" secondItem="alr-1g-rif" secondAttribute="bottomMargin" id="ye1-4n-OOM"/>
+                                </constraints>
+                                <size key="customSize" width="200" height="244"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -160,5 +208,6 @@
     </scenes>
     <resources>
         <image name="bicep" width="400" height="400"/>
+        <image name="plus" width="600" height="600"/>
     </resources>
 </document>

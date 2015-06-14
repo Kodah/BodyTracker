@@ -12,14 +12,15 @@ let reuseIdentifier = "Cell"
 
 class PhotoSelectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    let reuseIdentifier = "BodyCollectionViewCellId"
+    let bodyReuseIdentifier = "BodyCollectionViewCellId"
+    let addReuseIdentifier = "AddCollectionViewId"
+    let itemCount = 10
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
          self.clearsSelectionOnViewWillAppear = true
-        
     }
 
 
@@ -34,18 +35,30 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
 
-        return 10
+        return itemCount + 1
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+        var cell: UICollectionViewCell
+        
+        if (indexPath.row == itemCount)
+        {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier(addReuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+            cell.layer.borderColor = UIColor.purpleColor().CGColor;
+            cell.layer.borderWidth = 1.0
+        }
+        else
+        {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier(bodyReuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
+            
+            cell.contentView.frame = cell.bounds
+            cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+            
+            cell.layer.borderColor = UIColor.purpleColor().CGColor;
+            cell.layer.borderWidth = 1.0
+        }
 
-        cell.contentView.frame = cell.bounds
-        cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
-
-        cell.layer.borderColor = UIColor.purpleColor().CGColor;
-        cell.layer.borderWidth = 1.0
     
         return cell
     }

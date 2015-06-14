@@ -64,6 +64,7 @@ class MenuTableViewController: UITableViewController {
             case TableViewSection.Main.rawValue:
             
                 cell.backgroundColor = UIColor.purpleColor()
+                cell.textLabel?.text = "Bicep"
                 break
             case TableViewSection.More.rawValue:
             
