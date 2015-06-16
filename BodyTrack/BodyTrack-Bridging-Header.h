@@ -3,3 +3,4 @@
 //
 
 #import <ECSlidingViewController/ECSlidingViewController.h>
+#import "ProgressCollection.h"

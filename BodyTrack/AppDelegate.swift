@@ -38,9 +38,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.makeKeyAndVisible()
         
+        self.setupContext()
+        
         return true
     }
 
+    
+    func setupContext()
+    {
+        
+        var context = self.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
+
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [ProgressCollection] {
+            
+            if fetchResults.count > 0
+            {
+                print(fetchResults.first?.colour)
+            }
+            else
+            {
+                var progressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context!) as ProgressCollection
+                
+                progressCollection.colour = "red"
+                progressCollection.interval = 30
+                progressCollection.name = "front"
+                context?.save(nil);
+            }
+        }
+    }
     // MARK: - Core Data stack
 
     lazy var applicationDocumentsDirectory: NSURL = {
