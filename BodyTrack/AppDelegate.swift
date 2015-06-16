@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if fetchResults.count > 0
             {
-                print(fetchResults.first?.name)
+                println("ProgressCollection \'\(fetchResults.first!.name)\' found")
             }
             else
             {

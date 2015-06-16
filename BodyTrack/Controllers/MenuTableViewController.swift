@@ -100,6 +100,35 @@ class MenuTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        switch (indexPath.section)
+        {
+        case TableViewSection.Main.rawValue:
+            println("Load \"\(self.progressCollections[indexPath.row].name)\" progressCollection into top level view controller")
+            
+            break
+            
+        case TableViewSection.More.rawValue:
+
+            switch (indexPath.row)
+            {
+            case MoreTableViewCell.New.rawValue:
+                println("Create new progressCollection")
+                break;
+            case MoreTableViewCell.Settings.rawValue:
+                println("Display Settings Page")
+                break
+            default:
+                break
+            }
+            
+        default:
+            break
+        }
+        
+
+    }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
