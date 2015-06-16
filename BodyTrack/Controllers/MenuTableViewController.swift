@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MenuTableViewController: UITableViewController {
 
@@ -25,10 +26,24 @@ class MenuTableViewController: UITableViewController {
     }
     
     let CellIdentifier = "MenuCellId"
+    var context: NSManagedObjectContext?
+    var progressCollections = [ProgressCollection]()
+    
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
+        
+        if self.context != nil
+        {
+            self.progressCollections = self.context!.executeFetchRequest(fetchRequest, error: nil) as [ProgressCollection]
+        }
+        else
+        {
+            println("Fuck sake pal")
+        }
 
         self.clearsSelectionOnViewWillAppear = false
 
@@ -47,7 +62,7 @@ class MenuTableViewController: UITableViewController {
         switch (section)
         {
             case TableViewSection.Main.rawValue:
-                return 1;
+                return self.progressCollections.count;
             case TableViewSection.More.rawValue:
                 return MoreTableViewCell.Count.rawValue
             default:
@@ -64,7 +79,7 @@ class MenuTableViewController: UITableViewController {
             case TableViewSection.Main.rawValue:
             
                 cell.backgroundColor = UIColor.purpleColor()
-                cell.textLabel?.text = "Bicep"
+                cell.textLabel?.text = self.progressCollections[indexPath.row].name
                 break
             case TableViewSection.More.rawValue:
             

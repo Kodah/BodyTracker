@@ -19,10 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let slidingViewController = storyboard.instantiateViewControllerWithIdentifier("slidingViewControllerId") as ECSlidingViewController;
-        let topViewController = storyboard.instantiateViewControllerWithIdentifier("homeNavigationControllerId") as UIViewController
-        let underLeftViewController = storyboard.instantiateViewControllerWithIdentifier("menuTableViewControllerId") as UIViewController
+        let topViewController = storyboard.instantiateViewControllerWithIdentifier("homeNavigationControllerId") as PhotoSelectionCollectionViewController
+        let underLeftViewController = storyboard.instantiateViewControllerWithIdentifier("menuTableViewControllerId") as MenuTableViewController
         
         let navigationController = UINavigationController(rootViewController: topViewController);
+        
+        underLeftViewController.context = self.managedObjectContext
         
         underLeftViewController.view.layer.backgroundColor = UIColor(white: 0.9, alpha: 1).CGColor
         underLeftViewController.view.layer.borderColor = UIColor(white: 0.8, alpha: 1).CGColor
@@ -55,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if fetchResults.count > 0
             {
-                print(fetchResults.first?.colour)
+                print(fetchResults.first?.name)
             }
             else
             {
