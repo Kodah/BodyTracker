@@ -4,3 +4,5 @@
 
 #import <ECSlidingViewController/ECSlidingViewController.h>
 #import "ProgressCollection.h"
+#import "ProgressPoint.h"
+#import "UIViewController+ECSlidingViewController.h"

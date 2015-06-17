@@ -28,7 +28,10 @@ class MenuTableViewController: UITableViewController {
     let CellIdentifier = "MenuCellId"
     var context: NSManagedObjectContext?
     var progressCollections = [ProgressCollection]()
-    
+    var selectedProgressCollection : ProgressCollection?
+
+    var slidingVC = slidingViewController
+
     
     override func viewDidLoad()
     {
@@ -36,14 +39,9 @@ class MenuTableViewController: UITableViewController {
         
         let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
         
-        if self.context != nil
-        {
-            self.progressCollections = self.context!.executeFetchRequest(fetchRequest, error: nil) as [ProgressCollection]
-        }
-        else
-        {
-            println("Fuck sake pal")
-        }
+        self.progressCollections = context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
+//
+        self.selectedProgressCollection = self.progressCollections.first
 
         self.clearsSelectionOnViewWillAppear = false
 
@@ -59,6 +57,8 @@ class MenuTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        let sectionEnum = section
+        
         switch (section)
         {
             case TableViewSection.Main.rawValue:
@@ -72,7 +72,7 @@ class MenuTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier)as! UITableViewCell
         
         switch (indexPath.section)
         {
@@ -107,6 +107,15 @@ class MenuTableViewController: UITableViewController {
         case TableViewSection.Main.rawValue:
             println("Load \"\(self.progressCollections[indexPath.row].name)\" progressCollection into top level view controller")
             
+            self.selectedProgressCollection = self.progressCollections[indexPath.row]
+
+            var photoSelectionCollectionViewController : PhotoSelectionCollectionViewController = self.storyboard!.instantiateViewControllerWithIdentifier("homeNavigationControllerId") as! PhotoSelectionCollectionViewController
+            
+            photoSelectionCollectionViewController.progressCollection = self.selectedProgressCollection
+            PhotoSelectionCollectionViewController.setBackgrounColour()
+            
+            self.slidingViewController().resetTopViewAnimated(true)
+
             break
             
         case TableViewSection.More.rawValue:
