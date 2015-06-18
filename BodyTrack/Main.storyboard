@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -104,7 +104,7 @@
                             <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BodyCollectionViewCellId" id="Oxj-71-81G">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BodyCollectionViewCellId" id="Oxj-71-81G" customClass="ProgressPointCollectionViewCell" customModule="BodyTrack" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -114,12 +114,6 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSa-sb-iCh">
                                             <rect key="frame" x="0.0" y="300" width="300" height="44"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19/07/2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-7K-xCb">
-                                                    <rect key="frame" x="8" y="12" width="254" height="20"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXq-dx-aXD">
                                                     <rect key="frame" x="270" y="11" width="22" height="22"/>
                                                     <constraints>
@@ -130,6 +124,12 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19/07/2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-7K-xCb">
+                                                    <rect key="frame" x="8" y="12" width="254" height="20"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -159,6 +159,11 @@
                                     <constraint firstItem="QSa-sb-iCh" firstAttribute="top" secondItem="E3S-Ys-Ykg" secondAttribute="bottom" id="zWt-KW-skh"/>
                                 </constraints>
                                 <size key="customSize" width="300" height="344"/>
+                                <connections>
+                                    <outlet property="date" destination="fcc-7K-xCb" id="DoA-FU-WqY"/>
+                                    <outlet property="progressPicImageView" destination="E3S-Ys-Ykg" id="EgX-ZA-wPG"/>
+                                    <outlet property="progressPicture" destination="E3S-Ys-Ykg" id="S9n-uA-Tw1"/>
+                                </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddCollectionViewId" id="alr-1g-rif">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -195,16 +200,28 @@
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="PHv-sg-9dh" id="VeQ-I4-cSt"/>
-                            <outlet property="delegate" destination="PHv-sg-9dh" id="gNU-pr-T8o"/>
+                            <outlet property="dataSource" destination="Gi2-75-QRK" id="s2r-eh-QM6"/>
+                            <outlet property="delegate" destination="Gi2-75-QRK" id="mYk-w9-WOk"/>
                         </connections>
                     </collectionView>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="imagePickerControllerHelper" destination="kVj-LO-qPv" id="2gY-Kd-pPU"/>
+                        <outlet property="progressPointCollectionViewHelper" destination="Gi2-75-QRK" id="JM2-RG-ACQ"/>
                         <segue destination="OeL-zR-jBy" kind="show" identifier="showProgressPointId" id="cbh-df-oRl"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i76-7Y-pNV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="kVj-LO-qPv" customClass="ImagePickerControllerHelper" customModule="BodyTrack" customModuleProvider="target">
+                    <connections>
+                        <outlet property="photoSelectionCollectionViewController" destination="PHv-sg-9dh" id="Itv-YA-yVv"/>
+                    </connections>
+                </customObject>
+                <customObject id="Gi2-75-QRK" customClass="ProgressPointCollectionViewHelper" customModule="BodyTrack" customModuleProvider="target">
+                    <connections>
+                        <outlet property="photoSelectionCollectionViewController" destination="PHv-sg-9dh" id="syb-NK-efx"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1162" y="1055"/>
         </scene>

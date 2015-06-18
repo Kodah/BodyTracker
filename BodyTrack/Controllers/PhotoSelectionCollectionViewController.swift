@@ -15,12 +15,11 @@ enum ActionSheetButton: Int
     case PhotoLibrary
 }
 
-class PhotoSelectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MenuTableViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate {
+class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate {
 
-    let reuseIdentifier = "Cell"
-    let ProgressPointSegueId = "showProgressPointId"
-    let bodyReuseIdentifier = "BodyCollectionViewCellId"
-    let addReuseIdentifier = "AddCollectionViewId"
+    @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
+    @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
+
     var progressCollection : ProgressCollection?
     var progressPoints = [ProgressPoint]()
     var context: NSManagedObjectContext?
@@ -28,20 +27,17 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        
-        
-        
+
         if let context = self.context
         {
             let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
             var progressCollectionArray : [ProgressCollection] = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
             self.progressCollection = progressCollectionArray.first
             
+            self.collectionView?.registerClass(ProgressPointCollectionViewCell.self, forCellWithReuseIdentifier: "BodyCollectionViewCellId")
+            
         }
 
-        
-        
         if let progressCollection = self.progressCollection
         {
             let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
@@ -70,95 +66,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
             
         self.clearsSelectionOnViewWillAppear = true
     }
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int
-    {
-        return 1
-    }
-
-
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
-
-        return self.progressPoints.count + 1
-    }
-
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
-    {
-        var cell: UICollectionViewCell
-        
-        if (indexPath.row == self.progressPoints.count)
-        {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(addReuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
-            cell.layer.borderColor = UIColor.purpleColor().CGColor;
-            cell.layer.borderWidth = 1.0
-        }
-        else
-        {
-            cell = collectionView.dequeueReusableCellWithReuseIdentifier(bodyReuseIdentifier, forIndexPath: indexPath)as! UICollectionViewCell
-            
-            cell.contentView.frame = cell.bounds
-            cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
-            
-            cell.layer.borderColor = UIColor.purpleColor().CGColor;
-            cell.layer.borderWidth = 1.0
-        }
-
     
-        return cell
-    }
-    
-    func setBackgrounColour()
-    {
-        self.view.backgroundColor = UIColor.blackColor()
-    }
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
-    {
-        return UIEdgeInsetsMake(16, 16, 8, 16)
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
-    {
-        let padding:CGFloat = 8 * 3
-        let side:CGFloat = CGRectGetWidth(collectionView.frame) / 2
-        let sideMinusPadding:CGFloat = side - padding
-        return CGSizeMake(sideMinusPadding, sideMinusPadding + 44)
-    }
-
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat
-    {
-        return 7
-    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat
-    {
-        return 8
-    }
-    
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
-    {
-        if (indexPath.row == self.progressPoints.count)
-        {
-            
-            let actionSheet = UIActionSheet(title: "New photo", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Use Camera", "Photo library")
-            
-            actionSheet.showInView(self.view)
-            
-//            var newProgressPoint :ProgressPoint = NSEntityDescription.insertNewObjectForEntityForName("ProgressPoint", inManagedObjectContext: self.context!) as! ProgressPoint
-//            
-//            newProgressPoint.progressCollection = self.progressCollection
-//            
-//            if let proCol = self.progressCollection
-//            {
-//                var copyProgressCollection : ProgressCollection = proCol
-//                self.loadProgressPointsForProgressCollection(copyProgressCollection)
-//            }
-            
-        }
-    }
     
     func newProgressCollectionCreated(progressCollection: ProgressCollection)
     {
@@ -187,9 +95,49 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
             break
         case ActionSheetButton.PhotoLibrary.rawValue:
             println("Open photos to select photo")
+            
+            var imagePickerController = self.imagePickerControllerHelper.getImagePickerFromHelper()
+            
+            self.presentViewController(imagePickerController, animated: true, completion: nil)
+            
             break
         default:
             break
+        }
+    }
+    
+    
+    func createNewProgressPoint(image : UIImage)
+    {
+        let date : NSDate = NSDate()
+        
+        let uuid = NSUUID().UUIDString
+        
+        let imageData = UIImagePNGRepresentation(image)
+        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let imagePath = paths.stringByAppendingPathComponent("\(uuid).png")
+        
+        if !imageData.writeToFile(imagePath, atomically: false)
+        {
+            println("not saved")
+        } else {
+            println("saved")
+            NSUserDefaults.standardUserDefaults().setObject(imagePath, forKey: "imagePath")
+        }
+        
+        
+        var newProgressPoint :ProgressPoint = NSEntityDescription.insertNewObjectForEntityForName("ProgressPoint", inManagedObjectContext: self.context!) as! ProgressPoint
+        
+        newProgressPoint.progressCollection = self.progressCollection
+        newProgressPoint.imageName = imagePath
+        newProgressPoint.date = date
+        
+        self.context?.save(nil)
+        
+        if let proCol = self.progressCollection
+        {
+            var copyProgressCollection : ProgressCollection = proCol
+            self.loadProgressPointsForProgressCollection(copyProgressCollection)
         }
     }
     
@@ -207,13 +155,21 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
         if let context = self.context
         {
             self.progressPoints = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressPoint]
+            self.progressPointCollectionViewHelper.progressPoints = self.progressPoints
         }
         
         self.title = progressCollection.name
+        
         self.collectionView?.reloadData()
     }
 
-    
+    func showActionSheet()
+    {
+        let actionSheet = UIActionSheet(title: "New photo", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Use Camera", "Photo library")
+        
+        actionSheet.showInView(self.view)
+    }
+
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
     {
         switch buttonIndex
