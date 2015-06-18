@@ -11,7 +11,7 @@ import CoreData
 
 
 
-class PhotoSelectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MenuTableViewControllerDelegate, UIAlertViewDelegate {
+class PhotoSelectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MenuTableViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate {
 
     let reuseIdentifier = "Cell"
     let ProgressPointSegueId = "showProgressPointId"
@@ -138,17 +138,20 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     {
         if (indexPath.row == self.progressPoints.count)
         {
-            var newProgressPoint :ProgressPoint = NSEntityDescription.insertNewObjectForEntityForName("ProgressPoint", inManagedObjectContext: self.context!) as! ProgressPoint
             
-            newProgressPoint.progressCollection = self.progressCollection
+            let actionSheet = UIActionSheet(title: "New photo", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Use Camera", "Photo library")
             
-            if let proCol = self.progressCollection
-            {
-                var copyProgressCollection : ProgressCollection = proCol
-                self.loadProgressPointsForProgressCollection(copyProgressCollection)
-            }
+            actionSheet.showInView(self.view)
             
-
+//            var newProgressPoint :ProgressPoint = NSEntityDescription.insertNewObjectForEntityForName("ProgressPoint", inManagedObjectContext: self.context!) as! ProgressPoint
+//            
+//            newProgressPoint.progressCollection = self.progressCollection
+//            
+//            if let proCol = self.progressCollection
+//            {
+//                var copyProgressCollection : ProgressCollection = proCol
+//                self.loadProgressPointsForProgressCollection(copyProgressCollection)
+//            }
             
         }
     }
