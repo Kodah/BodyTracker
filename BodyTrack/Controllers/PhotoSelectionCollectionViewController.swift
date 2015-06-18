@@ -9,7 +9,11 @@
 import UIKit
 import CoreData
 
-
+enum ActionSheetButton: Int
+{
+    case Camera = 1
+    case PhotoLibrary
+}
 
 class PhotoSelectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MenuTableViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate {
 
@@ -168,6 +172,25 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
         
         alert.show()
         
+    }
+    
+    // actionsheet delegate
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
+    {
+        switch buttonIndex
+        {
+        case ActionSheetButton.Camera.rawValue:
+            println("open custom camera")
+
+            
+            break
+        case ActionSheetButton.PhotoLibrary.rawValue:
+            println("Open photos to select photo")
+            break
+        default:
+            break
+        }
     }
     
     //menu delegate
