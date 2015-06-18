@@ -9,6 +9,12 @@
 import UIKit
 import CoreData
 
+protocol MenuTableViewControllerDelegate
+{
+    func newProgressCollectionCreated(progressCollection: ProgressCollection)
+    func loadProgressPointsForProgressCollection(progressCollection:ProgressCollection)
+}
+
 class MenuTableViewController: UITableViewController {
 
     enum TableViewSection: Int
@@ -25,10 +31,14 @@ class MenuTableViewController: UITableViewController {
         case Count
     }
     
+    var delegate: MenuTableViewControllerDelegate! = nil;
     let CellIdentifier = "MenuCellId"
     var context: NSManagedObjectContext?
     var progressCollections = [ProgressCollection]()
-    
+    var selectedProgressCollection : ProgressCollection?
+
+    var slidingVC = slidingViewController
+
     
     override func viewDidLoad()
     {
@@ -36,17 +46,17 @@ class MenuTableViewController: UITableViewController {
         
         let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
         
-        if self.context != nil
-        {
-            self.progressCollections = self.context!.executeFetchRequest(fetchRequest, error: nil) as [ProgressCollection]
-        }
-        else
-        {
-            println("Fuck sake pal")
-        }
+        self.progressCollections = context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
+//
+        self.selectedProgressCollection = self.progressCollections.first
 
         self.clearsSelectionOnViewWillAppear = false
 
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -59,6 +69,8 @@ class MenuTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        let sectionEnum = section
+        
         switch (section)
         {
             case TableViewSection.Main.rawValue:
@@ -72,7 +84,7 @@ class MenuTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        var cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(CellIdentifier)as! UITableViewCell
         
         switch (indexPath.section)
         {
@@ -107,6 +119,15 @@ class MenuTableViewController: UITableViewController {
         case TableViewSection.Main.rawValue:
             println("Load \"\(self.progressCollections[indexPath.row].name)\" progressCollection into top level view controller")
             
+            self.selectedProgressCollection = self.progressCollections[indexPath.row]
+          
+            
+            self.delegate.loadProgressPointsForProgressCollection(self.selectedProgressCollection!
+            )
+            
+            
+            self.slidingViewController().resetTopViewAnimated(true)
+
             break
             
         case TableViewSection.More.rawValue:
@@ -115,6 +136,20 @@ class MenuTableViewController: UITableViewController {
             {
             case MoreTableViewCell.New.rawValue:
                 println("Create new progressCollection")
+                
+                if let context = self.context
+                {
+                    var newProgressCollection :ProgressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context) as! ProgressCollection
+                    
+                    self.delegate.newProgressCollectionCreated(newProgressCollection)
+                    
+                    
+                    let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
+                    self.progressCollections = self.context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
+                    
+                    
+                }
+
                 break;
             case MoreTableViewCell.Settings.rawValue:
                 println("Display Settings Page")

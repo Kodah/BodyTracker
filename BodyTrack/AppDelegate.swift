@@ -18,13 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let slidingViewController = storyboard.instantiateViewControllerWithIdentifier("slidingViewControllerId") as ECSlidingViewController;
-        let topViewController = storyboard.instantiateViewControllerWithIdentifier("homeNavigationControllerId") as PhotoSelectionCollectionViewController
-        let underLeftViewController = storyboard.instantiateViewControllerWithIdentifier("menuTableViewControllerId") as MenuTableViewController
+        let slidingViewController = storyboard.instantiateViewControllerWithIdentifier("slidingViewControllerId") as! ECSlidingViewController;
+        let topViewController = storyboard.instantiateViewControllerWithIdentifier("homeNavigationControllerId") as! PhotoSelectionCollectionViewController
+        let underLeftViewController = storyboard.instantiateViewControllerWithIdentifier("menuTableViewControllerId") as! MenuTableViewController
         
         let navigationController = UINavigationController(rootViewController: topViewController);
         
         underLeftViewController.context = self.managedObjectContext
+        topViewController.context = self.managedObjectContext
         
         underLeftViewController.view.layer.backgroundColor = UIColor(white: 0.9, alpha: 1).CGColor
         underLeftViewController.view.layer.borderColor = UIColor(white: 0.8, alpha: 1).CGColor
@@ -33,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         slidingViewController.topViewController = navigationController
         slidingViewController.underLeftViewController = underLeftViewController
         navigationController.view.addGestureRecognizer(slidingViewController.panGesture)
+        
+        underLeftViewController.delegate = topViewController
         
         slidingViewController.anchorLeftRevealAmount = 50
         
@@ -61,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             else
             {
-                var progressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context!) as ProgressCollection
+                var progressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context!) as! ProgressCollection
                 
                 progressCollection.colour = "red"
                 progressCollection.interval = 30
@@ -75,7 +78,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "Sug.BodyTrack" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
+        return urls[urls.count-1] as! NSURL
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -98,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")

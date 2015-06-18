@@ -46,7 +46,6 @@
 		7E115F2F1B2CECD4002F443A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E115F301B2CECD4002F443A /* BodyTrackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTrackTests.swift; sourceTree = "<group>"; };
 		7E115F3A1B2CECE6002F443A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		7E115F3D1B2CEEA3002F443A /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		7E115F3E1B2CF568002F443A /* BodyTrack-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "BodyTrack-Bridging-Header.h"; path = "BodyTrack/BodyTrack-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E87C7D81B30BD2000AF1B32 /* ProgressPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressPoint.h; path = model/ProgressPoint.h; sourceTree = "<group>"; };
 		7E87C7D91B30BD2000AF1B32 /* ProgressPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressPoint.m; path = model/ProgressPoint.m; sourceTree = "<group>"; };
@@ -86,7 +85,6 @@
 		7E115F091B2CECD4002F443A = {
 			isa = PBXGroup;
 			children = (
-				7E115F3D1B2CEEA3002F443A /* BridgingHeader.h */,
 				7E115F3E1B2CF568002F443A /* BodyTrack-Bridging-Header.h */,
 				7E115F141B2CECD4002F443A /* BodyTrack */,
 				7E115F2D1B2CECD4002F443A /* BodyTrackTests */,
