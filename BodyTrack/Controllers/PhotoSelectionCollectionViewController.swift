@@ -11,7 +11,7 @@ import CoreData
 
 
 
-class PhotoSelectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class PhotoSelectionCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MenuTableViewControllerDelegate, UIAlertViewDelegate {
 
     let reuseIdentifier = "Cell"
     let ProgressPointSegueId = "showProgressPointId"
@@ -25,8 +25,6 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     {
         super.viewDidLoad()
         
-        
-        
         if let progressCollection = self.progressCollection
         {
             let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
@@ -38,6 +36,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
             {
                 self.progressPoints = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressPoint]
             }
+            self.title = progressCollection.name
             
         }
 
@@ -115,6 +114,67 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
         self.performSegueWithIdentifier(ProgressPointSegueId, sender: self)
+    }
+    
+    func newProgressCollectionCreated(progressCollection: ProgressCollection)
+    {
+        self.progressCollection = progressCollection
+        
+        slidingViewController().resetTopViewAnimated(true)
+        
+        var alert = UIAlertView(title: "Edit collection name", message: "", delegate: self, cancelButtonTitle: "Delete", otherButtonTitles: "OK")
+
+        alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
+        
+        alert.show()
+        
+    }
+    
+    //menu delegate
+    
+    func loadProgressPointsForProgressCollection(progressCollection: ProgressCollection) {
+        
+        self.progressCollection = progressCollection
+        let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
+        let predicate = NSPredicate(format: "progressCollection == %@", progressCollection)
+        
+        fetchRequest.predicate = predicate
+        
+        if let context = self.context
+        {
+            self.progressPoints = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressPoint]
+        }
+        
+        self.title = progressCollection.name
+        self.collectionView?.reloadData()
+    }
+
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
+    {
+        switch buttonIndex
+        {
+        case 0:
+            println("delete progress collection and loads another one")
+            break
+            
+        case 1:
+            
+            self.progressCollection?.name = alertView.textFieldAtIndex(0)?.text
+            self.loadProgressPointsForProgressCollection(self.progressCollection!)
+            
+            if let context = self.context
+            {
+                if self.context?.save(nil) == false
+                {
+                    println("save failed")
+                }
+            }
+            
+            break
+        default:
+            break
+        }
     }
     
 }

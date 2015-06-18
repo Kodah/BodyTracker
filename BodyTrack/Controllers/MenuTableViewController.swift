@@ -9,6 +9,12 @@
 import UIKit
 import CoreData
 
+protocol MenuTableViewControllerDelegate
+{
+    func newProgressCollectionCreated(progressCollection: ProgressCollection)
+    func loadProgressPointsForProgressCollection(progressCollection:ProgressCollection)
+}
+
 class MenuTableViewController: UITableViewController {
 
     enum TableViewSection: Int
@@ -25,6 +31,7 @@ class MenuTableViewController: UITableViewController {
         case Count
     }
     
+    var delegate: MenuTableViewControllerDelegate! = nil;
     let CellIdentifier = "MenuCellId"
     var context: NSManagedObjectContext?
     var progressCollections = [ProgressCollection]()
@@ -45,6 +52,11 @@ class MenuTableViewController: UITableViewController {
 
         self.clearsSelectionOnViewWillAppear = false
 
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -108,11 +120,11 @@ class MenuTableViewController: UITableViewController {
             println("Load \"\(self.progressCollections[indexPath.row].name)\" progressCollection into top level view controller")
             
             self.selectedProgressCollection = self.progressCollections[indexPath.row]
-
-            var photoSelectionCollectionViewController : PhotoSelectionCollectionViewController = self.storyboard!.instantiateViewControllerWithIdentifier("homeNavigationControllerId") as! PhotoSelectionCollectionViewController
+          
             
-            photoSelectionCollectionViewController.progressCollection = self.selectedProgressCollection
-            PhotoSelectionCollectionViewController.setBackgrounColour()
+            self.delegate.loadProgressPointsForProgressCollection(self.selectedProgressCollection!
+            )
+            
             
             self.slidingViewController().resetTopViewAnimated(true)
 
@@ -124,6 +136,20 @@ class MenuTableViewController: UITableViewController {
             {
             case MoreTableViewCell.New.rawValue:
                 println("Create new progressCollection")
+                
+                if let context = self.context
+                {
+                    var newProgressCollection :ProgressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context) as! ProgressCollection
+                    
+                    self.delegate.newProgressCollectionCreated(newProgressCollection)
+                    
+                    
+                    let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
+                    self.progressCollections = self.context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
+                    
+                    
+                }
+
                 break;
             case MoreTableViewCell.Settings.rawValue:
                 println("Display Settings Page")

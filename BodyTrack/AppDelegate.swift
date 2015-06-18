@@ -35,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         slidingViewController.underLeftViewController = underLeftViewController
         navigationController.view.addGestureRecognizer(slidingViewController.panGesture)
         
+        underLeftViewController.delegate = topViewController
+        
         slidingViewController.anchorLeftRevealAmount = 50
         
         self.window?.rootViewController = slidingViewController
