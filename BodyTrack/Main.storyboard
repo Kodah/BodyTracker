@@ -335,7 +335,7 @@
         <!--View Controller-->
         <scene sceneID="FDn-gH-CbP">
             <objects>
-                <viewController id="7P9-TT-3wU" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="imagePickerOverlayViewController" id="7P9-TT-3wU" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s0R-bc-jeQ"/>
                         <viewControllerLayoutGuide type="bottom" id="zTg-o4-ZgH"/>
@@ -344,6 +344,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="54W-Tp-GeN">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zi5-8A-yWf">
                                 <rect key="frame" x="0.0" y="500" width="600" height="100"/>
                                 <subviews>
@@ -418,13 +421,10 @@
                                     <constraint firstItem="BRB-OK-weK" firstAttribute="centerX" secondItem="W7E-Fm-lDJ" secondAttribute="centerX" id="yje-fD-gLo"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="54W-Tp-GeN">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
-                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="zi5-8A-yWf" firstAttribute="leading" secondItem="rp6-e8-MAL" secondAttribute="leading" id="EzO-gT-rXK"/>
-                            <constraint firstItem="zi5-8A-yWf" firstAttribute="top" secondItem="54W-Tp-GeN" secondAttribute="bottom" id="I7J-zG-48u"/>
+                            <constraint firstItem="zi5-8A-yWf" firstAttribute="top" secondItem="54W-Tp-GeN" secondAttribute="bottom" constant="-100" id="I7J-zG-48u"/>
                             <constraint firstItem="54W-Tp-GeN" firstAttribute="top" secondItem="rp6-e8-MAL" secondAttribute="top" id="XN8-OG-JWP"/>
                             <constraint firstItem="zTg-o4-ZgH" firstAttribute="top" secondItem="zi5-8A-yWf" secondAttribute="bottom" id="ZsV-aO-3to"/>
                             <constraint firstItem="54W-Tp-GeN" firstAttribute="leading" secondItem="rp6-e8-MAL" secondAttribute="leading" id="n25-Pn-RIk"/>
