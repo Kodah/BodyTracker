@@ -25,16 +25,39 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     {
         super.viewDidLoad()
         
+        
+        
+        
+        if let context = self.context
+        {
+            let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
+            var progressCollectionArray : [ProgressCollection] = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
+            self.progressCollection = progressCollectionArray.first
+            
+        }
+
+        
+        
         if let progressCollection = self.progressCollection
         {
             let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
-            let predicate = NSPredicate(format: "ProgressCollection == %@", progressCollection)
+            let predicate = NSPredicate(format: "progressCollection == %@", progressCollection)
             
             fetchRequest.predicate = predicate
             
             if let context = self.context
             {
-                self.progressPoints = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressPoint]
+                var array = context.executeFetchRequest(fetchRequest, error: nil)
+                
+                if let arraySafe = array
+                {
+                    if ((arraySafe.first?.isKindOfClass(ProgressPoint)) != nil)
+                    {
+                        self.progressPoints = arraySafe as! [ProgressPoint]
+                    }
+                }
+                
+                
             }
             self.title = progressCollection.name
             
@@ -113,7 +136,21 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        self.performSegueWithIdentifier(ProgressPointSegueId, sender: self)
+        if (indexPath.row == self.progressPoints.count)
+        {
+            var newProgressPoint :ProgressPoint = NSEntityDescription.insertNewObjectForEntityForName("ProgressPoint", inManagedObjectContext: self.context!) as! ProgressPoint
+            
+            newProgressPoint.progressCollection = self.progressCollection
+            
+            if let proCol = self.progressCollection
+            {
+                var copyProgressCollection : ProgressCollection = proCol
+                self.loadProgressPointsForProgressCollection(copyProgressCollection)
+            }
+            
+
+            
+        }
     }
     
     func newProgressCollectionCreated(progressCollection: ProgressCollection)
@@ -135,6 +172,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, UIColl
     func loadProgressPointsForProgressCollection(progressCollection: ProgressCollection) {
         
         self.progressCollection = progressCollection
+        
         let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
         let predicate = NSPredicate(format: "progressCollection == %@", progressCollection)
         
