@@ -88,6 +88,9 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         case ActionSheetButton.Camera.rawValue:
             println("open custom camera")
 
+            var imagePickerController = self.imagePickerControllerHelper.getCameraFromHelper()
+            
+            self.presentViewController(imagePickerController, animated: true, completion: nil)
             
             break
         case ActionSheetButton.PhotoLibrary.rawValue:
