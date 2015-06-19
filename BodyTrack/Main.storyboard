@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -161,8 +161,7 @@
                                 <size key="customSize" width="300" height="344"/>
                                 <connections>
                                     <outlet property="date" destination="fcc-7K-xCb" id="DoA-FU-WqY"/>
-                                    <outlet property="progressPicImageView" destination="E3S-Ys-Ykg" id="EgX-ZA-wPG"/>
-                                    <outlet property="progressPicture" destination="E3S-Ys-Ykg" id="S9n-uA-Tw1"/>
+                                    <outlet property="progressPicImageView" destination="E3S-Ys-Ykg" id="ovA-pf-BA0"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddCollectionViewId" id="alr-1g-rif">
@@ -219,6 +218,7 @@
                 </customObject>
                 <customObject id="Gi2-75-QRK" customClass="ProgressPointCollectionViewHelper" customModule="BodyTrack" customModuleProvider="target">
                     <connections>
+                        <outlet property="collectionView" destination="JRL-sK-yTR" id="bp4-L4-GGT"/>
                         <outlet property="photoSelectionCollectionViewController" destination="PHv-sg-9dh" id="syb-NK-efx"/>
                     </connections>
                 </customObject>

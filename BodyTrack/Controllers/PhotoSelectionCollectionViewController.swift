@@ -33,9 +33,6 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
             var progressCollectionArray : [ProgressCollection] = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
             self.progressCollection = progressCollectionArray.first
-            
-            self.collectionView?.registerClass(ProgressPointCollectionViewCell.self, forCellWithReuseIdentifier: "BodyCollectionViewCellId")
-            
         }
 
         if let progressCollection = self.progressCollection
