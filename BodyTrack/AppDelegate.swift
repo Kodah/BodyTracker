@@ -34,8 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         underLeftViewController.context = self.managedObjectContext
         topViewController.context = self.managedObjectContext
         
-        underLeftViewController.view.layer.backgroundColor = UIColor(white: 0.9, alpha: 1).CGColor
-        underLeftViewController.view.layer.borderColor = UIColor(white: 0.8, alpha: 1).CGColor
         underLeftViewController.edgesForExtendedLayout = UIRectEdge.Top | UIRectEdge.Bottom | UIRectEdge.Left
         
         slidingViewController.topViewController = navigationController
@@ -71,7 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             {
                 var progressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context!) as! ProgressCollection
                 
-                progressCollection.colour = "red"
+                var color = UIColor.randomColor()
+                
+                var hex = UIColor.hexValuesFromUIColor(color)
+    
+                progressCollection.colour = hex
                 progressCollection.interval = 30
                 progressCollection.name = "front"
                 context?.save(nil);

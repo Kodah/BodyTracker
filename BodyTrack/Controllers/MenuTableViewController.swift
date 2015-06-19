@@ -90,7 +90,7 @@ class MenuTableViewController: UITableViewController {
         {
             case TableViewSection.Main.rawValue:
             
-                cell.backgroundColor = UIColor.purpleColor()
+                cell.backgroundColor = UIColor.randomColor()
                 cell.textLabel?.text = self.progressCollections[indexPath.row].name
                 break
             case TableViewSection.More.rawValue:
