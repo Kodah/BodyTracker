@@ -26,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let navigationController = UINavigationController(rootViewController: topViewController);
         
+        navigationController.view.clipsToBounds = false
+        navigationController.view.layer.shadowOpacity = 0.75;
+        navigationController.view.layer.shadowRadius = 10.0;
+        navigationController.view.layer.shadowColor = UIColor.blackColor().CGColor
+        
         underLeftViewController.context = self.managedObjectContext
         topViewController.context = self.managedObjectContext
         
