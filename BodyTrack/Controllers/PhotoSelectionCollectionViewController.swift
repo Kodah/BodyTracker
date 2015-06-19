@@ -58,6 +58,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
                 }
             }
             self.title = progressCollection.name
+            self.navigationController?.navigationBar.backgroundColor = UIColor(rgba: progressCollection.colour)
         }
         self.clearsSelectionOnViewWillAppear = true
     }
@@ -162,6 +163,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         }
         
         self.title = progressCollection.name
+        self.navigationController?.navigationBar.backgroundColor = UIColor(rgba: progressCollection.colour)
         
         self.collectionView?.reloadData()
     }
@@ -184,6 +186,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         case 1:
             
             self.progressCollection?.name = alertView.textFieldAtIndex(0)?.text
+
+            self.progressCollection?.colour = UIColor.hexValuesFromUIColor(UIColor.randomColor())
             self.loadProgressPointsForProgressCollection(self.progressCollection!)
             
             if let context = self.context

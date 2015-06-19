@@ -38,17 +38,19 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
         {
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier(addReuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
             
-                cell.layer.borderColor = UIColor.purpleColor().CGColor;
+                cell.layer.borderColor = UIColor.blackColor().CGColor
                 cell.layer.borderWidth = 1.0
                 
                 return cell
         }
         else
         {
+            var progressPoint: ProgressPoint = self.progressPoints[indexPath.row]
+            var progressCollection = progressPoint.progressCollection as! ProgressCollection
             
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier(bodyReuseIdentifier, forIndexPath: indexPath) as! ProgressPointCollectionViewCell
 
-            var progressPoint: ProgressPoint = self.progressPoints[indexPath.row]
+            
             
             if let imageView = cell.progressPicImageView
             {
@@ -61,7 +63,7 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             cell.contentView.frame = cell.bounds
             cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
                 
-            cell.layer.borderColor = UIColor.purpleColor().CGColor;
+            cell.layer.borderColor = UIColor(rgba: progressCollection.colour).CGColor
             cell.layer.borderWidth = 1.0
             return cell
         }
