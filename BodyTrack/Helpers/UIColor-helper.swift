@@ -13,11 +13,11 @@ extension UIColor
 {
     class func randomColor() -> UIColor
     {
-        var randomRed:CGFloat = CGFloat(drand48())
+        var randomRed:CGFloat = CGFloat(arc4random_uniform(100)) / 100
         
-        var randomGreen:CGFloat = CGFloat(drand48())
+        var randomGreen:CGFloat = CGFloat(arc4random_uniform(100)) / 100
         
-        var randomBlue:CGFloat = CGFloat(drand48())
+        var randomBlue:CGFloat = CGFloat(arc4random_uniform(100)) / 100
         
         return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     }
