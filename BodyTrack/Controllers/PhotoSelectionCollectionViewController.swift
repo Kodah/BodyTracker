@@ -112,29 +112,34 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     func createNewProgressPoint(image : UIImage)
     {
         let date : NSDate = NSDate()
+  
         
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         let uuid = NSUUID().UUIDString
         
-        let imageData = UIImagePNGRepresentation(image)
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-        let imagePath = paths.stringByAppendingPathComponent("\(uuid).png")
+        let fileName = "\(uuid).png"
         
-        if !imageData.writeToFile(imagePath, atomically: false)
-        {
-            println("not saved")
-        } else {
-            println("saved")
-            NSUserDefaults.standardUserDefaults().setObject(imagePath, forKey: "imagePath")
-        }
+        var filePathToWrite = "\(paths)/\(fileName)"
+        
+        var imageData : NSData = UIImagePNGRepresentation(image)
+        
+        fileManager.createFileAtPath(filePathToWrite, contents: imageData, attributes: nil)
         
         
         var newProgressPoint :ProgressPoint = NSEntityDescription.insertNewObjectForEntityForName("ProgressPoint", inManagedObjectContext: self.context!) as! ProgressPoint
         
         newProgressPoint.progressCollection = self.progressCollection
-        newProgressPoint.imageName = imagePath
+        newProgressPoint.imageName = fileName
         newProgressPoint.date = date
         
-        self.context?.save(nil)
+        var error : NSError?
+        if self.context?.save(&error) == false
+        {
+            println("error \(error?.description)")
+        }
         
         if let proCol = self.progressCollection
         {

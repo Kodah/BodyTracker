@@ -16,7 +16,7 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!)
     {
-    self.photoSelectionCollectionViewController.createNewProgressPoint(image)
+        self.photoSelectionCollectionViewController.createNewProgressPoint(image)
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     

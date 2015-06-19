@@ -50,24 +50,13 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
 
             var progressPoint: ProgressPoint = self.progressPoints[indexPath.row]
             
-            var imageData: NSData? = NSData.dataWithContentsOfMappedFile(progressPoint.imageName) as? NSData
-            var progressImage: UIImage?
-            
-            if let imageData = imageData
+            if let imageView = cell.progressPicImageView
             {
-                progressImage = UIImage(data: imageData)
-            }
-            
-            
-            if let image = progressImage
-            {
-                if let imageView = cell.progressPicImageView
+                if let image = progressPoint.getImage()
                 {
                     imageView.image = image
                 }
-                
             }
-            
                     
             cell.contentView.frame = cell.bounds
             cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight

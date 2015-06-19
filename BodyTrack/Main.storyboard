@@ -141,7 +141,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="GXq-dx-aXD" secondAttribute="trailing" constant="8" id="tjX-Pj-ZQY"/>
                                             </constraints>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="bicep" translatesAutoresizingMaskIntoConstraints="NO" id="E3S-Ys-Ykg">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="E3S-Ys-Ykg">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="E3S-Ys-Ykg" secondAttribute="height" multiplier="1:1" id="OkU-TM-ROe"/>
@@ -381,7 +381,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bicep" width="400" height="400"/>
         <image name="plus" width="600" height="600"/>
     </resources>
 </document>

@@ -22,6 +22,7 @@
 		7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */; };
 		7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */; };
 		88DF6BFD1B3441A000E07033 /* ProgressPointDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */; };
+		88DF6C061B345D2400E07033 /* ProgressPointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = Controllers/MenuTableViewController.swift; sourceTree = "<group>"; };
 		7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoSelectionCollectionViewController.swift; path = Controllers/PhotoSelectionCollectionViewController.swift; sourceTree = "<group>"; };
 		88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointDetailTableViewController.swift; path = Controllers/ProgressPointDetailTableViewController.swift; sourceTree = "<group>"; };
+		88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPointHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 			children = (
 				7E2ECF5E1B3357DC004F2033 /* ImagePickerControllerHelper.swift */,
 				7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */,
+				88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */,
 				7E2ECF611B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift in Sources */,
 				7E115F1B1B2CECD4002F443A /* BodyTrack.xcdatamodeld in Sources */,
+				88DF6C061B345D2400E07033 /* ProgressPointHelper.swift in Sources */,
 				7E87C7DD1B30BD2000AF1B32 /* ProgressCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,25 +31,14 @@ class ProgressPointDetailTableViewController: UITableViewController {
         
         if let progressPoint = self.progressPoint
         {
-            var imageData: NSData? = NSData.dataWithContentsOfMappedFile(progressPoint.imageName) as? NSData
-            var progressImage: UIImage?
-            
-            if let imageData = imageData
+            if let imageView = self.imageView
             {
-                progressImage = UIImage(data: imageData)
-            }
-            
-            
-            if let image = progressImage
-            {
-                if let imageView = self.imageView
+                if let image = self.progressPoint?.getImage()
                 {
                     imageView.image = image
                 }
-                
             }
         }
-
     }
     
 
