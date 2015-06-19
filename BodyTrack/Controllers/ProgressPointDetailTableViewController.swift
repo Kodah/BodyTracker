@@ -64,7 +64,9 @@ class ProgressPointDetailTableViewController: UITableViewController {
             if let date = self.progressPoint?.date
             {
                 var dateformatter = NSDateFormatter()
-                dateformatter.dateFromString("dd-MM-yyyy")
+                dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
+                dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
+                dateformatter.dateFormat = "dd MMM yyyy"
                 cell.detailTextLabel?.text = dateformatter.stringFromDate(date)
             }
             
