@@ -15,6 +15,9 @@
 		7E115F251B2CECD4002F443A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E115F231B2CECD4002F443A /* LaunchScreen.xib */; };
 		7E115F311B2CECD4002F443A /* BodyTrackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F301B2CECD4002F443A /* BodyTrackTests.swift */; };
 		7E115F3B1B2CECE6002F443A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E115F3A1B2CECE6002F443A /* Main.storyboard */; };
+		7E2ECF5F1B3357DC004F2033 /* ImagePickerControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECF5E1B3357DC004F2033 /* ImagePickerControllerHelper.swift */; };
+		7E2ECF611B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */; };
+		7E2ECF631B33637B004F2033 /* ProgressPointCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECF621B33637B004F2033 /* ProgressPointCollectionViewCell.swift */; };
 		7E87C7DA1B30BD2000AF1B32 /* ProgressPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C7D91B30BD2000AF1B32 /* ProgressPoint.m */; };
 		7E87C7DD1B30BD2000AF1B32 /* ProgressCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C7DC1B30BD2000AF1B32 /* ProgressCollection.m */; };
 		7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */; };
@@ -47,6 +50,9 @@
 		7E115F301B2CECD4002F443A /* BodyTrackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTrackTests.swift; sourceTree = "<group>"; };
 		7E115F3A1B2CECE6002F443A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7E115F3E1B2CF568002F443A /* BodyTrack-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "BodyTrack-Bridging-Header.h"; path = "BodyTrack/BodyTrack-Bridging-Header.h"; sourceTree = "<group>"; };
+		7E2ECF5E1B3357DC004F2033 /* ImagePickerControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagePickerControllerHelper.swift; path = Helpers/ImagePickerControllerHelper.swift; sourceTree = "<group>"; };
+		7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointCollectionViewHelper.swift; path = Helpers/ProgressPointCollectionViewHelper.swift; sourceTree = "<group>"; };
+		7E2ECF621B33637B004F2033 /* ProgressPointCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointCollectionViewCell.swift; path = View/ProgressPointCollectionViewCell.swift; sourceTree = "<group>"; };
 		7E87C7D81B30BD2000AF1B32 /* ProgressPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressPoint.h; path = model/ProgressPoint.h; sourceTree = "<group>"; };
 		7E87C7D91B30BD2000AF1B32 /* ProgressPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressPoint.m; path = model/ProgressPoint.m; sourceTree = "<group>"; };
 		7E87C7DB1B30BD2000AF1B32 /* ProgressCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressCollection.h; path = model/ProgressCollection.h; sourceTree = "<group>"; };
@@ -110,6 +116,7 @@
 				7EC64C241B2DB18E001B2CBE /* Controller */,
 				7EC64C231B2DB183001B2CBE /* View */,
 				7EC64C221B2DB17D001B2CBE /* Model */,
+				7E2ECF5D1B3357AC004F2033 /* Helpers */,
 				7E115F151B2CECD4002F443A /* Supporting Files */,
 			);
 			path = BodyTrack;
@@ -141,6 +148,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7E2ECF5D1B3357AC004F2033 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7E2ECF5E1B3357DC004F2033 /* ImagePickerControllerHelper.swift */,
+				7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		7EC64C221B2DB17D001B2CBE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +174,7 @@
 			children = (
 				7E115F3A1B2CECE6002F443A /* Main.storyboard */,
 				7E115F231B2CECD4002F443A /* LaunchScreen.xib */,
+				7E2ECF621B33637B004F2033 /* ProgressPointCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -316,11 +333,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E2ECF631B33637B004F2033 /* ProgressPointCollectionViewCell.swift in Sources */,
 				7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */,
 				7E87C7DA1B30BD2000AF1B32 /* ProgressPoint.m in Sources */,
 				7E115F1D1B2CECD4002F443A /* ViewController.swift in Sources */,
+				7E2ECF5F1B3357DC004F2033 /* ImagePickerControllerHelper.swift in Sources */,
 				7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */,
 				7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */,
+				7E2ECF611B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift in Sources */,
 				7E115F1B1B2CECD4002F443A /* BodyTrack.xcdatamodeld in Sources */,
 				7E87C7DD1B30BD2000AF1B32 /* ProgressCollection.m in Sources */,
 			);
@@ -442,6 +462,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BodyTrack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BodyTrack/BodyTrack-Bridging-Header.h";
@@ -456,6 +477,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BodyTrack/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BodyTrack/BodyTrack-Bridging-Header.h";
