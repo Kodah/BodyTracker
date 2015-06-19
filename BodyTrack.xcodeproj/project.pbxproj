@@ -10,7 +10,6 @@
 		56A34A199E043F6CFF535F2C /* libPods-BodyTrack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36B4958550F31313F014F915 /* libPods-BodyTrack.a */; };
 		7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F171B2CECD4002F443A /* AppDelegate.swift */; };
 		7E115F1B1B2CECD4002F443A /* BodyTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F191B2CECD4002F443A /* BodyTrack.xcdatamodeld */; };
-		7E115F1D1B2CECD4002F443A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F1C1B2CECD4002F443A /* ViewController.swift */; };
 		7E115F221B2CECD4002F443A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E115F211B2CECD4002F443A /* Images.xcassets */; };
 		7E115F251B2CECD4002F443A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E115F231B2CECD4002F443A /* LaunchScreen.xib */; };
 		7E115F311B2CECD4002F443A /* BodyTrackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F301B2CECD4002F443A /* BodyTrackTests.swift */; };
@@ -22,6 +21,7 @@
 		7E87C7DD1B30BD2000AF1B32 /* ProgressCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E87C7DC1B30BD2000AF1B32 /* ProgressCollection.m */; };
 		7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */; };
 		7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */; };
+		88DF6BFD1B3441A000E07033 /* ProgressPointDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,6 @@
 		7E115F161B2CECD4002F443A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E115F171B2CECD4002F443A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E115F1A1B2CECD4002F443A /* BodyTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BodyTrack.xcdatamodel; sourceTree = "<group>"; };
-		7E115F1C1B2CECD4002F443A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7E115F211B2CECD4002F443A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7E115F241B2CECD4002F443A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		7E115F2A1B2CECD4002F443A /* BodyTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BodyTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +58,7 @@
 		7E87C7DC1B30BD2000AF1B32 /* ProgressCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressCollection.m; path = model/ProgressCollection.m; sourceTree = "<group>"; };
 		7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = Controllers/MenuTableViewController.swift; sourceTree = "<group>"; };
 		7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoSelectionCollectionViewController.swift; path = Controllers/PhotoSelectionCollectionViewController.swift; sourceTree = "<group>"; };
+		88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointDetailTableViewController.swift; path = Controllers/ProgressPointDetailTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,9 +182,9 @@
 		7EC64C241B2DB18E001B2CBE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7E115F1C1B2CECD4002F443A /* ViewController.swift */,
 				7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */,
 				7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */,
+				88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -336,8 +336,8 @@
 				7E2ECF631B33637B004F2033 /* ProgressPointCollectionViewCell.swift in Sources */,
 				7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */,
 				7E87C7DA1B30BD2000AF1B32 /* ProgressPoint.m in Sources */,
-				7E115F1D1B2CECD4002F443A /* ViewController.swift in Sources */,
 				7E2ECF5F1B3357DC004F2033 /* ImagePickerControllerHelper.swift in Sources */,
+				88DF6BFD1B3441A000E07033 /* ProgressPointDetailTableViewController.swift in Sources */,
 				7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */,
 				7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */,
 				7E2ECF611B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift in Sources */,

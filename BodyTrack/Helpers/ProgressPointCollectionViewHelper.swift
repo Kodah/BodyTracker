@@ -108,5 +108,10 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
         {
             self.photoSelectionCollectionViewController.showActionSheet()
         }
+        else
+        {
+            self.photoSelectionCollectionViewController.selectedProgressPoint = self.progressPoints[indexPath.row]
+            self.photoSelectionCollectionViewController.performSegueWithIdentifier("ShowProgressPointDetailId", sender: self.photoSelectionCollectionViewController)
+        }
     }
 }

@@ -23,6 +23,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     var progressCollection : ProgressCollection?
     var progressPoints = [ProgressPoint]()
     var context: NSManagedObjectContext?
+    var selectedProgressCollection : ProgressCollection?
+    var selectedProgressPoint : ProgressPoint?
     
     override func viewDidLoad()
     {
@@ -194,6 +196,22 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             break
         default:
             break
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segue.identifier!
+        {
+        case "ShowProgressPointDetailId":
+        
+            var viewController = segue.destinationViewController as! ProgressPointDetailTableViewController
+            viewController.progressPoint = self.selectedProgressPoint
+        break
+            
+            
+            
+        default:
+                break;
         }
     }
     
