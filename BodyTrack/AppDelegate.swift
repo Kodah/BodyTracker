@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         
+        self.setupContext()
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
         let slidingViewController = storyboard.instantiateViewControllerWithIdentifier("slidingViewControllerId") as! ECSlidingViewController;
         let topViewController = storyboard.instantiateViewControllerWithIdentifier("homeNavigationControllerId") as! PhotoSelectionCollectionViewController
@@ -42,8 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = slidingViewController
         
         self.window?.makeKeyAndVisible()
-        
-        self.setupContext()
         
         return true
     }

@@ -27,7 +27,7 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        
+        println(self.progressPoints.count)
         return self.progressPoints.count + 1
     }
     

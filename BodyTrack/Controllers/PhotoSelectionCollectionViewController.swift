@@ -53,16 +53,12 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
                     if ((arraySafe.first?.isKindOfClass(ProgressPoint)) != nil)
                     {
                         self.progressPoints = arraySafe as! [ProgressPoint]
+                        self.progressPointCollectionViewHelper.progressPoints = self.progressPoints
                     }
                 }
-                
-                
             }
             self.title = progressCollection.name
-            
         }
-
-            
         self.clearsSelectionOnViewWillAppear = true
     }
     
