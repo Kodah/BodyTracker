@@ -21,6 +21,7 @@ class ProgressPointDetailTableViewController: UITableViewController, UIAlertView
     
     var progressPoint: ProgressPoint?
     var selectedStat : TableViewCell.RawValue?
+    var context : NSManagedObjectContext?
     
     @IBOutlet var imageView: UIImageView!
     
@@ -163,6 +164,7 @@ class ProgressPointDetailTableViewController: UITableViewController, UIAlertView
             default:
                 break
             }
+            self.context?.save(nil)
             self.tableView.reloadData()
         }
     }

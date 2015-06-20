@@ -123,8 +123,6 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     {
         let date : NSDate = NSDate()
   
-        
-        
         let fileManager = NSFileManager.defaultManager()
         
         var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
@@ -225,6 +223,11 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
             var viewController = segue.destinationViewController as! ProgressPointDetailTableViewController
             viewController.progressPoint = self.selectedProgressPoint
+            if let context = self.context
+            {
+                viewController.context = context
+            }
+            
         break
             
             
