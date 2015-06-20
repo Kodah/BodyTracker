@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             {
                 var progressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context!) as! ProgressCollection
                 
-                var color = UIColor.randomColor()
+                var color = UIColor(red:91/255.0, green:140/255.0, blue:231/255.0, alpha:1.0);
                 
                 var hex = UIColor.hexValuesFromUIColor(color)
     
