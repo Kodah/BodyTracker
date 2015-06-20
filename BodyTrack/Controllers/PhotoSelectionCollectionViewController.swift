@@ -61,11 +61,21 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             self.navigationController?.navigationBar.translucent = false
             self.navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
             self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            
+            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("openMenu"))
+            
+            self.navigationItem.leftBarButtonItem = barButtonItem
             
         }
         self.clearsSelectionOnViewWillAppear = true
     }
     
+    
+    func openMenu()
+    {
+        self.slidingViewController().anchorTopViewToRightAnimated(true)
+    }
     
     func newProgressCollectionCreated(progressCollection: ProgressCollection)
     {
