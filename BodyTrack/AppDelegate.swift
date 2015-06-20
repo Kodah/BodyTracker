@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         slidingViewController.topViewController = navigationController
         slidingViewController.underLeftViewController = underLeftViewController
-        navigationController.view.addGestureRecognizer(slidingViewController.panGesture)
+        topViewController.view.addGestureRecognizer(slidingViewController.panGesture)
         
         underLeftViewController.delegate = topViewController
         
