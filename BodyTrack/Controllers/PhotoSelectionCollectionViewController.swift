@@ -58,7 +58,10 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
                 }
             }
             self.title = progressCollection.name
-            self.navigationController?.navigationBar.backgroundColor = UIColor(rgba: progressCollection.colour)
+            self.navigationController?.navigationBar.translucent = false
+            self.navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
+            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+            
         }
         self.clearsSelectionOnViewWillAppear = true
     }
@@ -163,7 +166,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         }
         
         self.title = progressCollection.name
-        self.navigationController?.navigationBar.backgroundColor = UIColor(rgba: progressCollection.colour)
+        self.navigationController?.navigationBar.translucent = false
+        self.navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
         
         self.collectionView?.reloadData()
     }

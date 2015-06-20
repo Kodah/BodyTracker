@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgressPointDetailTableViewController: UITableViewController {
+class ProgressPointDetailTableViewController: UITableViewController, UIAlertViewDelegate {
 
     enum TableViewCell: Int
     {
@@ -20,6 +20,7 @@ class ProgressPointDetailTableViewController: UITableViewController {
     }
     
     var progressPoint: ProgressPoint?
+    var selectedStat : TableViewCell.RawValue?
     
     @IBOutlet var imageView: UIImageView!
     
@@ -97,5 +98,72 @@ class ProgressPointDetailTableViewController: UITableViewController {
             break
         }
         return cell
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        var alertView = UIAlertView(title: "", message: "", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Save")
+        alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
+        alertView.textFieldAtIndex(0)?.keyboardType = UIKeyboardType.DecimalPad
+        
+        switch indexPath.row
+        {
+        case TableViewCell.Date.rawValue:
+            
+        return
+            
+        case TableViewCell.Measurement.rawValue:
+            
+            alertView.title = "Edit measurement"
+            alertView.message = "Enter measurement"
+            self.selectedStat = TableViewCell.Measurement.rawValue
+            break
+            
+        case TableViewCell.BodyWeight.rawValue:
+            alertView.title = "Edit Body Weight"
+            alertView.message = "Enter Body Weight"
+            self.selectedStat = TableViewCell.BodyWeight.rawValue
+            break
+            
+        case TableViewCell.BodyFat.rawValue:
+            alertView.title = "Edit Body Fat"
+            alertView.message = "Enter Body Fat"
+            self.selectedStat = TableViewCell.BodyFat.rawValue
+            break
+            
+        default:
+            break
+        
+        }
+        
+        alertView.show()
+        
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
+    {
+        
+        if buttonIndex == 1
+        {
+            var text = alertView.textFieldAtIndex(0)?.text
+            switch self.selectedStat!
+            {
+            case TableViewCell.Measurement.rawValue:
+                
+                self.progressPoint?.measurement = text?.toInt()
+                break
+                
+            case TableViewCell.BodyWeight.rawValue:
+                self.progressPoint?.weight = text?.toInt()
+                break
+            case TableViewCell.BodyFat.rawValue:
+                self.progressPoint?.bodyFat = text?.toInt()
+                break
+            default:
+                break
+            }
+            self.tableView.reloadData()
+        }
     }
 }
