@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgressPointDetailTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate {
+class ProgressPointDetailTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, DatePickerViewControllerDelegate {
 
     enum TableViewCell: Int
     {
@@ -22,12 +22,14 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
     var progressPoint: ProgressPoint?
     var selectedStat : TableViewCell.RawValue?
     var context : NSManagedObjectContext?
+    var datePickerViewController : DatePickerViewController?
     
     @IBOutlet weak var containerConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var imageView: UIImageView!
     
     let TableViewCellIdentifier = "Cell"
+    let DatePickerContainerIdentifier = "DatePickerContainerId"
     
     override func viewDidLoad()
     {
@@ -114,9 +116,23 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
         {
         case TableViewCell.Date.rawValue:
             
+            if let datePickerVC = self.datePickerViewController
+            {
+                if let progressPoint = self.progressPoint
+                {
+                    if (progressPoint.date != nil)
+                    {
+                        datePickerVC.datePicker.date = progressPoint.date
+                    }
+                    else
+                    {
+                        datePickerVC.datePicker.date = NSDate()
+                    }
+                }
+            }
             self.view.layoutIfNeeded()
             self.containerConstraint.constant = 208
-            UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations:
+            UIView.animateWithDuration(0.75, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations:
                 {
                     self.view.layoutIfNeeded()
                     
@@ -178,5 +194,45 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
             self.context?.save(nil)
             self.tableView.reloadData()
         }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if let identifier = segue.identifier
+        {
+            switch identifier
+            {
+            case DatePickerContainerIdentifier:
+                var datePickerViewController = segue.destinationViewController as! DatePickerViewController
+                datePickerViewController.delegate = self
+                self.datePickerViewController = datePickerViewController
+                break
+            default:
+                break
+            }
+        }
+        
+    }
+    
+    // Date picker view controller delegate
+    
+    func dismissDatePicker()
+    {
+        self.view.layoutIfNeeded()
+        self.containerConstraint.constant = 0
+        UIView.animateWithDuration(0.75, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations:
+            {
+                self.view.layoutIfNeeded()
+                
+                
+            }, completion: nil)
+    }
+    
+    func datePickerDidChoose(date: NSDate)
+    {
+        self.progressPoint?.date = date
+        self.context?.save(nil)
+        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        self.dismissDatePicker()
     }
 }

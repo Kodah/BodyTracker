@@ -284,7 +284,7 @@
                                     <constraint firstAttribute="height" constant="208" id="iAY-2G-Cvd"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="Iyt-lv-cfK" kind="embed" id="4Kz-Ku-HPJ"/>
+                                    <segue destination="Iyt-lv-cfK" kind="embed" identifier="DatePickerContainerId" id="4Kz-Ku-HPJ"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -416,10 +416,10 @@
             </objects>
             <point key="canvasLocation" x="2667" y="302"/>
         </scene>
-        <!--View Controller-->
+        <!--Date Picker View Controller-->
         <scene sceneID="x1D-Hq-LNC">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Iyt-lv-cfK" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Iyt-lv-cfK" customClass="DatePickerViewController" customModule="BodyTrack" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Giy-2C-Eyv"/>
                         <viewControllerLayoutGuide type="bottom" id="6c6-HX-TfX"/>
@@ -439,6 +439,9 @@
                                 <state key="normal" title="Done">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="doneButtonTapped:" destination="Iyt-lv-cfK" eventType="touchUpInside" id="zrX-9M-yIb"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaI-yV-6eU">
                                 <rect key="frame" x="173" y="8" width="69" height="30"/>
@@ -454,6 +457,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="Iyt-lv-cfK" eventType="touchUpInside" id="kqv-O0-B3K"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -472,6 +478,9 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="datePicker" destination="XtT-nJ-0dm" id="5G2-V9-FRT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pc1-LC-jE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

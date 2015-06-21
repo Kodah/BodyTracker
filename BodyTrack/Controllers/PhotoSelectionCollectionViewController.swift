@@ -71,6 +71,11 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         self.clearsSelectionOnViewWillAppear = true
     }
     
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        self.progressPointCollectionViewHelper.collectionView.reloadData()
+    }
     
     func openMenu()
     {

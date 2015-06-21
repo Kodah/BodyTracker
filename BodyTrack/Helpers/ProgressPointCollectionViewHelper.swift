@@ -59,6 +59,12 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
                     imageView.image = image
                 }
             }
+            var dateformatter = NSDateFormatter()
+            dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
+            dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
+            dateformatter.dateFormat = "dd MMM yyyy"
+            
+            cell.date.text = dateformatter.stringFromDate(progressPoint.date)
                     
             cell.contentView.frame = cell.bounds
             cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
