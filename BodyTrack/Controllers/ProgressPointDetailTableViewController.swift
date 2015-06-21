@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProgressPointDetailTableViewController: UITableViewController, UIAlertViewDelegate {
+class ProgressPointDetailTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate {
 
     enum TableViewCell: Int
     {
@@ -23,6 +23,8 @@ class ProgressPointDetailTableViewController: UITableViewController, UIAlertView
     var selectedStat : TableViewCell.RawValue?
     var context : NSManagedObjectContext?
     
+    @IBOutlet weak var containerConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet var imageView: UIImageView!
     
     let TableViewCellIdentifier = "Cell"
@@ -46,17 +48,17 @@ class ProgressPointDetailTableViewController: UITableViewController, UIAlertView
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
+    
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return TableViewCell.Count.rawValue
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
         switch indexPath.row
@@ -102,7 +104,7 @@ class ProgressPointDetailTableViewController: UITableViewController, UIAlertView
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         var alertView = UIAlertView(title: "", message: "", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Save")
         alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
@@ -111,6 +113,15 @@ class ProgressPointDetailTableViewController: UITableViewController, UIAlertView
         switch indexPath.row
         {
         case TableViewCell.Date.rawValue:
+            
+            self.view.layoutIfNeeded()
+            self.containerConstraint.constant = 208
+            UIView.animateWithDuration(1, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations:
+                {
+                    self.view.layoutIfNeeded()
+                    
+           
+                }, completion: nil)
             
         return
             
