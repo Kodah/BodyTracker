@@ -169,6 +169,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
         let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
         let predicate = NSPredicate(format: "progressCollection == %@", progressCollection)
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         
         fetchRequest.predicate = predicate
         
