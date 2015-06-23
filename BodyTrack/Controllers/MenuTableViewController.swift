@@ -12,7 +12,7 @@ import CoreData
 protocol MenuTableViewControllerDelegate
 {
     func newProgressCollectionCreated(progressCollection: ProgressCollection)
-    func loadProgressPointsForProgressCollection(progressCollection:ProgressCollection)
+    func loadProgressPointsForProgressCollection(progressCollection:ProgressCollection?)
 }
 
 class MenuTableViewController: UITableViewController {

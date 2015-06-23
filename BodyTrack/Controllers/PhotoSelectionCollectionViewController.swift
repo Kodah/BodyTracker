@@ -71,10 +71,17 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         self.clearsSelectionOnViewWillAppear = true
     }
     
-    override func viewWillAppear(animated: Bool)
+    override func viewDidAppear(animated: Bool)
     {
-        super.viewWillAppear(animated)
-        self.progressPointCollectionViewHelper.collectionView.reloadData()
+        super.viewDidAppear(animated)
+        
+        var copyCollection = self.progressCollection
+        self.loadProgressPointsForProgressCollection(nil)
+        
+        self.progressPointCollectionViewHelper.collectionView.performBatchUpdates({ () -> Void in
+            self.progressPointCollectionViewHelper.collectionView.reloadData()
+        }, completion: { (Bool) -> Void in })
+        
     }
     
     func openMenu()
@@ -163,28 +170,34 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     
     //menu delegate
     
-    func loadProgressPointsForProgressCollection(progressCollection: ProgressCollection) {
+    func loadProgressPointsForProgressCollection(progressCollection: ProgressCollection?) {
         
-        self.progressCollection = progressCollection
-        
-        let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
-        let predicate = NSPredicate(format: "progressCollection == %@", progressCollection)
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        fetchRequest.predicate = predicate
-        
-        if let context = self.context
+        if let progressCollection = progressCollection
         {
-            self.progressPoints = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressPoint]
-            self.progressPointCollectionViewHelper.progressPoints = self.progressPoints
+            self.progressCollection = progressCollection
         }
         
-        self.title = progressCollection.name
-        self.navigationController?.navigationBar.translucent = false
-        self.navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
-        
-        self.collectionView?.reloadData()
+        if let safeProgressCollection = self.progressCollection
+        {
+            let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
+            let predicate = NSPredicate(format: "progressCollection == %@", safeProgressCollection)
+            let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            
+            fetchRequest.predicate = predicate
+            
+            if let context = self.context
+            {
+                self.progressPoints = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressPoint]
+                self.progressPointCollectionViewHelper.progressPoints = self.progressPoints
+            }
+            
+            self.title = safeProgressCollection.name
+            self.navigationController?.navigationBar.translucent = false
+            self.navigationController?.navigationBar.barTintColor = UIColor(rgba: safeProgressCollection.colour)
+            
+            self.collectionView?.reloadData()
+        }
     }
 
     func showActionSheet()
