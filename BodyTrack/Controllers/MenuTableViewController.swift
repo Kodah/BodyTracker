@@ -12,7 +12,7 @@ import CoreData
 protocol MenuTableViewControllerDelegate
 {
     func newProgressCollectionCreated(progressCollection: ProgressCollection)
-    func loadProgressPointsForProgressCollection(progressCollection:ProgressCollection)
+    func loadProgressPointsForProgressCollection(progressCollection:ProgressCollection?)
 }
 
 class MenuTableViewController: UITableViewController {
@@ -101,7 +101,7 @@ class MenuTableViewController: UITableViewController {
                     cell.textLabel?.text = "Settings"
                     break
                 case MoreTableViewCell.New.rawValue:
-                    cell.textLabel?.text = "New Body Tracker"
+                    cell.textLabel?.text = "New Body Tracker .."
                     break
                 default:
                     break
