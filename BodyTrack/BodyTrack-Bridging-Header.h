@@ -6,3 +6,4 @@
 #import "ProgressCollection.h"
 #import "ProgressPoint.h"
 #import "UIViewController+ECSlidingViewController.h"
+#import "HRColorPickerView.h"
