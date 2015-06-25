@@ -19,6 +19,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
 
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
     @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
+    
+    let EditProgressCollectionSegueIdentifier : String = "EditProgressCollectionSegue"
 
     var progressCollection : ProgressCollection?
     var progressPoints = [ProgressPoint]()
@@ -63,26 +65,26 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
             
-            var gesture = UITapGestureRecognizer(target: self, action: "navBarTapped")
-            
-            self.navigationController?.navigationBar.addGestureRecognizer(gesture)
-            
-            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("navBarTapped"))
+           
+            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("openMenu"))
             
             self.navigationItem.leftBarButtonItem = barButtonItem
             
+            var gesture = UITapGestureRecognizer(target: self, action: "navBarTapped")
+            
+            self.navigationController?.navigationBar.addGestureRecognizer(gesture)
         }
         self.clearsSelectionOnViewWillAppear = true
     }
     
     func navBarTapped()
     {
-        self.performSegueWithIdentifier("EditProgressCollectionSegue", sender: self)
+        self.performSegueWithIdentifier(EditProgressCollectionSegueIdentifier, sender: self)
     }
     
-    override func viewDidAppear(animated: Bool)
+    override func viewWillAppear(animated: Bool)
     {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         
         var copyCollection = self.progressCollection
         self.loadProgressPointsForProgressCollection(nil)
@@ -259,6 +261,12 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             
         break
             
+        case EditProgressCollectionSegueIdentifier:
+            var navController = segue.destinationViewController as! UINavigationController
+            var editProgressCollectionVC = navController.viewControllers.first as? EditProgressCollectionViewController
+            
+            editProgressCollectionVC?.progressCollection = self.progressCollection
+            editProgressCollectionVC?.context = self.context
             
             
         default:
