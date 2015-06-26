@@ -35,6 +35,22 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
     {
         super.viewDidLoad()
         
+        if let gestures = self.navigationController!.navigationBar.gestureRecognizers
+        {
+            for gesture  in gestures
+            {
+                if gesture.isKindOfClass(UITapGestureRecognizer)
+                {
+                    if let gesture = gesture as? UITapGestureRecognizer
+                    {
+                        gesture.enabled = false
+                    }
+                }
+            }
+        }
+        
+        
+        
         if let progressPoint = self.progressPoint
         {
             if let imageView = self.imageView

@@ -19,6 +19,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
 
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
     @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
+    
+    let EditProgressCollectionSegueIdentifier : String = "EditProgressCollectionSegue"
 
     var progressCollection : ProgressCollection?
     var progressPoints = [ProgressPoint]()
@@ -63,17 +65,28 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
             
-            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("openMenu"))
+           
+            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("toggleMenu"))
             
             self.navigationItem.leftBarButtonItem = barButtonItem
+            
+            var navbarTapGesture = UITapGestureRecognizer(target: self, action: "navBarTapped")
+            self.navigationController?.navigationBar.addGestureRecognizer(navbarTapGesture)
             
         }
         self.clearsSelectionOnViewWillAppear = true
     }
     
-    override func viewDidAppear(animated: Bool)
+    func navBarTapped()
     {
-        super.viewDidAppear(animated)
+        self.performSegueWithIdentifier(EditProgressCollectionSegueIdentifier, sender: self)
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        self.enableGestures()
         
         var copyCollection = self.progressCollection
         self.loadProgressPointsForProgressCollection(nil)
@@ -84,9 +97,32 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
     }
     
-    func openMenu()
+    func enableGestures()
     {
-        self.slidingViewController().anchorTopViewToRightAnimated(true)
+        if let gestures = self.navigationController!.navigationBar.gestureRecognizers
+        {
+            for gesture  in gestures
+            {
+                if let gesture = gesture as? UIGestureRecognizer
+                {
+                    gesture.enabled = true
+                }
+            }
+        }
+    }
+    
+    func toggleMenu()
+    {
+        switch self.slidingViewController().currentTopViewPosition
+        {
+        case ECSlidingViewControllerTopViewPosition.Centered:
+            self.slidingViewController().anchorTopViewToRightAnimated(true)
+        case ECSlidingViewControllerTopViewPosition.AnchoredRight:
+            self.slidingViewController().resetTopViewAnimated(true)
+        default:
+            break
+        }
+        
     }
     
     func newProgressCollectionCreated(progressCollection: ProgressCollection)
@@ -250,6 +286,12 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             
         break
             
+        case EditProgressCollectionSegueIdentifier:
+            var navController = segue.destinationViewController as! UINavigationController
+            var editProgressCollectionVC = navController.viewControllers.first as? EditProgressCollectionViewController
+            
+            editProgressCollectionVC?.progressCollection = self.progressCollection
+            editProgressCollectionVC?.context = self.context
             
             
         default:
