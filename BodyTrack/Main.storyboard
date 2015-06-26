@@ -387,7 +387,7 @@
         <!--bla-->
         <scene sceneID="6cU-Pm-rdL">
             <objects>
-                <viewController title="bla" id="4If-Nf-U3i" sceneMemberID="viewController">
+                <viewController title="bla" id="4If-Nf-U3i" customClass="CompareOverlayViewController" customModule="BodyTrack" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wcy-4V-V5b"/>
                         <viewControllerLayoutGuide type="bottom" id="7Rv-lb-YCa"/>
@@ -400,11 +400,11 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MyP-iQ-cpH">
+                            <imageView opaque="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="after" translatesAutoresizingMaskIntoConstraints="NO" id="MyP-iQ-cpH">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <gestureRecognizers/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="M9L-ai-314" appends="YES" id="K8F-PK-dH1"/>
+                                    <outletCollection property="gestureRecognizers" destination="M9L-ai-314" appends="YES" id="voZ-Ov-8Qe"/>
                                 </connections>
                             </imageView>
                         </subviews>
@@ -421,9 +421,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1AZ-RO-tCZ"/>
+                    <connections>
+                        <outlet property="topImageView" destination="MyP-iQ-cpH" id="XZi-er-Rle"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jsb-m7-WT3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="M9L-ai-314"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="M9L-ai-314">
+                    <connections>
+                        <action selector="panGesture:" destination="4If-Nf-U3i" id="Cix-Eg-Ujn"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2534" y="1860"/>
         </scene>

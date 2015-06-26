@@ -22,6 +22,7 @@
 		7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */; };
 		7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */; };
 		7EDA17CC1B37292E00BA915D /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA17CB1B37292E00BA915D /* DatePickerViewController.swift */; };
+		88111E8A1B3DA3D800C8B45E /* CompareOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88111E891B3DA3D800C8B45E /* CompareOverlayViewController.swift */; };
 		8877E9521B3C10DF000E9054 /* EditProgressCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8877E9511B3C10DF000E9054 /* EditProgressCollectionViewController.swift */; };
 		88DF6BFD1B3441A000E07033 /* ProgressPointDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */; };
 		88DF6C061B345D2400E07033 /* ProgressPointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */; };
@@ -63,6 +64,7 @@
 		7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = Controllers/MenuTableViewController.swift; sourceTree = "<group>"; };
 		7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoSelectionCollectionViewController.swift; path = Controllers/PhotoSelectionCollectionViewController.swift; sourceTree = "<group>"; };
 		7EDA17CB1B37292E00BA915D /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerViewController.swift; path = Controllers/DatePickerViewController.swift; sourceTree = "<group>"; };
+		88111E891B3DA3D800C8B45E /* CompareOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareOverlayViewController.swift; path = Controllers/CompareOverlayViewController.swift; sourceTree = "<group>"; };
 		8877E9511B3C10DF000E9054 /* EditProgressCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProgressCollectionViewController.swift; path = Controllers/EditProgressCollectionViewController.swift; sourceTree = "<group>"; };
 		88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointDetailTableViewController.swift; path = Controllers/ProgressPointDetailTableViewController.swift; sourceTree = "<group>"; };
 		88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPointHelper.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */,
 				7EDA17CB1B37292E00BA915D /* DatePickerViewController.swift */,
 				8877E9511B3C10DF000E9054 /* EditProgressCollectionViewController.swift */,
+				88111E891B3DA3D800C8B45E /* CompareOverlayViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88111E8A1B3DA3D800C8B45E /* CompareOverlayViewController.swift in Sources */,
 				7E2ECF631B33637B004F2033 /* ProgressPointCollectionViewCell.swift in Sources */,
 				8877E9521B3C10DF000E9054 /* EditProgressCollectionViewController.swift in Sources */,
 				7EDA17CC1B37292E00BA915D /* DatePickerViewController.swift in Sources */,
