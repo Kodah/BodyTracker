@@ -11,6 +11,7 @@ import UIKit
 class CompareOverlayViewController: UIViewController {
 
     @IBOutlet var topImageView: UIImageView!
+    @IBOutlet var slider: UISlider!
     
     var lastScale : CGFloat?
     var lastPoint : CGPoint?
@@ -20,6 +21,7 @@ class CompareOverlayViewController: UIViewController {
 
         topImageView.layer.borderColor = UIColor.darkGrayColor().CGColor
         topImageView.layer.borderWidth = 2
+        
         // Do any additional setup after loading the view.
     }
 
@@ -63,11 +65,17 @@ class CompareOverlayViewController: UIViewController {
         
         recognizer.setTranslation(CGPointMake(0, 0), inView: self.topImageView)
         
-        var center = recognizer.view?.center
-        center?.y += translation.y
-        center?.x += translation.x
-        recognizer.view?.center = center!
+        var center = self.topImageView.center
+        center.y += translation.y
+        center.x += translation.x
+        self.topImageView.center = center
         
 
     }
+    
+    @IBAction func sliderValueChanged(slider: UISlider)
+    {
+        self.topImageView.alpha = CGFloat(slider.value)
+    }
+    
 }

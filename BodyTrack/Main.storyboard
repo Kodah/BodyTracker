@@ -397,7 +397,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="before" translatesAutoresizingMaskIntoConstraints="NO" id="C5h-wz-XPt">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="441"/>
                                 <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="M9L-ai-314" appends="YES" id="dtc-zN-oTU"/>
@@ -405,17 +405,27 @@
                                 </connections>
                             </imageView>
                             <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="after" translatesAutoresizingMaskIntoConstraints="NO" id="MyP-iQ-cpH">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="441"/>
                                 <gestureRecognizers/>
                             </imageView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="QIN-OX-57y">
+                                <rect key="frame" x="14" y="513" width="572" height="31"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="4If-Nf-U3i" eventType="valueChanged" id="9SV-9C-MF6"/>
+                                </connections>
+                            </slider>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="QIN-OX-57y" firstAttribute="leading" secondItem="o5o-hD-Uur" secondAttribute="leadingMargin" id="1s2-22-4LQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QIN-OX-57y" secondAttribute="trailing" id="5GT-pL-UKS"/>
+                            <constraint firstItem="7Rv-lb-YCa" firstAttribute="top" secondItem="QIN-OX-57y" secondAttribute="bottom" constant="8" id="7FT-7Z-ttC"/>
                             <constraint firstItem="C5h-wz-XPt" firstAttribute="top" secondItem="MyP-iQ-cpH" secondAttribute="top" id="9Z0-8M-Xyj"/>
-                            <constraint firstItem="7Rv-lb-YCa" firstAttribute="top" secondItem="C5h-wz-XPt" secondAttribute="bottom" id="Dj8-Ex-qAV"/>
+                            <constraint firstItem="7Rv-lb-YCa" firstAttribute="top" secondItem="C5h-wz-XPt" secondAttribute="bottom" constant="46" id="Dj8-Ex-qAV"/>
                             <constraint firstItem="C5h-wz-XPt" firstAttribute="leading" secondItem="MyP-iQ-cpH" secondAttribute="leading" id="Iwz-iV-hH0"/>
                             <constraint firstAttribute="trailing" secondItem="C5h-wz-XPt" secondAttribute="trailing" id="Vcr-jm-lGC"/>
                             <constraint firstItem="C5h-wz-XPt" firstAttribute="width" secondItem="MyP-iQ-cpH" secondAttribute="width" id="X6e-Xt-Wmc"/>
+                            <constraint firstItem="QIN-OX-57y" firstAttribute="top" secondItem="C5h-wz-XPt" secondAttribute="bottom" constant="8" id="dMf-iP-gTV"/>
                             <constraint firstItem="C5h-wz-XPt" firstAttribute="top" secondItem="wcy-4V-V5b" secondAttribute="bottom" id="gdy-AO-lot"/>
                             <constraint firstItem="C5h-wz-XPt" firstAttribute="height" secondItem="MyP-iQ-cpH" secondAttribute="height" id="nwn-VH-dYm"/>
                             <constraint firstItem="C5h-wz-XPt" firstAttribute="leading" secondItem="o5o-hD-Uur" secondAttribute="leading" id="yCK-FN-4L8"/>
@@ -423,6 +433,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="1AZ-RO-tCZ"/>
                     <connections>
+                        <outlet property="slider" destination="QIN-OX-57y" id="MJW-wf-xNV"/>
                         <outlet property="topImageView" destination="MyP-iQ-cpH" id="XZi-er-Rle"/>
                     </connections>
                 </viewController>
