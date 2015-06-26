@@ -17,10 +17,10 @@ enum ActionSheetButton: Int
 
 class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate {
 
+    let SegueToCompareTabBar : String = "GoToCompareSegueId"
+    
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
     @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
-    
-    let EditProgressCollectionSegueIdentifier : String = "EditProgressCollectionSegue"
 
     var progressCollection : ProgressCollection?
     var progressPoints = [ProgressPoint]()
@@ -65,28 +65,19 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
             
-           
-            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("toggleMenu"))
+            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("openMenu"))
             
             self.navigationItem.leftBarButtonItem = barButtonItem
             
-            var navbarTapGesture = UITapGestureRecognizer(target: self, action: "navBarTapped")
-            self.navigationController?.navigationBar.addGestureRecognizer(navbarTapGesture)
-            
+            var rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Compose, target: self, action: "rightBarButtonTapped")
+           self.navigationItem.rightBarButtonItem = rightBarButtonItem
         }
         self.clearsSelectionOnViewWillAppear = true
     }
     
-    func navBarTapped()
+    override func viewDidAppear(animated: Bool)
     {
-        self.performSegueWithIdentifier(EditProgressCollectionSegueIdentifier, sender: self)
-    }
-    
-    override func viewWillAppear(animated: Bool)
-    {
-        super.viewWillAppear(animated)
-        
-        self.enableGestures()
+        super.viewDidAppear(animated)
         
         var copyCollection = self.progressCollection
         self.loadProgressPointsForProgressCollection(nil)
@@ -97,32 +88,14 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
     }
     
-    func enableGestures()
+    func openMenu()
     {
-        if let gestures = self.navigationController!.navigationBar.gestureRecognizers
-        {
-            for gesture  in gestures
-            {
-                if let gesture = gesture as? UIGestureRecognizer
-                {
-                    gesture.enabled = true
-                }
-            }
-        }
+        self.slidingViewController().anchorTopViewToRightAnimated(true)
     }
     
-    func toggleMenu()
+    func rightBarButtonTapped()
     {
-        switch self.slidingViewController().currentTopViewPosition
-        {
-        case ECSlidingViewControllerTopViewPosition.Centered:
-            self.slidingViewController().anchorTopViewToRightAnimated(true)
-        case ECSlidingViewControllerTopViewPosition.AnchoredRight:
-            self.slidingViewController().resetTopViewAnimated(true)
-        default:
-            break
-        }
-        
+        self.performSegueWithIdentifier(SegueToCompareTabBar, sender: self)
     }
     
     func newProgressCollectionCreated(progressCollection: ProgressCollection)
@@ -286,12 +259,6 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             
         break
             
-        case EditProgressCollectionSegueIdentifier:
-            var navController = segue.destinationViewController as! UINavigationController
-            var editProgressCollectionVC = navController.viewControllers.first as? EditProgressCollectionViewController
-            
-            editProgressCollectionVC?.progressCollection = self.progressCollection
-            editProgressCollectionVC?.context = self.context
             
             
         default:
