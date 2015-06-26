@@ -12,6 +12,8 @@ class CompareOverlayViewController: UIViewController {
 
     @IBOutlet var topImageView: UIImageView!
     
+    var lastScale : CGFloat?
+    var lastPoint : CGPoint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,38 @@ class CompareOverlayViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
+
+    @IBAction func pinchGesture(recognizer: UIPinchGestureRecognizer)
+    {
+
+        
+        if recognizer.numberOfTouches() >= 2
+        {
+            if recognizer.state == UIGestureRecognizerState.Began
+            {
+                self.lastScale = 1.0
+                self.lastPoint = recognizer.locationInView(recognizer.view)
+            }
+        }
+        
+        var scale = 1.0 - (self.lastScale! - recognizer.scale)
+        
+        self.topImageView.layer.setAffineTransform(CGAffineTransformScale(self.topImageView.layer.affineTransform(), scale, scale))
+        
+        
+        self.lastScale = recognizer.scale
+        
+        var point = recognizer.locationInView(recognizer.view)
+        
+        self.topImageView.layer.setAffineTransform(
+            CGAffineTransformTranslate(
+                self.topImageView.layer.affineTransform(),
+                point.x - self.lastPoint!.x,
+                point.y - self.lastPoint!.y))
+        
+        self.lastPoint = recognizer.locationInView(recognizer.view)
+
+    }
 
     @IBAction func panGesture(recognizer: UIPanGestureRecognizer)
     {

@@ -396,16 +396,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="before" translatesAutoresizingMaskIntoConstraints="NO" id="C5h-wz-XPt">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="before" translatesAutoresizingMaskIntoConstraints="NO" id="C5h-wz-XPt">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="M9L-ai-314" appends="YES" id="dtc-zN-oTU"/>
+                                    <outletCollection property="gestureRecognizers" destination="oLp-ZL-mck" appends="YES" id="8ag-A5-rz2"/>
+                                </connections>
                             </imageView>
-                            <imageView opaque="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="after" translatesAutoresizingMaskIntoConstraints="NO" id="MyP-iQ-cpH">
+                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="after" translatesAutoresizingMaskIntoConstraints="NO" id="MyP-iQ-cpH">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="M9L-ai-314" appends="YES" id="voZ-Ov-8Qe"/>
-                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -431,6 +432,11 @@
                         <action selector="panGesture:" destination="4If-Nf-U3i" id="Cix-Eg-Ujn"/>
                     </connections>
                 </panGestureRecognizer>
+                <pinchGestureRecognizer id="oLp-ZL-mck">
+                    <connections>
+                        <action selector="pinchGesture:" destination="4If-Nf-U3i" id="eKB-9B-H2O"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2534" y="1860"/>
         </scene>
