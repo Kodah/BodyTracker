@@ -86,6 +86,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     {
         super.viewWillAppear(animated)
         
+        self.enableGestures()
+        
         var copyCollection = self.progressCollection
         self.loadProgressPointsForProgressCollection(nil)
         
@@ -93,6 +95,20 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             self.progressPointCollectionViewHelper.collectionView.reloadData()
         }, completion: { (Bool) -> Void in })
         
+    }
+    
+    func enableGestures()
+    {
+        if let gestures = self.navigationController!.navigationBar.gestureRecognizers
+        {
+            for gesture  in gestures
+            {
+                if let gesture = gesture as? UIGestureRecognizer
+                {
+                    gesture.enabled = true
+                }
+            }
+        }
     }
     
     func toggleMenu()
