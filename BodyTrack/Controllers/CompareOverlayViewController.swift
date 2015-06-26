@@ -19,10 +19,19 @@ class CompareOverlayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        topImageView.layer.borderColor = UIColor.darkGrayColor().CGColor
+        topImageView.layer.borderColor = UIColor.grayColor().CGColor
         topImageView.layer.borderWidth = 2
         
+        var barButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissSelf")
+        
+        self.navigationItem.leftBarButtonItem = barButtonItem
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func dismissSelf()
+    {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
 
