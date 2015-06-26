@@ -66,13 +66,13 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
             
            
-            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("openMenu"))
+            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("toggleMenu"))
             
             self.navigationItem.leftBarButtonItem = barButtonItem
             
-            var gesture = UITapGestureRecognizer(target: self, action: "navBarTapped")
+            var navbarTapGesture = UITapGestureRecognizer(target: self, action: "navBarTapped")
+            self.navigationController?.navigationBar.addGestureRecognizer(navbarTapGesture)
             
-            self.navigationController?.navigationBar.addGestureRecognizer(gesture)
         }
         self.clearsSelectionOnViewWillAppear = true
     }
@@ -95,9 +95,18 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
     }
     
-    func openMenu()
+    func toggleMenu()
     {
-        self.slidingViewController().anchorTopViewToRightAnimated(true)
+        switch self.slidingViewController().currentTopViewPosition
+        {
+        case ECSlidingViewControllerTopViewPosition.Centered:
+            self.slidingViewController().anchorTopViewToRightAnimated(true)
+        case ECSlidingViewControllerTopViewPosition.AnchoredRight:
+            self.slidingViewController().resetTopViewAnimated(true)
+        default:
+            break
+        }
+        
     }
     
     func newProgressCollectionCreated(progressCollection: ProgressCollection)
