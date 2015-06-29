@@ -406,16 +406,16 @@
                                     <outletCollection property="gestureRecognizers" destination="oLp-ZL-mck" appends="YES" id="8ag-A5-rz2"/>
                                 </connections>
                             </imageView>
-                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="after" translatesAutoresizingMaskIntoConstraints="NO" id="MyP-iQ-cpH">
-                                <rect key="frame" x="0.0" y="64" width="600" height="441"/>
-                                <gestureRecognizers/>
-                            </imageView>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="QIN-OX-57y">
                                 <rect key="frame" x="14" y="513" width="572" height="31"/>
                                 <connections>
                                     <action selector="sliderValueChanged:" destination="4If-Nf-U3i" eventType="valueChanged" id="9SV-9C-MF6"/>
                                 </connections>
                             </slider>
+                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="after" translatesAutoresizingMaskIntoConstraints="NO" id="MyP-iQ-cpH">
+                                <rect key="frame" x="0.0" y="64" width="600" height="441"/>
+                                <gestureRecognizers/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -433,8 +433,15 @@
                             <constraint firstItem="C5h-wz-XPt" firstAttribute="leading" secondItem="o5o-hD-Uur" secondAttribute="leading" id="yCK-FN-4L8"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="1AZ-RO-tCZ"/>
+                    <navigationItem key="navigationItem" id="1AZ-RO-tCZ">
+                        <barButtonItem key="rightBarButtonItem" title="Reset" id="NRD-XC-rmE">
+                            <connections>
+                                <action selector="resetBarButtonTapped:" destination="4If-Nf-U3i" id="I2Q-LI-t5C"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="bottomImageView" destination="C5h-wz-XPt" id="Baa-1Q-MaD"/>
                         <outlet property="slider" destination="QIN-OX-57y" id="MJW-wf-xNV"/>
                         <outlet property="topImageView" destination="MyP-iQ-cpH" id="XZi-er-Rle"/>
                     </connections>

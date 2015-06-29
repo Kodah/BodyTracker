@@ -10,6 +10,7 @@ import UIKit
 
 class CompareOverlayViewController: UIViewController {
 
+    @IBOutlet var bottomImageView: UIImageView!
     @IBOutlet var topImageView: UIImageView!
     @IBOutlet var slider: UISlider!
     
@@ -25,8 +26,7 @@ class CompareOverlayViewController: UIViewController {
         var barButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissSelf")
         
         self.navigationItem.leftBarButtonItem = barButtonItem
-        
-        // Do any additional setup after loading the view.
+
     }
     
     func dismissSelf()
@@ -87,4 +87,11 @@ class CompareOverlayViewController: UIViewController {
         self.topImageView.alpha = CGFloat(slider.value)
     }
     
+    @IBAction func resetBarButtonTapped(sender: UIBarButtonItem)
+    {
+        self.topImageView.transform = CGAffineTransformIdentity
+        self.topImageView.frame = self.bottomImageView.bounds
+        self.topImageView.setNeedsLayout()
+        self.topImageView.layoutIfNeeded()
+    }
 }
