@@ -15,7 +15,7 @@ enum ActionSheetButton: Int
     case PhotoLibrary
 }
 
-class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate {
+class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate, UITextFieldDelegate, UIActionSheetDelegate {
 
     let SegueToCompareTabBar : String = "GoToCompareSegueId"
     let SegueToEditCollection : String = "EditProgressCollectionSegue"
@@ -28,6 +28,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     var context: NSManagedObjectContext?
     var selectedProgressCollection : ProgressCollection?
     var selectedProgressPoint : ProgressPoint?
+    var alertController : UIAlertController?
     
     override func viewDidLoad()
     {
@@ -120,12 +121,61 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     func initiateNewProgressCollection()
     {
         slidingViewController().resetTopViewAnimated(true)
-        var alert = UIAlertView(title: "Edit collection name", message: "", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "OK")
-
-        alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
+        self.setupAlertController()        
+    }
+    
+    func setupAlertController()
+    {
+        self.alertController = UIAlertController(title: "New Collection", message: "Edit name", preferredStyle: UIAlertControllerStyle.Alert)
         
-        alert.show()
+        var nameTextField : UITextField?
         
+        self.alertController!.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.placeholder = "name"
+            nameTextField = textField
+            nameTextField?.delegate = self
+            nameTextField?.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
+        }
+        
+        var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (_) -> Void in
+            self.slidingViewController().anchorTopViewToRightAnimated(true)
+        }
+        var OKAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { (action) -> Void in
+            if let name = nameTextField?.text
+            {
+                self.createNewProgressCollectionWithName(name)
+            }
+        }
+        
+        OKAction.enabled = false
+        self.alertController!.addAction(cancelAction)
+        self.alertController!.addAction(OKAction)
+        
+        self.presentViewController(self.alertController!, animated: true, completion: nil)
+    }
+    
+    func textFieldChanged(textField : UITextField)
+    {
+        if let alertController = self.alertController
+        {
+            if count(textField.text) > 0
+            {
+                if let actions = alertController.actions as? [UIAlertAction]
+                {
+                    for action in actions
+                    {
+                        action.enabled = true
+                    }
+                }
+            }
+            else
+            {
+                if let actions = alertController.actions as? [UIAlertAction]
+                {
+                    actions[1].enabled = false
+                }
+            }
+        }
     }
     
     // actionsheet delegate
@@ -230,23 +280,6 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         let actionSheet = UIActionSheet(title: "New photo", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Use Camera", "Photo library")
         
         actionSheet.showInView(self.view)
-    }
-
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
-    {
-        switch buttonIndex
-        {
-        case 0:
-            self.slidingViewController().anchorTopViewToRightAnimated(true)
-            break
-            
-        case 1:
-            
-            self.createNewProgressCollectionWithName(alertView.textFieldAtIndex(0)?.text)
-
-        default:
-            break
-        }
     }
     
     func createNewProgressCollectionWithName(name : String?)
