@@ -117,13 +117,10 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         self.performSegueWithIdentifier(SegueToCompareTabBar, sender: self)
     }
     
-    func newProgressCollectionCreated(progressCollection: ProgressCollection)
+    func initiateNewProgressCollection()
     {
-        self.progressCollection = progressCollection
-        
         slidingViewController().resetTopViewAnimated(true)
-        
-        var alert = UIAlertView(title: "Edit collection name", message: "", delegate: self, cancelButtonTitle: "Delete", otherButtonTitles: "OK")
+        var alert = UIAlertView(title: "Edit collection name", message: "", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "OK")
 
         alert.alertViewStyle = UIAlertViewStyle.PlainTextInput
         
@@ -240,27 +237,27 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         switch buttonIndex
         {
         case 0:
-            println("delete progress collection and loads another one")
+            self.slidingViewController().anchorTopViewToRightAnimated(true)
             break
             
         case 1:
             
-            self.progressCollection?.name = alertView.textFieldAtIndex(0)?.text
+            self.createNewProgressCollectionWithName(alertView.textFieldAtIndex(0)?.text)
 
-            self.progressCollection?.colour = UIColor.hexValuesFromUIColor(UIColor.randomColor())
-            self.loadProgressPointsForProgressCollection(self.progressCollection!)
-            
-            if let context = self.context
-            {
-                if self.context?.save(nil) == false
-                {
-                    println("save failed")
-                }
-            }
-            
-            break
         default:
             break
+        }
+    }
+    
+    func createNewProgressCollectionWithName(name : String?)
+    {
+        if let context = self.context
+        {
+            var newProgressCollection :ProgressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context) as! ProgressCollection
+            newProgressCollection.name = name
+            newProgressCollection.colour = UIColor.hexValuesFromUIColor(UIColor.randomColor())
+            context.save(nil)
+            self.loadProgressPointsForProgressCollection(newProgressCollection)
         }
     }
     

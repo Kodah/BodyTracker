@@ -11,7 +11,7 @@ import CoreData
 
 protocol MenuTableViewControllerDelegate
 {
-    func newProgressCollectionCreated(progressCollection: ProgressCollection)
+    func initiateNewProgressCollection()
     func loadProgressPointsForProgressCollection(progressCollection:ProgressCollection?)
 }
 
@@ -56,6 +56,8 @@ class MenuTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
+        self.progressCollections = context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
         self.tableView.reloadData()
     }
 
@@ -136,19 +138,8 @@ class MenuTableViewController: UITableViewController {
             {
             case MoreTableViewCell.New.rawValue:
                 println("Create new progressCollection")
-                
-                if let context = self.context
-                {
-                    var newProgressCollection :ProgressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context) as! ProgressCollection
-                    
-                    self.delegate.newProgressCollectionCreated(newProgressCollection)
-                    
-                    
-                    let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
-                    self.progressCollections = self.context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
-                    
-                    
-                }
+                self.delegate.initiateNewProgressCollection()
+
 
                 break;
             case MoreTableViewCell.Settings.rawValue:
