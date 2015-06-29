@@ -90,7 +90,15 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     
     func openMenu()
     {
-        self.slidingViewController().anchorTopViewToRightAnimated(true)
+        if self.slidingViewController().currentTopViewPosition == ECSlidingViewControllerTopViewPosition.Centered
+        {
+            self.slidingViewController().anchorTopViewToRightAnimated(true)
+        }
+        else
+        {
+            self.slidingViewController().resetTopViewAnimated(true)
+        }
+        
     }
     
     func rightBarButtonTapped()
