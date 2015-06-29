@@ -50,7 +50,6 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
         }
         
         
-        
         if let progressPoint = self.progressPoint
         {
             if let imageView = self.imageView
@@ -58,6 +57,24 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
                 if let image = self.progressPoint?.getImage()
                 {
                     imageView.image = image
+                }
+            }
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        if let gestures = self.navigationController!.navigationBar.gestureRecognizers
+        {
+            for gesture  in gestures
+            {
+                if gesture.isKindOfClass(UITapGestureRecognizer)
+                {
+                    if let gesture = gesture as? UITapGestureRecognizer
+                    {
+                        gesture.enabled = true
+                    }
                 }
             }
         }
