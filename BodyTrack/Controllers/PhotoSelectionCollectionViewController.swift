@@ -18,6 +18,7 @@ enum ActionSheetButton: Int
 class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate, UIAlertViewDelegate, UIActionSheetDelegate {
 
     let SegueToCompareTabBar : String = "GoToCompareSegueId"
+    let SegueToEditCollection : String = "EditProgressCollectionSegue"
     
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
     @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
@@ -71,13 +72,18 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             
             var rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Compose, target: self, action: "rightBarButtonTapped")
            self.navigationItem.rightBarButtonItem = rightBarButtonItem
+            
+            
+            
+            var tapNavGesture = UITapGestureRecognizer(target: self, action: "navBarTapped")
+            self.navigationController?.navigationBar.addGestureRecognizer(tapNavGesture)
         }
         self.clearsSelectionOnViewWillAppear = true
     }
     
-    override func viewDidAppear(animated: Bool)
+    override func viewWillAppear(animated: Bool)
     {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         
         var copyCollection = self.progressCollection
         self.loadProgressPointsForProgressCollection(nil)
@@ -86,6 +92,11 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             self.progressPointCollectionViewHelper.collectionView.reloadData()
         }, completion: { (Bool) -> Void in })
         
+    }
+    
+    func navBarTapped()
+    {
+        self.performSegueWithIdentifier(SegueToEditCollection, sender: self)
     }
     
     func openMenu()
@@ -260,15 +271,23 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
             var viewController = segue.destinationViewController as! ProgressPointDetailTableViewController
             viewController.progressPoint = self.selectedProgressPoint
+            
             if let context = self.context
             {
                 viewController.context = context
             }
             
-        break
+        case SegueToEditCollection:
+            var viewController = segue.destinationViewController.childViewControllers.first as! EditProgressCollectionViewController
             
-            
-            
+            if let context = self.context
+            {
+                viewController.context = context
+            }
+            if let progressCollection = self.progressCollection
+            {
+                viewController.progressCollection = progressCollection
+            }
         default:
                 break;
         }
