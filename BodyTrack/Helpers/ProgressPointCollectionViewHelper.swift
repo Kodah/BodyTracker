@@ -119,6 +119,7 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             
             if self.selectedProgressPoints.count == 2
             {
+                self.photoSelectionCollectionViewController.progressPointsToCompare = ProgressPointsToCompare(firstProgressPoint: self.selectedProgressPoints.first!, secondProgressPoint: self.selectedProgressPoints.last!)
                 self.photoSelectionCollectionViewController.performSegueWithIdentifier(SegueToCompareTabBar, sender: self.photoSelectionCollectionViewController)
             }
         }

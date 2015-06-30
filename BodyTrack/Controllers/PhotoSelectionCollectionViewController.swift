@@ -15,6 +15,26 @@ enum ActionSheetButton: Int
     case PhotoLibrary
 }
 
+struct ProgressPointsToCompare
+{
+    let firstProgressPoint : ProgressPoint
+    let secondProgressPoint : ProgressPoint
+    
+    init(firstProgressPoint : ProgressPoint, secondProgressPoint : ProgressPoint)
+    {
+        if firstProgressPoint.date.compare(secondProgressPoint.date) == NSComparisonResult.OrderedAscending
+        {
+            self.firstProgressPoint = firstProgressPoint
+            self.secondProgressPoint = secondProgressPoint
+        }
+        else
+        {
+            self.firstProgressPoint = secondProgressPoint
+            self.secondProgressPoint = firstProgressPoint
+        }
+    }
+}
+
 class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate, UITextFieldDelegate, UIActionSheetDelegate {
 
     let SegueToCompareTabBar : String = "GoToCompareSegueId"
@@ -31,6 +51,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     var alertController : UIAlertController?
     var selectMode : Bool = false
     var buttonForRightBarButton : UIButton?
+    var progressPointsToCompare : ProgressPointsToCompare?
     
     override func viewDidLoad()
     {
@@ -350,7 +371,11 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             {
                 viewController.progressCollection = progressCollection
             }
-              
+        case SegueToCompareTabBar:
+            
+            break
+            
+            
         default:
                 break;
         }
