@@ -15,6 +15,8 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
     let bodyReuseIdentifier = "BodyCollectionViewCellId"
     let addReuseIdentifier = "AddCollectionViewId"
     var progressPoints = [ProgressPoint]()
+    var multipleSelectionEnabled : Bool? = true
+    var selectedProgressPoints = [ProgressPoint]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var photoSelectionCollectionViewController: PhotoSelectionCollectionViewController!
@@ -49,8 +51,9 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             var progressCollection = progressPoint.progressCollection as! ProgressCollection
             
             var cell = collectionView.dequeueReusableCellWithReuseIdentifier(bodyReuseIdentifier, forIndexPath: indexPath) as! ProgressPointCollectionViewCell
-
             
+            cell.selectedBackgroundView = UIView(frame: cell.bounds)
+            cell.selectedBackgroundView.backgroundColor = UIColor.blueColor()
             
             if let imageView = cell.progressPicImageView
             {
@@ -101,9 +104,21 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
+        
         if (indexPath.row == self.progressPoints.count)
         {
             self.photoSelectionCollectionViewController.showActionSheet()
+        }
+        else if let multipleSelectionEnabled = self.multipleSelectionEnabled
+        {
+            if multipleSelectionEnabled
+            {
+                self.selectedProgressPoints.append(self.progressPoints[indexPath.row])
+                var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
+                cell.selectedImageView.hidden = false
+                cell.layer.borderWidth = 6
+                return
+            }
         }
         else
         {

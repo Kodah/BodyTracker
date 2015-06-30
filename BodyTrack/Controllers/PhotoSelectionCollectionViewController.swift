@@ -71,7 +71,20 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             
             self.navigationItem.leftBarButtonItem = barButtonItem
             
-            var rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Compose, target: self, action: "rightBarButtonTapped")
+
+            var button : UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+            
+            
+            var image = UIImage(named: "muscle")
+            image = image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+            button.setImage(image, forState: UIControlState.Normal)
+            button.frame = CGRectMake(0, 0, 25, 25)
+            button.addTarget(self, action: "rightBarButtonItemTapped", forControlEvents: UIControlEvents.TouchUpInside)
+            button.imageView?.tintColor = UIColor.whiteColor()
+            
+            var rightBarButtonItem = UIBarButtonItem(customView: button)
+
+            
            self.navigationItem.rightBarButtonItem = rightBarButtonItem
             
             
