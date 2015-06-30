@@ -10,12 +10,13 @@ import UIKit
 
 class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
+    let SegueToCompareTabBar : String = "GoToCompareSegueId"
     let reuseIdentifier = "Cell"
     let ProgressPointSegueId = "showProgressPointId"
     let bodyReuseIdentifier = "BodyCollectionViewCellId"
     let addReuseIdentifier = "AddCollectionViewId"
     var progressPoints = [ProgressPoint]()
-    var multipleSelectionEnabled : Bool? = true
+    var selectMode : Bool = false
     var selectedProgressPoints = [ProgressPoint]()
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -104,26 +105,46 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        
         if (indexPath.row == self.progressPoints.count)
         {
             self.photoSelectionCollectionViewController.showActionSheet()
         }
-        else if let multipleSelectionEnabled = self.multipleSelectionEnabled
+        else if self.selectMode
         {
-            if multipleSelectionEnabled
+            self.selectedProgressPoints.append(self.progressPoints[indexPath.row])
+            var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
+            cell.selectedImageView.hidden = false
+            cell.layer.borderWidth = 6
+            cell.selected = true
+            
+            if self.selectedProgressPoints.count == 2
             {
-                self.selectedProgressPoints.append(self.progressPoints[indexPath.row])
-                var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
-                cell.selectedImageView.hidden = false
-                cell.layer.borderWidth = 6
-                return
+                self.photoSelectionCollectionViewController.performSegueWithIdentifier(SegueToCompareTabBar, sender: self.photoSelectionCollectionViewController)
             }
         }
         else
         {
+            var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
+            cell.selected = false
             self.photoSelectionCollectionViewController.selectedProgressPoint = self.progressPoints[indexPath.row]
             self.photoSelectionCollectionViewController.performSegueWithIdentifier("ShowProgressPointDetailId", sender: self.photoSelectionCollectionViewController)
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath)
+    {
+        if indexPath.row != self.progressPoints.count
+        {
+            var progressPoint = self.progressPoints[indexPath.row]
+            
+            var index = find(self.selectedProgressPoints, progressPoint)
+            
+            self.selectedProgressPoints.removeAtIndex(index!)
+            
+            var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
+            cell.selectedImageView.hidden = true
+            cell.layer.borderWidth = 1
+            cell.selected = false
         }
     }
 }

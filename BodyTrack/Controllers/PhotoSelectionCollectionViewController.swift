@@ -29,6 +29,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     var selectedProgressCollection : ProgressCollection?
     var selectedProgressPoint : ProgressPoint?
     var alertController : UIAlertController?
+    var selectMode : Bool = false
+    var buttonForRightBarButton : UIButton?
     
     override func viewDidLoad()
     {
@@ -71,21 +73,22 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             
             self.navigationItem.leftBarButtonItem = barButtonItem
             
+            self.collectionView?.allowsMultipleSelection = true
 
-            var button : UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+            self.buttonForRightBarButton = UIButton.buttonWithType(UIButtonType.Custom) as? UIButton
+            if let button = self.buttonForRightBarButton
+            {
+                var image = UIImage(named: "muscle")
+                image = image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+                button.setImage(image, forState: UIControlState.Normal)
+                button.frame = CGRectMake(0, 0, 25, 25)
+                button.addTarget(self, action: "rightBarButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
+                button.imageView?.tintColor = UIColor.whiteColor()
+                
+                var rightBarButtonItem = UIBarButtonItem(customView: button)
+                self.navigationItem.rightBarButtonItem = rightBarButtonItem
+            }
             
-            
-            var image = UIImage(named: "muscle")
-            image = image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-            button.setImage(image, forState: UIControlState.Normal)
-            button.frame = CGRectMake(0, 0, 25, 25)
-            button.addTarget(self, action: "rightBarButtonItemTapped", forControlEvents: UIControlEvents.TouchUpInside)
-            button.imageView?.tintColor = UIColor.whiteColor()
-            
-            var rightBarButtonItem = UIBarButtonItem(customView: button)
-
-            
-           self.navigationItem.rightBarButtonItem = rightBarButtonItem
             
             
             
@@ -128,7 +131,23 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     
     func rightBarButtonTapped()
     {
-        self.performSegueWithIdentifier(SegueToCompareTabBar, sender: self)
+        if self.selectMode
+        {
+            self.navigationItem.title = self.progressCollection?.name
+            self.buttonForRightBarButton?.imageView?.tintColor = UIColor.whiteColor()
+            //deselect all cells
+        }
+        else
+        {
+            self.navigationItem.title = "Select Two Cells"
+            self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
+            self.buttonForRightBarButton?.imageView?.tintColor = UIColor.yellowColor()
+        }
+        
+        self.selectMode = !self.selectMode
+        self.progressPointCollectionViewHelper.selectMode = self.selectMode
+        
+//        self.performSegueWithIdentifier(SegueToCompareTabBar, sender: self)
     }
     
     func initiateNewProgressCollection()
@@ -331,6 +350,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             {
                 viewController.progressCollection = progressCollection
             }
+              
         default:
                 break;
         }
