@@ -15,7 +15,7 @@ enum ActionSheetButton: Int
     case PhotoLibrary
 }
 
-struct ProgressPointsToCompare
+class ProgressPointsToCompare
 {
     let firstProgressPoint : ProgressPoint
     let secondProgressPoint : ProgressPoint
@@ -372,6 +372,11 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
                 viewController.progressCollection = progressCollection
             }
         case SegueToCompareTabBar:
+            
+            
+            var tabBar = segue.destinationViewController as! CompareTabViewController
+            tabBar.progressPointsToCompare = self.progressPointsToCompare
+
             
             break
             

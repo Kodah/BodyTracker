@@ -470,10 +470,10 @@
             </objects>
             <point key="canvasLocation" x="2534" y="1860"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Compare Tab View Controller-->
         <scene sceneID="Xgg-ol-oEU">
             <objects>
-                <tabBarController id="n42-xr-eFz" sceneMemberID="viewController">
+                <tabBarController id="n42-xr-eFz" customClass="CompareTabViewController" customModule="BodyTrack" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="sAx-Cj-tS3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

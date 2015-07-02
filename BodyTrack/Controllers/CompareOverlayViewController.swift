@@ -16,12 +16,25 @@ class CompareOverlayViewController: UIViewController {
     
     var lastScale : CGFloat?
     var lastPoint : CGPoint?
+    var tabBar : CompareTabViewController?
+    var progressPointsToCompare : ProgressPointsToCompare?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         topImageView.layer.borderColor = UIColor.grayColor().CGColor
         topImageView.layer.borderWidth = 2
+        
+        if let tabBar = self.tabBarController as? CompareTabViewController
+        {
+            self.tabBar = tabBar
+            
+            if let progressPointToCompare = tabBar.progressPointsToCompare
+            {
+                self.bottomImageView.image = progressPointToCompare.firstProgressPoint.getImage()
+                self.topImageView.image = progressPointToCompare.secondProgressPoint.getImage()
+            }
+        }
         
         var barButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissSelf")
         
