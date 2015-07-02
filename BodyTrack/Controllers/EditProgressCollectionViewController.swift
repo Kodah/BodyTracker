@@ -78,18 +78,13 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
     
     @IBAction func saveButtonTapped(sender: UIBarButtonItem)
     {
-        if let progressCollection = progressCollection
+        if let progressCollection = progressCollection, context = context
         {
-            
             progressCollection.name = navigationItem.title
             progressCollection.colour = UIColor.hexValuesFromUIColor(colorPickerView.color)
-                
-            if let context = context
-            {
-                context.save(nil)
-            }
-            dismissViewControllerAnimated(true, completion: nil)
 
+            context.save(nil)
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

@@ -36,13 +36,13 @@ class ProgressPointsToCompare
 }
 
 class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate, UITextFieldDelegate, UIActionSheetDelegate {
-
+    
     let SegueToCompareTabBar : String = "GoToCompareSegueId"
     let SegueToEditCollection : String = "EditProgressCollectionSegue"
     
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
     @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
-
+    
     var progressCollection : ProgressCollection?
     var progressPoints = [ProgressPoint]()
     var context: NSManagedObjectContext?
@@ -56,33 +56,32 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         if let context = context
         {
             let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
             var progressCollectionArray : [ProgressCollection] = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
             progressCollection = progressCollectionArray.first
         }
-
-        if let progressCollection = progressCollection
+        
+        if let progressCollection = progressCollection, context = context
         {
             let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
             let predicate = NSPredicate(format: "progressCollection == %@", progressCollection)
             
             fetchRequest.predicate = predicate
             
-            if let context = context
+            
+            var array = context.executeFetchRequest(fetchRequest, error: nil)
+            
+            if let arraySafe = array
             {
-                var array = context.executeFetchRequest(fetchRequest, error: nil)
-                
-                if let arraySafe = array
+                if ((arraySafe.first?.isKindOfClass(ProgressPoint)) != nil)
                 {
-                    if ((arraySafe.first?.isKindOfClass(ProgressPoint)) != nil)
-                    {
-                        progressPoints = arraySafe as! [ProgressPoint]
-                        progressPointCollectionViewHelper.progressPoints = progressPoints
-                    }
+                    progressPoints = arraySafe as! [ProgressPoint]
+                    progressPointCollectionViewHelper.progressPoints = progressPoints
                 }
+                
             }
             title = progressCollection.name
             navigationController?.navigationBar.translucent = false
@@ -95,7 +94,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             navigationItem.leftBarButtonItem = barButtonItem
             
             collectionView?.allowsMultipleSelection = true
-
+            
             buttonForRightBarButton = UIButton.buttonWithType(UIButtonType.Custom) as? UIButton
             if let button = buttonForRightBarButton
             {
@@ -128,7 +127,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
         progressPointCollectionViewHelper.collectionView.performBatchUpdates({ () -> Void in
             self.progressPointCollectionViewHelper.collectionView.reloadData()
-        }, completion: { (Bool) -> Void in })
+            }, completion: { (Bool) -> Void in })
         
     }
     
@@ -169,13 +168,13 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         selectMode = !selectMode
         progressPointCollectionViewHelper.selectMode = selectMode
         
-//        self.performSegueWithIdentifier(SegueToCompareTabBar, sender: self)
+        //        self.performSegueWithIdentifier(SegueToCompareTabBar, sender: self)
     }
     
     func initiateNewProgressCollection()
     {
         slidingViewController().resetTopViewAnimated(true)
-        setupAlertController()        
+        setupAlertController()
     }
     
     func setupAlertController()
@@ -210,24 +209,20 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     
     func textFieldChanged(textField : UITextField)
     {
-        if let alertController = alertController
+        if let alertController = alertController, actions = alertController.actions as? [UIAlertAction]
         {
             if count(textField.text) > 0
             {
-                if let actions = alertController.actions as? [UIAlertAction]
+                
+                for action in actions
                 {
-                    for action in actions
-                    {
-                        action.enabled = true
-                    }
+                    action.enabled = true
                 }
             }
             else
             {
-                if let actions = alertController.actions as? [UIAlertAction]
-                {
-                    actions[1].enabled = false
-                }
+                
+                actions[1].enabled = false
             }
         }
     }
@@ -240,7 +235,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         {
         case ActionSheetButton.Camera.rawValue:
             println("open custom camera")
-
+            
             var imagePickerController = imagePickerControllerHelper.getCameraFromHelper()
             
             presentViewController(imagePickerController, animated: true, completion: nil)
@@ -263,7 +258,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     func createNewProgressPoint(image : UIImage)
     {
         let date : NSDate = NSDate()
-  
+        
         let fileManager = NSFileManager.defaultManager()
         
         var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
@@ -306,7 +301,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             self.progressCollection = progressCollection
         }
         
-        if let safeProgressCollection = self.progressCollection
+        if let safeProgressCollection = self.progressCollection, context = context
         {
             let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
             let predicate = NSPredicate(format: "progressCollection == %@", safeProgressCollection)
@@ -315,11 +310,10 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             
             fetchRequest.predicate = predicate
             
-            if let context = context
-            {
-                progressPoints = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressPoint]
-                progressPointCollectionViewHelper.progressPoints = progressPoints
-            }
+            
+            progressPoints = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressPoint]
+            progressPointCollectionViewHelper.progressPoints = progressPoints
+            
             
             title = safeProgressCollection.name
             navigationController?.navigationBar.translucent = false
@@ -328,7 +322,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             collectionView?.reloadData()
         }
     }
-
+    
     func showActionSheet()
     {
         let actionSheet = UIActionSheet(title: "New photo", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Use Camera", "Photo library")
@@ -352,7 +346,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         switch segue.identifier!
         {
         case "ShowProgressPointDetailId":
-        
+            
             var viewController = segue.destinationViewController as! ProgressPointDetailTableViewController
             viewController.progressPoint = selectedProgressPoint
             
@@ -364,26 +358,18 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         case SegueToEditCollection:
             var viewController = segue.destinationViewController.childViewControllers.first as! EditProgressCollectionViewController
             
-            if let context = context
+            if let context = context, progressCollection = progressCollection
             {
                 viewController.context = context
-            }
-            if let progressCollection = progressCollection
-            {
                 viewController.progressCollection = progressCollection
             }
         case SegueToCompareTabBar:
-            
-            
+
             var tabBar = segue.destinationViewController as! CompareTabViewController
             tabBar.progressPointsToCompare = progressPointsToCompare
-
-            
-            break
-            
             
         default:
-                break;
+            break;
         }
     }
     

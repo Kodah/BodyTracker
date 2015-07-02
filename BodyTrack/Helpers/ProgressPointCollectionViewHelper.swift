@@ -56,12 +56,9 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             cell.selectedBackgroundView = UIView(frame: cell.bounds)
             cell.selectedBackgroundView.backgroundColor = UIColor.blueColor()
             
-            if let imageView = cell.progressPicImageView
+            if let imageView = cell.progressPicImageView, image = progressPoint.getImage()
             {
-                if let image = progressPoint.getImage()
-                {
-                    imageView.image = image
-                }
+                imageView.image = image
             }
             var dateformatter = NSDateFormatter()
             dateformatter.timeStyle = NSDateFormatterStyle.NoStyle

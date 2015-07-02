@@ -50,15 +50,9 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
         }
         
         
-        if let progressPoint = progressPoint
+        if let progressPoint = progressPoint, imageView = imageView, image = progressPoint.getImage()
         {
-            if let imageView = imageView
-            {
-                if let image = progressPoint.getImage()
-                {
-                    imageView.image = image
-                }
-            }
+            imageView.image = image
         }
     }
     
@@ -149,18 +143,15 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
         {
         case TableViewCell.Date.rawValue:
             
-            if let datePickerVC = datePickerViewController
+            if let datePickerVC = datePickerViewController, progressPoint = progressPoint
             {
-                if let progressPoint = progressPoint
+                if (progressPoint.date != nil)
                 {
-                    if (progressPoint.date != nil)
-                    {
-                        datePickerVC.datePicker.date = progressPoint.date
-                    }
-                    else
-                    {
-                        datePickerVC.datePicker.date = NSDate()
-                    }
+                    datePickerVC.datePicker.date = progressPoint.date
+                }
+                else
+                {
+                    datePickerVC.datePicker.date = NSDate()
                 }
             }
             view.layoutIfNeeded()
