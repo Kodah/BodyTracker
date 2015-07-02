@@ -19,7 +19,7 @@ extension ProgressPoint
         
         var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         
-        var fullPath = "\(path)/\(self.imageName)"
+        var fullPath = "\(path)/\(imageName)"
         
         if (fileManager.fileExistsAtPath(fullPath))
         {

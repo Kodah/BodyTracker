@@ -28,12 +28,12 @@ class DatePickerViewController: UIViewController {
     
     func prepareDatePickerToShowWithDate(date : NSDate)
     {
-        self.datePicker.setDate(date, animated: false)
+        datePicker.setDate(date, animated: false)
     }
 
     @IBAction func cancelButtonTapped(sender: UIButton)
     {
-        if let delegate = self.delegate
+        if let delegate = delegate
         {
             delegate.dismissDatePicker()
         }
@@ -41,9 +41,9 @@ class DatePickerViewController: UIViewController {
 
     @IBAction func doneButtonTapped(sender: UIButton)
     {
-        if let delegate = self.delegate
+        if let delegate = delegate
         {
-            delegate.datePickerDidChoose(self.datePicker.date)
+            delegate.datePickerDidChoose(datePicker.date)
         }
     }
 }

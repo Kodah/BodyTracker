@@ -23,24 +23,24 @@ class CompareOverlayViewController: UIViewController {
         topImageView.layer.borderColor = UIColor.grayColor().CGColor
         topImageView.layer.borderWidth = 2
         
-        if let tabBar = self.tabBarController as? CompareTabViewController
+        if let tabBar = tabBarController as? CompareTabViewController
         {
             if let progressPointToCompare = tabBar.progressPointsToCompare
             {
-                self.bottomImageView.image = progressPointToCompare.firstProgressPoint.getImage()
-                self.topImageView.image = progressPointToCompare.secondProgressPoint.getImage()
+                bottomImageView.image = progressPointToCompare.firstProgressPoint.getImage()
+                topImageView.image = progressPointToCompare.secondProgressPoint.getImage()
             }
         }
         
         var barButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissSelf")
         
-        self.navigationItem.leftBarButtonItem = barButtonItem
+        navigationItem.leftBarButtonItem = barButtonItem
 
     }
     
     func dismissSelf()
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
 
@@ -52,55 +52,55 @@ class CompareOverlayViewController: UIViewController {
         {
             if recognizer.state == UIGestureRecognizerState.Began
             {
-                self.lastScale = 1.0
-                self.lastPoint = recognizer.locationInView(recognizer.view)
+                lastScale = 1.0
+                lastPoint = recognizer.locationInView(recognizer.view)
             }
         }
         
-        var scale = 1.0 - (self.lastScale! - recognizer.scale)
+        var scale = 1.0 - (lastScale! - recognizer.scale)
         
-        self.topImageView.layer.setAffineTransform(CGAffineTransformScale(self.topImageView.layer.affineTransform(), scale, scale))
+        topImageView.layer.setAffineTransform(CGAffineTransformScale(topImageView.layer.affineTransform(), scale, scale))
         
         
-        self.lastScale = recognizer.scale
+        lastScale = recognizer.scale
         
         var point = recognizer.locationInView(recognizer.view)
         
-        self.topImageView.layer.setAffineTransform(
+        topImageView.layer.setAffineTransform(
             CGAffineTransformTranslate(
-                self.topImageView.layer.affineTransform(),
-                point.x - self.lastPoint!.x,
-                point.y - self.lastPoint!.y))
+                topImageView.layer.affineTransform(),
+                point.x - lastPoint!.x,
+                point.y - lastPoint!.y))
         
-        self.lastPoint = recognizer.locationInView(recognizer.view)
+        lastPoint = recognizer.locationInView(recognizer.view)
 
     }
 
     @IBAction func panGesture(recognizer: UIPanGestureRecognizer)
     {
         
-        var translation = recognizer.translationInView(self.topImageView)
+        var translation = recognizer.translationInView(topImageView)
         
-        recognizer.setTranslation(CGPointMake(0, 0), inView: self.topImageView)
+        recognizer.setTranslation(CGPointMake(0, 0), inView: topImageView)
         
-        var center = self.topImageView.center
+        var center = topImageView.center
         center.y += translation.y
         center.x += translation.x
-        self.topImageView.center = center
+        topImageView.center = center
         
 
     }
     
     @IBAction func sliderValueChanged(slider: UISlider)
     {
-        self.topImageView.alpha = CGFloat(slider.value)
+        topImageView.alpha = CGFloat(slider.value)
     }
     
     @IBAction func resetBarButtonTapped(sender: UIBarButtonItem)
     {
-        self.topImageView.transform = CGAffineTransformIdentity
-        self.topImageView.frame = self.bottomImageView.bounds
-        self.topImageView.setNeedsLayout()
-        self.topImageView.layoutIfNeeded()
+        topImageView.transform = CGAffineTransformIdentity
+        topImageView.frame = bottomImageView.bounds
+        topImageView.setNeedsLayout()
+        topImageView.layoutIfNeeded()
     }
 }
