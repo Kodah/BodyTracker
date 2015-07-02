@@ -358,10 +358,10 @@
             </objects>
             <point key="canvasLocation" x="2004" y="1047"/>
         </scene>
-        <!--View Controller-->
+        <!--Top Bottom Compare View Controller-->
         <scene sceneID="X7R-aR-vly">
             <objects>
-                <viewController id="Oxb-eW-6Op" sceneMemberID="viewController">
+                <viewController id="Oxb-eW-6Op" customClass="TopBottomCompareViewController" customModule="BodyTrack" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7rS-rN-aoW"/>
                         <viewControllerLayoutGuide type="bottom" id="G10-M2-aCm"/>
@@ -391,6 +391,10 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="2TJ-SJ-USG"/>
+                    <connections>
+                        <outlet property="bottomImageView" destination="fyZ-7y-5Qc" id="JPy-6d-VAa"/>
+                        <outlet property="topImageView" destination="xT0-lU-DCz" id="bx0-6c-p6e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrq-o9-v4x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

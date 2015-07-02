@@ -28,6 +28,7 @@
 		88DF6C061B345D2400E07033 /* ProgressPointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */; };
 		88DF6C081B347BEB00E07033 /* UIColor-helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C071B347BEB00E07033 /* UIColor-helper.swift */; };
 		88F170B41B45410900C89671 /* CompareTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F170B31B45410900C89671 /* CompareTabViewController.swift */; };
+		88F170B61B45455900C89671 /* TopBottomCompareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F170B51B45455900C89671 /* TopBottomCompareViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPointHelper.swift; sourceTree = "<group>"; };
 		88DF6C071B347BEB00E07033 /* UIColor-helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor-helper.swift"; path = "Helpers/UIColor-helper.swift"; sourceTree = "<group>"; };
 		88F170B31B45410900C89671 /* CompareTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareTabViewController.swift; path = Controllers/CompareTabViewController.swift; sourceTree = "<group>"; };
+		88F170B51B45455900C89671 /* TopBottomCompareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomCompareViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +198,7 @@
 		7EC64C241B2DB18E001B2CBE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				88F170B51B45455900C89671 /* TopBottomCompareViewController.swift */,
 				7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */,
 				7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */,
 				88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */,
@@ -352,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88111E8A1B3DA3D800C8B45E /* CompareOverlayViewController.swift in Sources */,
+				88F170B61B45455900C89671 /* TopBottomCompareViewController.swift in Sources */,
 				7E2ECF631B33637B004F2033 /* ProgressPointCollectionViewCell.swift in Sources */,
 				8877E9521B3C10DF000E9054 /* EditProgressCollectionViewController.swift in Sources */,
 				7EDA17CC1B37292E00BA915D /* DatePickerViewController.swift in Sources */,

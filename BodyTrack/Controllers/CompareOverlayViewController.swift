@@ -16,8 +16,6 @@ class CompareOverlayViewController: UIViewController {
     
     var lastScale : CGFloat?
     var lastPoint : CGPoint?
-    var tabBar : CompareTabViewController?
-    var progressPointsToCompare : ProgressPointsToCompare?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +25,6 @@ class CompareOverlayViewController: UIViewController {
         
         if let tabBar = self.tabBarController as? CompareTabViewController
         {
-            self.tabBar = tabBar
-            
             if let progressPointToCompare = tabBar.progressPointsToCompare
             {
                 self.bottomImageView.image = progressPointToCompare.firstProgressPoint.getImage()
