@@ -157,6 +157,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             self.navigationItem.title = self.progressCollection?.name
             self.buttonForRightBarButton?.imageView?.tintColor = UIColor.whiteColor()
             //deselect all cells
+            progressPointCollectionViewHelper.deselectAllCellsInCollectionView()
         }
         else
         {

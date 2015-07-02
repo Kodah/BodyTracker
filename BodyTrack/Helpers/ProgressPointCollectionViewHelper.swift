@@ -115,11 +115,12 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
             cell.selectedImageView.hidden = false
             cell.layer.borderWidth = 6
-            cell.selected = true
+
             
             if self.selectedProgressPoints.count == 2
             {
                 self.photoSelectionCollectionViewController.progressPointsToCompare = ProgressPointsToCompare(firstProgressPoint: self.selectedProgressPoints.first!, secondProgressPoint: self.selectedProgressPoints.last!)
+                deselectAllCellsInCollectionView()
                 self.photoSelectionCollectionViewController.performSegueWithIdentifier(SegueToCompareTabBar, sender: self.photoSelectionCollectionViewController)
             }
         }
@@ -140,12 +141,23 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             
             var index = find(self.selectedProgressPoints, progressPoint)
             
-            self.selectedProgressPoints.removeAtIndex(index!)
+            if let index = index
+            {
+                self.selectedProgressPoints.removeAtIndex(index)
+            }
+            
             
             var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
             cell.selectedImageView.hidden = true
             cell.layer.borderWidth = 1
-            cell.selected = false
+        }
+    }
+    
+    func deselectAllCellsInCollectionView()
+    {
+        for indexPath in collectionView.indexPathsForSelectedItems()
+        {
+            self.collectionView(collectionView, didDeselectItemAtIndexPath: indexPath as! NSIndexPath)
         }
     }
 }
