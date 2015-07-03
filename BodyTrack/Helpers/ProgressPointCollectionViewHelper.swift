@@ -110,7 +110,6 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
         {
             selectedProgressPoints.append(progressPoints[indexPath.row])
             var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
-            cell.selectedImageView.hidden = false
             cell.layer.borderWidth = 6
 
             
@@ -145,7 +144,6 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             
             
             var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
-            cell.selectedImageView.hidden = true
             cell.layer.borderWidth = 1
         }
     }

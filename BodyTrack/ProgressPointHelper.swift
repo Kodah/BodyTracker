@@ -39,4 +39,28 @@ extension ProgressPoint
             
         }
     }
+    
+    func getStats() -> NSString
+    {
+        var description = ""
+        
+        if let date = date
+        {
+            description += "Date: \(date) \n"
+        }
+        if let measurement = measurement
+        {
+            description += "Measurement: \(measurement)cm \n"
+        }
+        if let weight = weight
+        {
+            description += "Weight: \(weight)kg \n"
+        }
+        if let bodyFat = bodyFat
+        {
+            description += "Body fat: \(bodyFat)% \n"
+        }
+        
+        return description
+    }
 }

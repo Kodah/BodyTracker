@@ -27,11 +27,16 @@ class CompareOverlayViewController: UIViewController {
         {
             bottomImageView.image = progressPointToCompare.firstProgressPoint.getImage()
             topImageView.image = progressPointToCompare.secondProgressPoint.getImage()
+            
+            var image = UIImage.createCompareImage(progressPointToCompare.firstProgressPoint, progressPoint2: progressPointToCompare.secondProgressPoint, statsEnabled: true)
+            
         }
         
         var barButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissSelf")
         
         navigationItem.leftBarButtonItem = barButtonItem
+        
+        
 
     }
     

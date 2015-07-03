@@ -10,9 +10,6 @@ import UIKit
 
 class ProgressPointCollectionViewCell: UICollectionViewCell
 {
-    
-    
-    @IBOutlet var selectedImageView: UIImageView!
     @IBOutlet weak var progressPicImageView: UIImageView!
     @IBOutlet weak var date: UILabel!
     

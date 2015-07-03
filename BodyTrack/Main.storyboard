@@ -153,21 +153,12 @@
                                                 <constraint firstAttribute="width" secondItem="E3S-Ys-Ykg" secondAttribute="height" multiplier="1:1" id="OkU-TM-ROe"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checked" translatesAutoresizingMaskIntoConstraints="NO" id="FVY-cT-eFq">
-                                            <rect key="frame" x="242" y="238" width="50" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="FVY-cT-eFq" secondAttribute="height" multiplier="1:1" id="LqX-a5-d2C"/>
-                                                <constraint firstAttribute="width" constant="50" id="qJj-yF-tzn"/>
-                                            </constraints>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="FVY-cT-eFq" firstAttribute="top" secondItem="E3S-Ys-Ykg" secondAttribute="bottom" constant="-62" id="7CL-7Y-1u2"/>
                                     <constraint firstItem="QSa-sb-iCh" firstAttribute="leading" secondItem="Oxj-71-81G" secondAttribute="leading" id="BEe-uA-fse"/>
                                     <constraint firstItem="E3S-Ys-Ykg" firstAttribute="top" secondItem="Oxj-71-81G" secondAttribute="top" id="MH4-Wz-m8m"/>
-                                    <constraint firstItem="FVY-cT-eFq" firstAttribute="leading" secondItem="E3S-Ys-Ykg" secondAttribute="trailing" constant="-58" id="S6p-3w-hho"/>
                                     <constraint firstItem="E3S-Ys-Ykg" firstAttribute="leading" secondItem="Oxj-71-81G" secondAttribute="leading" id="bnj-xb-JXy"/>
                                     <constraint firstAttribute="trailing" secondItem="QSa-sb-iCh" secondAttribute="trailing" id="cpJ-bQ-7Sk"/>
                                     <constraint firstAttribute="bottom" secondItem="QSa-sb-iCh" secondAttribute="bottom" id="f09-Dw-DOI"/>
@@ -178,7 +169,6 @@
                                 <connections>
                                     <outlet property="date" destination="fcc-7K-xCb" id="DoA-FU-WqY"/>
                                     <outlet property="progressPicImageView" destination="E3S-Ys-Ykg" id="ovA-pf-BA0"/>
-                                    <outlet property="selectedImageView" destination="FVY-cT-eFq" id="84l-3i-YLo"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddCollectionViewId" id="alr-1g-rif">
@@ -816,7 +806,6 @@
     <resources>
         <image name="after" width="140" height="261"/>
         <image name="before" width="139" height="261"/>
-        <image name="checked" width="50" height="50"/>
         <image name="plus" width="600" height="600"/>
     </resources>
 </document>
