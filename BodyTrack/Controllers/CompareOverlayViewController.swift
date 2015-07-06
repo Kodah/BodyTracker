@@ -14,6 +14,8 @@ class CompareOverlayViewController: UIViewController {
     @IBOutlet var topImageView: UIImageView!
     @IBOutlet var slider: UISlider!
     
+    var shareImage : UIImage?
+    
     var lastScale : CGFloat?
     var lastPoint : CGPoint?
     
@@ -28,13 +30,17 @@ class CompareOverlayViewController: UIViewController {
             bottomImageView.image = progressPointToCompare.firstProgressPoint.getImage()
             topImageView.image = progressPointToCompare.secondProgressPoint.getImage()
             
-            var image = UIImage.createCompareImage(progressPointToCompare.firstProgressPoint, progressPoint2: progressPointToCompare.secondProgressPoint, statsEnabled: true)
+            shareImage = UIImage.createCompareImage(progressPointToCompare.firstProgressPoint, progressPoint2: progressPointToCompare.secondProgressPoint, statsEnabled: true)
             
         }
         
-        var barButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissSelf")
+        var leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissSelf")
         
-        navigationItem.leftBarButtonItem = barButtonItem
+        navigationItem.leftBarButtonItem = leftBarButtonItem
+        
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "showShareImageViewController")
+        
+        navigationItem.rightBarButtonItem = rightBarButtonItem;
         
         
 
@@ -43,6 +49,19 @@ class CompareOverlayViewController: UIViewController {
     func dismissSelf()
     {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func showShareImageViewController()
+    {
+        if let image = shareImage
+        {
+            var message = "Shared from BodyTracker™ #LeetGains \n p.s Hi Si"
+            
+            var instagramActivity = UIActivity()
+            
+            var activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+            navigationController?.presentViewController(activityViewController, animated: true, completion: nil)
+        }
     }
 
 
