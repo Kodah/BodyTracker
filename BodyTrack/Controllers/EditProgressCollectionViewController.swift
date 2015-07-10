@@ -111,6 +111,8 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
         {
             progressCollection.name = navigationItem.title
             progressCollection.colour = UIColor.hexValuesFromUIColor(colorPickerView.color)
+            
+            NotificationFactory().scheduleNotificationForProgressCollection(progressCollection)
 
             context.save(nil)
             dismissViewControllerAnimated(true, completion: nil)

@@ -61,9 +61,19 @@ class CompareOverlayViewController: UIViewController {
             
             var activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
             navigationController?.presentViewController(activityViewController, animated: true, completion: nil)
+            
+            activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeCopyToPasteboard, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo]
+            
+//            activityViewController.completionWithItemsHandler = { activity, success, items, error in
+//            
+//                if activity == UIActivityTypeSaveToCameraRoll
+//                {
+//                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+//                }
+//                
+//            }
         }
     }
-
 
     @IBAction func pinchGesture(recognizer: UIPinchGestureRecognizer)
     {
@@ -108,8 +118,6 @@ class CompareOverlayViewController: UIViewController {
         center.y += translation.y
         center.x += translation.x
         topImageView.center = center
-        
-
     }
     
     @IBAction func sliderValueChanged(slider: UISlider)

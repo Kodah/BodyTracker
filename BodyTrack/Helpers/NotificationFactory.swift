@@ -40,18 +40,43 @@ class NotificationFactory: NSObject {
         
         if let reminderDate = calculateNotificationFireDateFor(progressCollection)
         {
-            progressDictionary[progressCollection.identifier] = ["deadline": reminderDate, "title": progressCollection.name]
-            
+            if reminderDate.compare(NSDate()) == NSComparisonResult.OrderedDescending
+            {
+                progressDictionary[progressCollection.identifier] = ["deadline": reminderDate, "title": progressCollection.name]
+                
+                var notification = UILocalNotification()
+                notification.alertBody = "BodyTrack progress picture due for \(progressCollection.name)"
+                notification.alertAction = "open"
+                notification.fireDate = reminderDate
+                notification.soundName = UILocalNotificationDefaultSoundName
+                notification.userInfo = ["UUID": progressCollection.identifier]
+                notification.category = "PROGRESS_CATEGORY"
+                UIApplication.sharedApplication().scheduleLocalNotification(notification)
+            }
+            else
+            {
+                progressDictionary.removeValueForKey(progressCollection.identifier)
+                deleteNotificationWith(progressCollection.identifier)
+                
+            }
             NSUserDefaults.standardUserDefaults().setObject(progressDictionary, forKey: PROGRESS_ITEMS)
-            
-            var notification = UILocalNotification()
-            notification.alertBody = "BodyTrack progress picture due for \(progressCollection.name)"
-            notification.alertAction = "open"
-            notification.fireDate = reminderDate
-            notification.soundName = UILocalNotificationDefaultSoundName
-            notification.userInfo = ["UUID": progressCollection.identifier]
-            notification.category = "PROGRESS_CATEGORY"
-            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+
+        }
+    }
+    
+    func deleteNotificationWith(UUIDToDelete : String)
+    {
+        var app:UIApplication = UIApplication.sharedApplication()
+        for oneEvent in app.scheduledLocalNotifications
+        {
+            var notification = oneEvent as! UILocalNotification
+            let userInfoCurrent = notification.userInfo! as! [String:AnyObject]
+            let uid = userInfoCurrent["UUID"]! as! String
+            if uid == UUIDToDelete
+            {
+                app.cancelLocalNotification(notification)
+                break;
+            }
         }
     }
     
