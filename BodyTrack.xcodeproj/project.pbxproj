@@ -22,10 +22,14 @@
 		7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */; };
 		7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */; };
 		7EDA17CC1B37292E00BA915D /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA17CB1B37292E00BA915D /* DatePickerViewController.swift */; };
+		88111E8A1B3DA3D800C8B45E /* CompareOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88111E891B3DA3D800C8B45E /* CompareOverlayViewController.swift */; };
 		8877E9521B3C10DF000E9054 /* EditProgressCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8877E9511B3C10DF000E9054 /* EditProgressCollectionViewController.swift */; };
+		88BAA97D1B46D54D00368C34 /* UIImage-helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BAA97C1B46D54D00368C34 /* UIImage-helper.swift */; };
 		88DF6BFD1B3441A000E07033 /* ProgressPointDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */; };
 		88DF6C061B345D2400E07033 /* ProgressPointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */; };
 		88DF6C081B347BEB00E07033 /* UIColor-helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C071B347BEB00E07033 /* UIColor-helper.swift */; };
+		88F170B41B45410900C89671 /* CompareTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F170B31B45410900C89671 /* CompareTabViewController.swift */; };
+		88F170B61B45455900C89671 /* TopBottomCompareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F170B51B45455900C89671 /* TopBottomCompareViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,10 +67,14 @@
 		7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = Controllers/MenuTableViewController.swift; sourceTree = "<group>"; };
 		7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoSelectionCollectionViewController.swift; path = Controllers/PhotoSelectionCollectionViewController.swift; sourceTree = "<group>"; };
 		7EDA17CB1B37292E00BA915D /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerViewController.swift; path = Controllers/DatePickerViewController.swift; sourceTree = "<group>"; };
+		88111E891B3DA3D800C8B45E /* CompareOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareOverlayViewController.swift; path = Controllers/CompareOverlayViewController.swift; sourceTree = "<group>"; };
 		8877E9511B3C10DF000E9054 /* EditProgressCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProgressCollectionViewController.swift; path = Controllers/EditProgressCollectionViewController.swift; sourceTree = "<group>"; };
+		88BAA97C1B46D54D00368C34 /* UIImage-helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage-helper.swift"; sourceTree = "<group>"; };
 		88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointDetailTableViewController.swift; path = Controllers/ProgressPointDetailTableViewController.swift; sourceTree = "<group>"; };
 		88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPointHelper.swift; sourceTree = "<group>"; };
 		88DF6C071B347BEB00E07033 /* UIColor-helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor-helper.swift"; path = "Helpers/UIColor-helper.swift"; sourceTree = "<group>"; };
+		88F170B31B45410900C89671 /* CompareTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareTabViewController.swift; path = Controllers/CompareTabViewController.swift; sourceTree = "<group>"; };
+		88F170B51B45455900C89671 /* TopBottomCompareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomCompareViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +171,7 @@
 				7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */,
 				88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */,
 				88DF6C071B347BEB00E07033 /* UIColor-helper.swift */,
+				88BAA97C1B46D54D00368C34 /* UIImage-helper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -192,11 +201,14 @@
 		7EC64C241B2DB18E001B2CBE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				88F170B51B45455900C89671 /* TopBottomCompareViewController.swift */,
 				7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */,
 				7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */,
 				88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */,
 				7EDA17CB1B37292E00BA915D /* DatePickerViewController.swift */,
 				8877E9511B3C10DF000E9054 /* EditProgressCollectionViewController.swift */,
+				88111E891B3DA3D800C8B45E /* CompareOverlayViewController.swift */,
+				88F170B31B45410900C89671 /* CompareTabViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -345,12 +357,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88111E8A1B3DA3D800C8B45E /* CompareOverlayViewController.swift in Sources */,
+				88F170B61B45455900C89671 /* TopBottomCompareViewController.swift in Sources */,
 				7E2ECF631B33637B004F2033 /* ProgressPointCollectionViewCell.swift in Sources */,
 				8877E9521B3C10DF000E9054 /* EditProgressCollectionViewController.swift in Sources */,
 				7EDA17CC1B37292E00BA915D /* DatePickerViewController.swift in Sources */,
 				7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */,
 				7E87C7DA1B30BD2000AF1B32 /* ProgressPoint.m in Sources */,
+				88F170B41B45410900C89671 /* CompareTabViewController.swift in Sources */,
 				7E2ECF5F1B3357DC004F2033 /* ImagePickerControllerHelper.swift in Sources */,
+				88BAA97D1B46D54D00368C34 /* UIImage-helper.swift in Sources */,
 				88DF6BFD1B3441A000E07033 /* ProgressPointDetailTableViewController.swift in Sources */,
 				88DF6C081B347BEB00E07033 /* UIColor-helper.swift in Sources */,
 				7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */,
@@ -478,7 +494,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BodyTrack/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BodyTrack/BodyTrack-Bridging-Header.h";
@@ -493,7 +509,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BodyTrack/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BodyTrack/BodyTrack-Bridging-Header.h";

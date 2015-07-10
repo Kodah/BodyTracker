@@ -11,7 +11,7 @@ import CoreData
 
 protocol MenuTableViewControllerDelegate
 {
-    func newProgressCollectionCreated(progressCollection: ProgressCollection)
+    func initiateNewProgressCollection()
     func loadProgressPointsForProgressCollection(progressCollection:ProgressCollection?)
 }
 
@@ -46,17 +46,19 @@ class MenuTableViewController: UITableViewController {
         
         let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
         
-        self.progressCollections = context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
-//
-        self.selectedProgressCollection = self.progressCollections.first
+        progressCollections = context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
 
-        self.clearsSelectionOnViewWillAppear = false
+        selectedProgressCollection = progressCollections.first
+
+        clearsSelectionOnViewWillAppear = false
 
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.tableView.reloadData()
+        let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
+        progressCollections = context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -74,7 +76,7 @@ class MenuTableViewController: UITableViewController {
         switch (section)
         {
             case TableViewSection.Main.rawValue:
-                return self.progressCollections.count;
+                return progressCollections.count;
             case TableViewSection.More.rawValue:
                 return MoreTableViewCell.Count.rawValue
             default:
@@ -90,8 +92,8 @@ class MenuTableViewController: UITableViewController {
         {
             case TableViewSection.Main.rawValue:
             
-                cell.backgroundColor = UIColor(rgba: self.progressCollections[indexPath.row].colour)
-                cell.textLabel?.text = self.progressCollections[indexPath.row].name
+                cell.backgroundColor = UIColor(rgba: progressCollections[indexPath.row].colour)
+                cell.textLabel?.text = progressCollections[indexPath.row].name
                 break
             case TableViewSection.More.rawValue:
             
@@ -117,16 +119,14 @@ class MenuTableViewController: UITableViewController {
         switch (indexPath.section)
         {
         case TableViewSection.Main.rawValue:
-            println("Load \"\(self.progressCollections[indexPath.row].name)\" progressCollection into top level view controller")
+            println("Load \"\(progressCollections[indexPath.row].name)\" progressCollection into top level view controller")
             
-            self.selectedProgressCollection = self.progressCollections[indexPath.row]
+            selectedProgressCollection = progressCollections[indexPath.row]
           
             
-            self.delegate.loadProgressPointsForProgressCollection(self.selectedProgressCollection!
-            )
+            delegate.loadProgressPointsForProgressCollection(selectedProgressCollection!)
             
-            
-            self.slidingViewController().resetTopViewAnimated(true)
+            slidingViewController().resetTopViewAnimated(true)
 
             break
             
@@ -136,19 +136,8 @@ class MenuTableViewController: UITableViewController {
             {
             case MoreTableViewCell.New.rawValue:
                 println("Create new progressCollection")
-                
-                if let context = self.context
-                {
-                    var newProgressCollection :ProgressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context) as! ProgressCollection
-                    
-                    self.delegate.newProgressCollectionCreated(newProgressCollection)
-                    
-                    
-                    let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
-                    self.progressCollections = self.context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
-                    
-                    
-                }
+                delegate.initiateNewProgressCollection()
+
 
                 break;
             case MoreTableViewCell.Settings.rawValue:

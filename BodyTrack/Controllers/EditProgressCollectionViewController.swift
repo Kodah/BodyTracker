@@ -11,30 +11,35 @@ import UIKit
 class EditProgressCollectionViewController: UIViewController, UITextFieldDelegate {
 
     
+    @IBOutlet var changeNameTextField: UITextField!
     @IBOutlet var colorPickerView: HRColorPickerView!
     
     var progressCollection : ProgressCollection?
     var context : NSManagedObjectContext?
+    
+    var inputtedName : String?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
         
-        if let progressCollection = self.progressCollection
+        if let progressCollection = progressCollection
         {
-            self.colorPickerView.color = UIColor(rgba: progressCollection.colour)
-            self.navigationItem.title = progressCollection.name
+            colorPickerView.color = UIColor(rgba: progressCollection.colour)
+            navigationItem.title = progressCollection.name
             
-            self.navigationController?.navigationBar.translucent = false
-            self.navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
-            self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            navigationController?.navigationBar.translucent = false
+            navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
+            navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+            navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            changeNameTextField.text = progressCollection.name
             
         }
         
-        self.colorPickerView.tintAdjustmentMode = UIViewTintAdjustmentMode.Normal
-        self.colorPickerView.addTarget(self, action: "colorDidChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        colorPickerView.tintAdjustmentMode = UIViewTintAdjustmentMode.Normal
+        colorPickerView.addTarget(self, action: "colorDidChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        changeNameTextField.delegate = self
         
         // Do any additional setup after loading the view.
     }
@@ -42,35 +47,44 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         textField.text = NSString(string: textField.text).stringByReplacingCharactersInRange(range, withString: string)
         
-        self.navigationItem.title = textField.text
+        navigationItem.title = textField.text
+        inputtedName = textField.text
+        
+        navigationItem.rightBarButtonItem?.enabled = count(textField.text) > 0 ? true : false
         
         return false
     }
     
+    @IBAction func tapBackground(sender: AnyObject)
+    {
+        changeNameTextField.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     func colorDidChanged(pickerView : HRColorPickerView)
     {
-        self.navigationController?.navigationBar.barTintColor = pickerView.color
+        navigationController?.navigationBar.barTintColor = pickerView.color
     }
     
     @IBAction func cancelButtonTapped(sender: AnyObject)
     {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     @IBAction func saveButtonTapped(sender: UIBarButtonItem)
     {
-        if let progressCollection = self.progressCollection
+        if let progressCollection = progressCollection, context = context
         {
-            progressCollection.name = self.navigationItem.title
-            progressCollection.colour = UIColor.hexValuesFromUIColor(self.colorPickerView.color)
-            
-            if let context = self.context
-            {
-                context.save(nil)
-            }
-            self.dismissViewControllerAnimated(true, completion: nil)
+            progressCollection.name = navigationItem.title
+            progressCollection.colour = UIColor.hexValuesFromUIColor(colorPickerView.color)
+
+            context.save(nil)
+            dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

@@ -19,7 +19,7 @@ extension ProgressPoint
         
         var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
         
-        var fullPath = "\(path)/\(self.imageName)"
+        var fullPath = "\(path)/\(imageName)"
         
         if (fileManager.fileExistsAtPath(fullPath))
         {
@@ -38,5 +38,29 @@ extension ProgressPoint
             return nil
             
         }
+    }
+    
+    func getStats() -> NSString
+    {
+        var description = ""
+        
+        if let date = date
+        {
+            description += "Date: \(date) \n"
+        }
+        if let measurement = measurement
+        {
+            description += "Measurement: \(measurement)cm \n"
+        }
+        if let weight = weight
+        {
+            description += "Weight: \(weight)kg \n"
+        }
+        if let bodyFat = bodyFat
+        {
+            description += "Body fat: \(bodyFat)% \n"
+        }
+        
+        return description
     }
 }
