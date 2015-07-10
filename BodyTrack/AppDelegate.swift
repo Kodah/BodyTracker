@@ -76,6 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 progressCollection.colour = hex
                 progressCollection.interval = 2
                 progressCollection.name = "front"
+                progressCollection.identifier = NSUUID().UUIDString
                 context?.save(nil);
             }
         }

@@ -512,15 +512,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEl-9g-0tU">
-                                <rect key="frame" x="0.0" y="736" width="414" height="208"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="208" id="iAY-2G-Cvd"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="Iyt-lv-cfK" kind="embed" identifier="DatePickerContainerId" id="4Kz-Ku-HPJ"/>
-                                </connections>
-                            </containerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4AF-gh-wsN">
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -555,6 +546,15 @@
                                     <outlet property="delegate" destination="MAO-FX-7jp" id="8mS-6x-ICR"/>
                                 </connections>
                             </tableView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEl-9g-0tU">
+                                <rect key="frame" x="0.0" y="736" width="414" height="208"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="208" id="iAY-2G-Cvd"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Iyt-lv-cfK" kind="embed" identifier="DatePickerContainerId" id="4Kz-Ku-HPJ"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

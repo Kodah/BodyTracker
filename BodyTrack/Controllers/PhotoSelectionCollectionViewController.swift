@@ -70,8 +70,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             let predicate = NSPredicate(format: "progressCollection == %@", progressCollection)
             
             fetchRequest.predicate = predicate
-            
-            
+                        
             var array = context.executeFetchRequest(fetchRequest, error: nil)
             
             if let arraySafe = array
@@ -337,6 +336,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             var newProgressCollection :ProgressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context) as! ProgressCollection
             newProgressCollection.name = name
             newProgressCollection.colour = UIColor.hexValuesFromUIColor(UIColor.randomColor())
+            newProgressCollection.identifier = NSUUID().UUIDString
             context.save(nil)
             loadProgressPointsForProgressCollection(newProgressCollection)
         }
