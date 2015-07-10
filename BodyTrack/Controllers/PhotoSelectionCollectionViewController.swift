@@ -278,6 +278,8 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         newProgressPoint.imageName = fileName
         newProgressPoint.date = date
         
+        NotificationFactory().scheduleNotificationForProgressCollection(newProgressPoint.progressCollection)
+        
         var error : NSError?
         if context?.save(&error) == false
         {

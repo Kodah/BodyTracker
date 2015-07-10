@@ -15,7 +15,7 @@ extension ProgressCollection
     {
         var pointsArray : Array<ProgressPoint> = Array(progressPoints) as! Array<ProgressPoint>
         
-        pointsArray.sort({$0.date.compare($1.date) == NSComparisonResult.OrderedAscending})
+        pointsArray.sort({$0.date.compare($1.date) == NSComparisonResult.OrderedDescending})
         
         return pointsArray.first
     }
