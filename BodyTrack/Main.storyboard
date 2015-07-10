@@ -287,6 +287,18 @@
                                             <outlet property="delegate" destination="k4h-hC-rvO" id="d6q-XO-vkn"/>
                                         </connections>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminder every X weeks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPQ-aP-zRB">
+                                        <rect key="frame" x="8" y="82" width="189" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="8" translatesAutoresizingMaskIntoConstraints="NO" id="6Re-PU-Idj">
+                                        <rect key="frame" x="312" y="78" width="94" height="29"/>
+                                        <connections>
+                                            <action selector="stepperDidChange:" destination="k4h-hC-rvO" eventType="valueChanged" id="88e-kI-FFF"/>
+                                        </connections>
+                                    </stepper>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -294,12 +306,16 @@
                                     <constraint firstAttribute="trailingMargin" secondItem="oou-Fs-XGl" secondAttribute="trailing" id="1sI-4S-8YF"/>
                                     <constraint firstItem="h2S-8c-eYV" firstAttribute="top" secondItem="fOh-hF-UoL" secondAttribute="centerY" id="4tz-I1-Qxi"/>
                                     <constraint firstItem="h2S-8c-eYV" firstAttribute="top" secondItem="0qS-Ce-yzM" secondAttribute="bottom" constant="16" id="Ig6-az-HTf"/>
+                                    <constraint firstAttribute="trailing" secondItem="6Re-PU-Idj" secondAttribute="trailing" constant="8" id="NOM-Yh-UFt"/>
+                                    <constraint firstItem="SPQ-aP-zRB" firstAttribute="top" secondItem="oou-Fs-XGl" secondAttribute="bottom" constant="32" id="Qa3-A3-4A0"/>
                                     <constraint firstItem="oou-Fs-XGl" firstAttribute="leading" secondItem="cE3-DX-kDi" secondAttribute="trailing" constant="8" id="Sxr-kB-SLX"/>
                                     <constraint firstItem="cE3-DX-kDi" firstAttribute="top" secondItem="fOh-hF-UoL" secondAttribute="topMargin" constant="16" id="YcR-TG-c20"/>
                                     <constraint firstAttribute="trailing" secondItem="h2S-8c-eYV" secondAttribute="trailing" id="fq6-MF-DuA"/>
                                     <constraint firstItem="cE3-DX-kDi" firstAttribute="leading" secondItem="fOh-hF-UoL" secondAttribute="leadingMargin" id="i9Z-O3-Fy8"/>
+                                    <constraint firstItem="SPQ-aP-zRB" firstAttribute="leading" secondItem="fOh-hF-UoL" secondAttribute="leading" constant="8" id="j4E-ZB-u87"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="0qS-Ce-yzM" secondAttribute="trailing" id="lke-zY-pBT"/>
                                     <constraint firstItem="cE3-DX-kDi" firstAttribute="centerY" secondItem="oou-Fs-XGl" secondAttribute="centerY" constant="-0.75" id="roU-qb-5po"/>
+                                    <constraint firstItem="SPQ-aP-zRB" firstAttribute="centerY" secondItem="6Re-PU-Idj" secondAttribute="centerY" constant="-0.25" id="sBo-OS-Mbc"/>
                                     <constraint firstAttribute="bottom" secondItem="h2S-8c-eYV" secondAttribute="bottom" id="sV7-H8-kB6"/>
                                     <constraint firstItem="h2S-8c-eYV" firstAttribute="leading" secondItem="fOh-hF-UoL" secondAttribute="leading" id="vr2-3a-oEq"/>
                                 </constraints>
@@ -341,6 +357,8 @@
                     <connections>
                         <outlet property="changeNameTextField" destination="oou-Fs-XGl" id="Lmg-wi-eGJ"/>
                         <outlet property="colorPickerView" destination="fOh-hF-UoL" id="8Pr-9f-tTd"/>
+                        <outlet property="reminderLabel" destination="SPQ-aP-zRB" id="HJ3-Jq-kMg"/>
+                        <outlet property="stepper" destination="6Re-PU-Idj" id="91A-oI-6X9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M33-ia-ajk" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 var hex = UIColor.hexValuesFromUIColor(color)
     
                 progressCollection.colour = hex
-                progressCollection.interval = 30
+                progressCollection.interval = 2
                 progressCollection.name = "front"
                 context?.save(nil);
             }

@@ -13,6 +13,8 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
     
     @IBOutlet var changeNameTextField: UITextField!
     @IBOutlet var colorPickerView: HRColorPickerView!
+    @IBOutlet var reminderLabel: UILabel!
+    @IBOutlet var stepper: UIStepper!
     
     var progressCollection : ProgressCollection?
     var context : NSManagedObjectContext?
@@ -35,6 +37,15 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
             navigationController?.navigationBar.tintColor = UIColor.whiteColor()
             changeNameTextField.text = progressCollection.name
             
+            if progressCollection.interval == 0
+            {
+                reminderLabel.text = "Reminders off"
+            }
+            else
+            {
+                reminderLabel.text = "Reminder every \(progressCollection.interval) weeks"
+            }
+            stepper.value = progressCollection.interval.doubleValue
         }
         
         colorPickerView.tintAdjustmentMode = UIViewTintAdjustmentMode.Normal
@@ -42,6 +53,24 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
         changeNameTextField.delegate = self
         
         // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func stepperDidChange(sender: UIStepper)
+    {
+        if let progressCollection = progressCollection
+        {
+            progressCollection.interval = stepper.value
+            
+            if stepper.value == 0
+            {
+                reminderLabel.text = "Reminders off"
+            }
+            else
+            {
+                reminderLabel.text = "Reminder every \(progressCollection.interval) weeks"
+            }
+        }
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
