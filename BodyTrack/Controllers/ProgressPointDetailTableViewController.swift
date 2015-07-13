@@ -16,6 +16,7 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
         case Measurement
         case BodyWeight
         case BodyFat
+        case Delete
         case Count
     }
     
@@ -29,6 +30,7 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
     @IBOutlet var imageView: UIImageView!
     
     let TableViewCellIdentifier = "Cell"
+    let TableViewCellIdentifierDelete = "DeleteCellId"
     let DatePickerContainerIdentifier = "DatePickerContainerId"
     
     override func viewDidLoad()
@@ -88,6 +90,15 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        if indexPath.row == TableViewCell.Delete.rawValue
+        {
+            var deleteCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifierDelete, forIndexPath: indexPath) as! UITableViewCell
+            
+            return deleteCell
+        }
+        
+        
         var cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
         switch indexPath.row
@@ -103,29 +114,25 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
                 cell.detailTextLabel?.text = dateformatter.stringFromDate(date)
             }
             
-            break
-            
         case TableViewCell.Measurement.rawValue:
             cell.textLabel?.text = "Measurement (cm)"
             if let measurement = progressPoint?.measurement
             {
                 cell.detailTextLabel?.text = "\(measurement) cm"
             }
-            break
+            
         case TableViewCell.BodyWeight.rawValue:
             cell.textLabel?.text = "Body Weight (kg)"
             if let weight = progressPoint?.weight
             {
                 cell.detailTextLabel?.text = "\(weight) kg"
             }
-            break
         case TableViewCell.BodyFat.rawValue:
             cell.textLabel?.text = "Body Fat (%)"
             if let bodyFat = progressPoint?.bodyFat
             {
                 cell.detailTextLabel?.text = "\(bodyFat) %"
             }
-            break
         default:
             break
         }
@@ -135,6 +142,16 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+        
+        if indexPath.row == TableViewCell.Delete.rawValue
+        {
+            // TODO delete progress point
+            
+            
+            
+            return
+        }
+        
         var alertView = UIAlertView(title: "", message: "", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Save")
         alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
         alertView.textFieldAtIndex(0)?.keyboardType = UIKeyboardType.DecimalPad

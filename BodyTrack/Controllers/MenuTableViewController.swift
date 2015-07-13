@@ -205,6 +205,9 @@ class MenuTableViewController: UITableViewController {
             alertVC.addAction(okAction)
             
             presentViewController(alertVC, animated: true, completion: nil)
+            
+            // TODO: remove any notification for this progress collection
+            // TODO: delete locally stored images
         }
     }
 }
