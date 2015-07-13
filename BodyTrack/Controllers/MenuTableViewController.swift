@@ -44,14 +44,19 @@ class MenuTableViewController: UITableViewController {
     {
         super.viewDidLoad()
         
+        loadProgressCollections()
+
+    }
+    
+    func loadProgressCollections()
+    {
         let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
         
         progressCollections = context!.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
-
+        
         selectedProgressCollection = progressCollections.first
-
+        
         clearsSelectionOnViewWillAppear = false
-
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -97,6 +102,7 @@ class MenuTableViewController: UITableViewController {
                 break
             case TableViewSection.More.rawValue:
             
+                cell.backgroundColor = UIColor.clearColor()
                 switch (indexPath.row)
                 {
                 case MoreTableViewCell.Settings.rawValue:
@@ -167,6 +173,39 @@ class MenuTableViewController: UITableViewController {
             break
         }
         return headerTitle
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        if indexPath.section == TableViewSection.Main.rawValue &&
+            tableView.numberOfRowsInSection(TableViewSection.Main.rawValue) > 1
+        {
+            return true
+        }
+        return false
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if editingStyle == UITableViewCellEditingStyle.Delete
+        {
+            var alertVC = UIAlertController(title: "Are you sure?", message: "Cannot undo delete", preferredStyle: UIAlertControllerStyle.Alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+            let okAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: {(action) in
+                var progressCollectionToDelete = self.progressCollections[indexPath.row]
+                self.context?.deleteObject(progressCollectionToDelete)
+                self.context?.save(nil)
+                
+                self.loadProgressCollections()
+                tableView.reloadData()
+                self.delegate.loadProgressPointsForProgressCollection(self.selectedProgressCollection)
+            })
+            
+            alertVC.addAction(cancelAction)
+            alertVC.addAction(okAction)
+            
+            presentViewController(alertVC, animated: true, completion: nil)
+        }
     }
 }
 
