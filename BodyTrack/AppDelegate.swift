@@ -14,27 +14,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
         
         self.setupContext()
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil);
-        let slidingViewController = storyboard.instantiateViewControllerWithIdentifier("slidingViewControllerId") as! ECSlidingViewController;
-        let topViewController = storyboard.instantiateViewControllerWithIdentifier("homeNavigationControllerId") as! PhotoSelectionCollectionViewController
-        let underLeftViewController = storyboard.instantiateViewControllerWithIdentifier("menuTableViewControllerId") as! MenuTableViewController
+        let slidingViewController = storyboard.instantiateViewController(withIdentifier: "slidingViewControllerId") as! ECSlidingViewController;
+        let topViewController = storyboard.instantiateViewController(withIdentifier: "homeNavigationControllerId") as! PhotoSelectionCollectionViewController
+        let underLeftViewController = storyboard.instantiateViewController(withIdentifier: "menuTableViewControllerId") as! MenuTableViewController
         
         let navigationController = UINavigationController(rootViewController: topViewController);
         
         navigationController.view.clipsToBounds = false
         navigationController.view.layer.shadowOpacity = 0.75;
         navigationController.view.layer.shadowRadius = 10.0;
-        navigationController.view.layer.shadowColor = UIColor.blackColor().CGColor
+        navigationController.view.layer.shadowColor = UIColor.black.cgColor
         
         underLeftViewController.context = self.managedObjectContext
         topViewController.context = self.managedObjectContext
         
-        underLeftViewController.edgesForExtendedLayout = UIRectEdge.Top | UIRectEdge.Bottom | UIRectEdge.Left
+        underLeftViewController.edgesForExtendedLayout = [.top, .bottom, .left]
         
         slidingViewController.topViewController = navigationController
         slidingViewController.underLeftViewController = underLeftViewController
@@ -55,65 +55,72 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupContext()
     {
         
-        var context = self.managedObjectContext
+        let context = self.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressCollection")
 
-        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [ProgressCollection] {
+        do {
+            if let fetchResults = try managedObjectContext!.fetch(fetchRequest) as? [ProgressCollection] {
             
-            if fetchResults.count > 0
-            {
-                println("ProgressCollection \'\(fetchResults.first!.name)\' found")
-            }
-            else
-            {
-                var progressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context!) as! ProgressCollection
+                if fetchResults.count > 0
+                {
+                    print("ProgressCollection \'\(fetchResults.first!.name)\' found")
+                }
+                else
+                {
+                    let progressCollection = NSEntityDescription.insertNewObject(forEntityName: "ProgressCollection", into: context!) as! ProgressCollection
                 
-                var color = UIColor(red:91/255.0, green:140/255.0, blue:231/255.0, alpha:1.0);
+                    let color = UIColor(red:91/255.0, green:140/255.0, blue:231/255.0, alpha:1.0);
                 
-                var hex = UIColor.hexValuesFromUIColor(color)
+                    let hex = UIColor.hexValuesFromUIColor(color)
     
-                progressCollection.colour = hex
-                progressCollection.interval = 30
-                progressCollection.name = "front"
-                context?.save(nil);
+                    progressCollection.colour = hex
+                    progressCollection.interval = 2
+                    progressCollection.name = "front"
+                    progressCollection.identifier = UUID().uuidString
+                    do {try context?.save() } catch {}
+                }
             }
-        }
+        } catch {}
     }
     // MARK: - Core Data stack
 
-    lazy var applicationDocumentsDirectory: NSURL = {
+    lazy var applicationDocumentsDirectory: URL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "Sug.BodyTrack" in the application's documents Application Support directory.
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return urls[urls.count-1] 
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("BodyTrack", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main.url(forResource: "BodyTrack", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("BodyTrack.sqlite")
+        let url = self.applicationDocumentsDirectory.appendingPathComponent("BodyTrack.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+        
+        do {
+        if try coordinator?.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil) == nil
+        {
             coordinator = nil
             // Report any error we got.
             let dict = NSMutableDictionary()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
+            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as NSDictionary? as? [AnyHashable: Any] ?? [:])
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
         }
+        } catch {}
         
         return coordinator
     }()
@@ -133,12 +140,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func saveContext () {
         if let moc = self.managedObjectContext {
-            var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            
+            if moc.hasChanges
+            {
+                do {
+                    try moc.save()
+                } catch {
+                    fatalError("Failure to save context: \(error)")
+                }
             }
         }
     }

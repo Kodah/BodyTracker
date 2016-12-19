@@ -15,25 +15,31 @@ extension ProgressPoint
     {
         
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        var path = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
         
-        var fullPath = "\(path)/\(imageName)"
+//        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] 
         
-        if (fileManager.fileExistsAtPath(fullPath))
+//        let fullPath = "\(path)/\(imageName)"
+        
+        let fullPath = documentsDirectory.appendingPathComponent(imageName)
+
+        
+        if (fileManager.fileExists(atPath: fullPath.path))
         {
-            println("FILE AVAILABLE");
+            print("FILE AVAILABLE");
             
             //Pick Image and Use accordingly
-            var imageis: UIImage = UIImage(contentsOfFile: fullPath)!
+            let imageis: UIImage = UIImage(contentsOfFile: fullPath.path)!
             
             return imageis
             
         }
         else
         {
-            println("FILE NOT AVAILABLE");
+            print("FILE NOT AVAILABLE");
             
             return nil
             
@@ -61,6 +67,6 @@ extension ProgressPoint
             description += "Body fat: \(bodyFat)% \n"
         }
         
-        return description
+        return description as NSString
     }
 }

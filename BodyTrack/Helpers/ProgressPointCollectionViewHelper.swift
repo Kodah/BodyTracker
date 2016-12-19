@@ -22,26 +22,26 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var photoSelectionCollectionViewController: PhotoSelectionCollectionViewController!
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int
+    func numberOfSections(in collectionView: UICollectionView) -> Int
     {
         return 1
     }
     
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        println(progressPoints.count)
+        print(progressPoints.count)
         return progressPoints.count + 1
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         
         if (indexPath.row == progressPoints.count)
         {
-            var cell = collectionView.dequeueReusableCellWithReuseIdentifier(addReuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: addReuseIdentifier, for: indexPath) 
             
-                cell.layer.borderColor = UIColor.blackColor().CGColor
+                cell.layer.borderColor = UIColor.black.cgColor
                 cell.layer.borderWidth = 1.0
                 
                 return cell
@@ -51,56 +51,56 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             var progressPoint: ProgressPoint = progressPoints[indexPath.row]
             var progressCollection = progressPoint.progressCollection as! ProgressCollection
             
-            var cell = collectionView.dequeueReusableCellWithReuseIdentifier(bodyReuseIdentifier, forIndexPath: indexPath) as! ProgressPointCollectionViewCell
+            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: bodyReuseIdentifier, for: indexPath) as! ProgressPointCollectionViewCell
             
             cell.selectedBackgroundView = UIView(frame: cell.bounds)
-            cell.selectedBackgroundView.backgroundColor = UIColor.blueColor()
+            cell.selectedBackgroundView?.backgroundColor = UIColor.blue
             
-            if let imageView = cell.progressPicImageView, image = progressPoint.getImage()
+            if let imageView = cell.progressPicImageView, let image = progressPoint.getImage()
             {
                 imageView.image = image
             }
-            var dateformatter = NSDateFormatter()
-            dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
-            dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
+            var dateformatter = DateFormatter()
+            dateformatter.timeStyle = DateFormatter.Style.none
+            dateformatter.dateStyle = DateFormatter.Style.short
             dateformatter.dateFormat = "dd MMM yyyy"
             
-            cell.date.text = dateformatter.stringFromDate(progressPoint.date)
+            cell.date.text = dateformatter.string(from: progressPoint.date)
                     
             cell.contentView.frame = cell.bounds
-            cell.contentView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+            cell.contentView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
                 
-            cell.layer.borderColor = UIColor(rgba: progressCollection.colour).CGColor
+            cell.layer.borderColor = UIColor(rgba: progressCollection.colour).cgColor
             cell.layer.borderWidth = 1.0
             return cell
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
     {
         return UIEdgeInsetsMake(16, 16, 8, 16)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         let padding:CGFloat = 8 * 3
-        let side:CGFloat = CGRectGetWidth(collectionView.frame) / 2
+        let side:CGFloat = collectionView.frame.width / 2
         let sideMinusPadding:CGFloat = side - padding
-        return CGSizeMake(sideMinusPadding, sideMinusPadding + 44)
+        return CGSize(width: sideMinusPadding, height: sideMinusPadding + 44)
     }
     
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
     {
         return 7
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
     {
         return 8
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         if (indexPath.row == progressPoints.count)
         {
@@ -109,7 +109,7 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
         else if selectMode
         {
             selectedProgressPoints.append(progressPoints[indexPath.row])
-            var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
+            var cell = collectionView.cellForItem(at: indexPath) as! ProgressPointCollectionViewCell
             cell.layer.borderWidth = 6
 
             
@@ -117,42 +117,42 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             {
                 photoSelectionCollectionViewController.progressPointsToCompare = ProgressPointsToCompare(firstProgressPoint: selectedProgressPoints.first!, secondProgressPoint: selectedProgressPoints.last!)
                 deselectAllCellsInCollectionView()
-                photoSelectionCollectionViewController.performSegueWithIdentifier(SegueToCompareTabBar, sender: photoSelectionCollectionViewController)
+                photoSelectionCollectionViewController.performSegue(withIdentifier: SegueToCompareTabBar, sender: photoSelectionCollectionViewController)
             }
         }
         else
         {
-            var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
-            cell.selected = false
+            var cell = collectionView.cellForItem(at: indexPath) as! ProgressPointCollectionViewCell
+            cell.isSelected = false
             photoSelectionCollectionViewController.selectedProgressPoint = progressPoints[indexPath.row]
-            photoSelectionCollectionViewController.performSegueWithIdentifier("ShowProgressPointDetailId", sender: photoSelectionCollectionViewController)
+            photoSelectionCollectionViewController.performSegue(withIdentifier: "ShowProgressPointDetailId", sender: photoSelectionCollectionViewController)
         }
     }
     
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath)
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath)
     {
         if indexPath.row != progressPoints.count
         {
             var progressPoint = progressPoints[indexPath.row]
             
-            var index = find(selectedProgressPoints, progressPoint)
+            var index = selectedProgressPoints.index(of: progressPoint)
             
             if let index = index
             {
-                selectedProgressPoints.removeAtIndex(index)
+                selectedProgressPoints.remove(at: index)
             }
             
             
-            var cell = collectionView.cellForItemAtIndexPath(indexPath) as! ProgressPointCollectionViewCell
+            var cell = collectionView.cellForItem(at: indexPath) as! ProgressPointCollectionViewCell
             cell.layer.borderWidth = 1
         }
     }
     
     func deselectAllCellsInCollectionView()
     {
-        for indexPath in collectionView.indexPathsForSelectedItems()
+        for indexPath in collectionView.indexPathsForSelectedItems!
         {
-            collectionView(collectionView, didDeselectItemAtIndexPath: indexPath as! NSIndexPath)
+            collectionView(collectionView, didDeselectItemAt: indexPath)
         }
     }
 }

@@ -12,11 +12,12 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
 
     enum TableViewCell: Int
     {
-        case Date
-        case Measurement
-        case BodyWeight
-        case BodyFat
-        case Count
+        case date
+        case measurement
+        case bodyWeight
+        case bodyFat
+        case delete
+        case count
     }
     
     var progressPoint: ProgressPoint?
@@ -29,6 +30,7 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
     @IBOutlet var imageView: UIImageView!
     
     let TableViewCellIdentifier = "Cell"
+    let TableViewCellIdentifierDelete = "DeleteCellId"
     let DatePickerContainerIdentifier = "DatePickerContainerId"
     
     override func viewDidLoad()
@@ -39,35 +41,35 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
         {
             for gesture  in gestures
             {
-                if gesture.isKindOfClass(UITapGestureRecognizer)
+                if gesture.isKind(of: UITapGestureRecognizer.self)
                 {
                     if let gesture = gesture as? UITapGestureRecognizer
                     {
-                        gesture.enabled = false
+                        gesture.isEnabled = false
                     }
                 }
             }
         }
         
         
-        if let progressPoint = progressPoint, imageView = imageView, image = progressPoint.getImage()
+        if let progressPoint = progressPoint, let imageView = imageView, let image = progressPoint.getImage()
         {
             imageView.image = image
         }
     }
     
-    override func viewWillDisappear(animated: Bool)
+    override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
         if let gestures = navigationController!.navigationBar.gestureRecognizers
         {
             for gesture  in gestures
             {
-                if gesture.isKindOfClass(UITapGestureRecognizer)
+                if gesture.isKind(of: UITapGestureRecognizer.self)
                 {
                     if let gesture = gesture as? UITapGestureRecognizer
                     {
-                        gesture.enabled = true
+                        gesture.isEnabled = true
                     }
                 }
             }
@@ -77,55 +79,60 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
 
     // MARK: - Table view data source
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return TableViewCell.Count.rawValue
+        return TableViewCell.count.rawValue
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.row == TableViewCell.delete.rawValue
+        {
+            let deleteCell = tableView.dequeueReusableCell(withIdentifier: TableViewCellIdentifierDelete, for: indexPath) 
+            
+            return deleteCell
+        }
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellIdentifier, for: indexPath) 
         
         switch indexPath.row
         {
-        case TableViewCell.Date.rawValue:
+        case TableViewCell.date.rawValue:
             cell.textLabel?.text = "Date"
             if let date = progressPoint?.date
             {
-                var dateformatter = NSDateFormatter()
-                dateformatter.timeStyle = NSDateFormatterStyle.NoStyle
-                dateformatter.dateStyle = NSDateFormatterStyle.ShortStyle
+                let dateformatter = DateFormatter()
+                dateformatter.timeStyle = DateFormatter.Style.none
+                dateformatter.dateStyle = DateFormatter.Style.short
                 dateformatter.dateFormat = "dd MMM yyyy"
-                cell.detailTextLabel?.text = dateformatter.stringFromDate(date)
+                cell.detailTextLabel?.text = dateformatter.string(from: date)
             }
             
-            break
-            
-        case TableViewCell.Measurement.rawValue:
+        case TableViewCell.measurement.rawValue:
             cell.textLabel?.text = "Measurement (cm)"
             if let measurement = progressPoint?.measurement
             {
                 cell.detailTextLabel?.text = "\(measurement) cm"
             }
-            break
-        case TableViewCell.BodyWeight.rawValue:
+            
+        case TableViewCell.bodyWeight.rawValue:
             cell.textLabel?.text = "Body Weight (kg)"
             if let weight = progressPoint?.weight
             {
                 cell.detailTextLabel?.text = "\(weight) kg"
             }
-            break
-        case TableViewCell.BodyFat.rawValue:
+        case TableViewCell.bodyFat.rawValue:
             cell.textLabel?.text = "Body Fat (%)"
             if let bodyFat = progressPoint?.bodyFat
             {
                 cell.detailTextLabel?.text = "\(bodyFat) %"
             }
-            break
         default:
             break
         }
@@ -133,17 +140,27 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        var alertView = UIAlertView(title: "", message: "", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Save")
-        alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
-        alertView.textFieldAtIndex(0)?.keyboardType = UIKeyboardType.DecimalPad
+        
+        if indexPath.row == TableViewCell.delete.rawValue
+        {
+            // TODO delete progress point
+            
+            
+            
+            return
+        }
+        
+        let alertView = UIAlertView(title: "", message: "", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Save")
+        alertView.alertViewStyle = UIAlertViewStyle.plainTextInput
+        alertView.textField(at: 0)?.keyboardType = UIKeyboardType.decimalPad
         
         switch indexPath.row
         {
-        case TableViewCell.Date.rawValue:
+        case TableViewCell.date.rawValue:
             
-            if let datePickerVC = datePickerViewController, progressPoint = progressPoint
+            if let datePickerVC = datePickerViewController, let progressPoint = progressPoint
             {
                 if (progressPoint.date != nil)
                 {
@@ -151,12 +168,12 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
                 }
                 else
                 {
-                    datePickerVC.datePicker.date = NSDate()
+                    datePickerVC.datePicker.date = Date()
                 }
             }
             view.layoutIfNeeded()
             containerConstraint.constant = 208
-            UIView.animateWithDuration(0.75, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations:
+            UIView.animate(withDuration: 0.75, delay: 0, options: UIViewAnimationOptions(), animations:
                 {
                     self.view.layoutIfNeeded()
                     
@@ -165,23 +182,23 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
             
         return
             
-        case TableViewCell.Measurement.rawValue:
+        case TableViewCell.measurement.rawValue:
             
             alertView.title = "Edit measurement"
             alertView.message = "Enter measurement"
-            selectedStat = TableViewCell.Measurement.rawValue
+            selectedStat = TableViewCell.measurement.rawValue
             break
             
-        case TableViewCell.BodyWeight.rawValue:
+        case TableViewCell.bodyWeight.rawValue:
             alertView.title = "Edit Body Weight"
             alertView.message = "Enter Body Weight"
-            selectedStat = TableViewCell.BodyWeight.rawValue
+            selectedStat = TableViewCell.bodyWeight.rawValue
             break
             
-        case TableViewCell.BodyFat.rawValue:
+        case TableViewCell.bodyFat.rawValue:
             alertView.title = "Edit Body Fat"
             alertView.message = "Enter Body Fat"
-            selectedStat = TableViewCell.BodyFat.rawValue
+            selectedStat = TableViewCell.bodyFat.rawValue
             break
             
         default:
@@ -193,41 +210,45 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
         
     }
     
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int)
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int)
     {
         
         if buttonIndex == 1
         {
-            var text = alertView.textFieldAtIndex(0)?.text
-            switch selectedStat!
+            if let  text = alertView.textField(at: 0)?.text
             {
-            case TableViewCell.Measurement.rawValue:
+                switch selectedStat!
+                {
+                case TableViewCell.measurement.rawValue:
+                    
+                    progressPoint?.measurement = Int(text) as NSNumber?
+                    break
+                    
+                case TableViewCell.bodyWeight.rawValue:
+                    progressPoint?.weight = Int(text) as NSNumber?
+                    break
+                case TableViewCell.bodyFat.rawValue:
+                    progressPoint?.bodyFat = Int(text) as NSNumber?
+                    break
+                default:
+                    break
+                }
                 
-                progressPoint?.measurement = text?.toInt()
-                break
-                
-            case TableViewCell.BodyWeight.rawValue:
-                progressPoint?.weight = text?.toInt()
-                break
-            case TableViewCell.BodyFat.rawValue:
-                progressPoint?.bodyFat = text?.toInt()
-                break
-            default:
-                break
+                do {try context?.save() } catch {}
+                tableView.reloadData()
             }
-            context?.save(nil)
-            tableView.reloadData()
+            
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if let identifier = segue.identifier
         {
             switch identifier
             {
             case DatePickerContainerIdentifier:
-                var datePickerViewController = segue.destinationViewController as! DatePickerViewController
+                let datePickerViewController = segue.destination as! DatePickerViewController
                 datePickerViewController.delegate = self
                 self.datePickerViewController = datePickerViewController
                 break
@@ -244,7 +265,7 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
     {
         view.layoutIfNeeded()
         containerConstraint.constant = 0
-        UIView.animateWithDuration(0.75, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations:
+        UIView.animate(withDuration: 0.75, delay: 0, options: UIViewAnimationOptions(), animations:
             {
                 self.view.layoutIfNeeded()
                 
@@ -252,11 +273,11 @@ class ProgressPointDetailTableViewController: UIViewController, UITableViewDataS
             }, completion: nil)
     }
     
-    func datePickerDidChoose(date: NSDate)
+    func datePickerDidChoose(_ date: Date)
     {
         progressPoint?.date = date
-        context?.save(nil)
-        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        do { try context?.save() } catch {}
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: UITableViewRowAnimation.automatic)
         dismissDatePicker()
     }
 }

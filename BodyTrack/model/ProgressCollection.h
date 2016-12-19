@@ -2,7 +2,7 @@
 //  ProgressCollection.h
 //  BodyTrack
 //
-//  Created by Tom Sugarex on 16/06/2015.
+//  Created by Tom Sugarev on 10/07/2015.
 //  Copyright (c) 2015 Tom Sugarex. All rights reserved.
 //
 
@@ -16,6 +16,8 @@
 @property (nonatomic, retain) NSString * colour;
 @property (nonatomic, retain) NSNumber * interval;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * identifier;
+@property (nonatomic, retain) NSDate * time;
 @property (nonatomic, retain) NSSet *progressPoints;
 @end
 
