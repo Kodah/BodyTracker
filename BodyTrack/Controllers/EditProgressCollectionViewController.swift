@@ -49,7 +49,7 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
         }
         
         colorPickerView.tintAdjustmentMode = UIViewTintAdjustmentMode.normal
-        colorPickerView.addTarget(self, action: "colorDidChanged:", for: UIControlEvents.valueChanged)
+        colorPickerView.addTarget(self, action: #selector(EditProgressCollectionViewController.colorDidChanged(_:)), for: UIControlEvents.valueChanged)
         changeNameTextField.delegate = self
         
         // Do any additional setup after loading the view.

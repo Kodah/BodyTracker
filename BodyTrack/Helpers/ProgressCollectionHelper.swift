@@ -15,7 +15,8 @@ extension ProgressCollection
     {
         let pointsArray : Array<ProgressPoint> = Array(progressPoints) as! Array<ProgressPoint>
         
-        pointsArray.sorted(by: {$0.date.compare($1.date) == ComparisonResult.orderedDescending})
+        
+        _ = pointsArray.sorted(by: {$0.date.compare($1.date) == ComparisonResult.orderedDescending})
         
         return pointsArray.first
     }

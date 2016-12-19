@@ -153,8 +153,9 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     
     func rightBarButtonTapped()
     {
-        if selectMode
+        if progressPointCollectionViewHelper.selectMode
         {
+            progressPointCollectionViewHelper.selectMode = false
             navigationItem.title = progressCollection?.name
             buttonForRightBarButton?.imageView?.tintColor = UIColor.white
             //deselect all cells
@@ -162,15 +163,12 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         }
         else
         {
+            progressPointCollectionViewHelper.selectMode = true
             navigationItem.title = "Select Two Cells"
             navigationItem.rightBarButtonItem?.tintColor = UIColor.white
             buttonForRightBarButton?.imageView?.tintColor = UIColor.yellow
         }
         
-        selectMode = !selectMode
-        progressPointCollectionViewHelper.selectMode = selectMode
-        
-        //        self.performSegueWithIdentifier(SegueToCompareTabBar, sender: self)
     }
     
     func initiateNewProgressCollection()

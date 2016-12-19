@@ -39,7 +39,7 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
         
         if (indexPath.row == progressPoints.count)
         {
-            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: addReuseIdentifier, for: indexPath) 
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addReuseIdentifier, for: indexPath) 
             
                 cell.layer.borderColor = UIColor.black.cgColor
                 cell.layer.borderWidth = 1.0
@@ -48,10 +48,10 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
         }
         else
         {
-            var progressPoint: ProgressPoint = progressPoints[indexPath.row]
-            var progressCollection = progressPoint.progressCollection as! ProgressCollection
+            let progressPoint: ProgressPoint = progressPoints[indexPath.row]
+            var progressCollection = progressPoint.progressCollection as ProgressCollection
             
-            var cell = collectionView.dequeueReusableCell(withReuseIdentifier: bodyReuseIdentifier, for: indexPath) as! ProgressPointCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bodyReuseIdentifier, for: indexPath) as! ProgressPointCollectionViewCell
             
             cell.selectedBackgroundView = UIView(frame: cell.bounds)
             cell.selectedBackgroundView?.backgroundColor = UIColor.blue
@@ -60,7 +60,7 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             {
                 imageView.image = image
             }
-            var dateformatter = DateFormatter()
+            let dateformatter = DateFormatter()
             dateformatter.timeStyle = DateFormatter.Style.none
             dateformatter.dateStyle = DateFormatter.Style.short
             dateformatter.dateFormat = "dd MMM yyyy"
@@ -109,7 +109,7 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
         else if selectMode
         {
             selectedProgressPoints.append(progressPoints[indexPath.row])
-            var cell = collectionView.cellForItem(at: indexPath) as! ProgressPointCollectionViewCell
+            let cell = collectionView.cellForItem(at: indexPath) as! ProgressPointCollectionViewCell
             cell.layer.borderWidth = 6
 
             
@@ -122,7 +122,7 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
         }
         else
         {
-            var cell = collectionView.cellForItem(at: indexPath) as! ProgressPointCollectionViewCell
+            let cell = collectionView.cellForItem(at: indexPath) as! ProgressPointCollectionViewCell
             cell.isSelected = false
             photoSelectionCollectionViewController.selectedProgressPoint = progressPoints[indexPath.row]
             photoSelectionCollectionViewController.performSegue(withIdentifier: "ShowProgressPointDetailId", sender: photoSelectionCollectionViewController)
@@ -133,9 +133,9 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
     {
         if indexPath.row != progressPoints.count
         {
-            var progressPoint = progressPoints[indexPath.row]
+            let progressPoint = progressPoints[indexPath.row]
             
-            var index = selectedProgressPoints.index(of: progressPoint)
+            let index = selectedProgressPoints.index(of: progressPoint)
             
             if let index = index
             {
@@ -143,8 +143,11 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             }
             
             
-            var cell = collectionView.cellForItem(at: indexPath) as! ProgressPointCollectionViewCell
-            cell.layer.borderWidth = 1
+            if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
+                
+                cell.layer.borderWidth = 1
+            }
+            
         }
     }
     
