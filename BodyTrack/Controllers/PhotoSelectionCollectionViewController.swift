@@ -247,6 +247,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             
             let imagePickerController = imagePickerControllerHelper.getImagePickerFromHelper()
             
+            
             present(imagePickerController, animated: true, completion: nil)
             
             break

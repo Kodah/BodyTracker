@@ -49,7 +49,7 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
         else
         {
             let progressPoint: ProgressPoint = progressPoints[indexPath.row]
-            var progressCollection = progressPoint.progressCollection as ProgressCollection
+            let progressCollection = progressPoint.progressCollection as ProgressCollection
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bodyReuseIdentifier, for: indexPath) as! ProgressPointCollectionViewCell
             

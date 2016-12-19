@@ -15,7 +15,7 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
     var image : UIImage?
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerEditedImage] as? UIImage
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
             photoSelectionCollectionViewController.createNewProgressPoint(image)
             picker.dismiss(animated: true, completion: nil)
@@ -35,7 +35,8 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
     {
         let picker : UIImagePickerController = UIImagePickerController()
         picker.delegate = self
-        picker.allowsEditing = true
+        picker.allowsEditing = false
+        
         picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
 
         return picker
@@ -47,12 +48,22 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
         let picker = UIImagePickerController()
         
         picker.delegate = self
-        picker.allowsEditing = true
+        picker.allowsEditing = false
         picker.sourceType = UIImagePickerControllerSourceType.camera
     
-        picker.showsCameraControls = true
+        picker.showsCameraControls = false
         picker.isNavigationBarHidden = true
+        
     
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let controller = storyboard.instantiateViewController(withIdentifier: "imagePickerOverlayViewController") 
+        
+        let overlayView = UIView(frame: CGRect(x:0, y: 0, width: picker.view.frame.size.width, height: picker.view.frame.size.height-44))
+        
+        overlayView.backgroundColor = UIColor.green
+        
+        picker.cameraOverlayView = overlayView
+        
         return picker
     }
     
