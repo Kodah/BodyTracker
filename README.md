@@ -1,2 +1,2 @@
 # BodyTracker
-Science bitch
+Progress Picture tracking app
