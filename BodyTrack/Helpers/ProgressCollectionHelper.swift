@@ -13,9 +13,9 @@ extension ProgressCollection
 {
     func latestProgressPoint() -> ProgressPoint?
     {
-        var pointsArray : Array<ProgressPoint> = Array(progressPoints) as! Array<ProgressPoint>
+        let pointsArray : Array<ProgressPoint> = Array(progressPoints) as! Array<ProgressPoint>
         
-        pointsArray.sort({$0.date.compare($1.date) == NSComparisonResult.OrderedDescending})
+        pointsArray.sorted(by: {$0.date.compare($1.date) == ComparisonResult.orderedDescending})
         
         return pointsArray.first
     }

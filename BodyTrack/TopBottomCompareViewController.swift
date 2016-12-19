@@ -19,7 +19,7 @@ class TopBottomCompareViewController: UIViewController {
     {
         super.viewDidLoad()
         
-        if let tabBar = tabBarController as? CompareTabViewController, progressPointToCompare = tabBar.progressPointsToCompare
+        if let tabBar = tabBarController as? CompareTabViewController, let progressPointToCompare = tabBar.progressPointsToCompare
         {
             topImageView.image = progressPointToCompare.firstProgressPoint.getImage()
             bottomImageView.image = progressPointToCompare.secondProgressPoint.getImage()

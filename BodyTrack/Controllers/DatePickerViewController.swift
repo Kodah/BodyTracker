@@ -11,7 +11,7 @@ import UIKit
 protocol DatePickerViewControllerDelegate
 {
     func dismissDatePicker()
-    func datePickerDidChoose(date : NSDate)
+    func datePickerDidChoose(_ date : Date)
 }
 
 class DatePickerViewController: UIViewController {
@@ -26,12 +26,12 @@ class DatePickerViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    func prepareDatePickerToShowWithDate(date : NSDate)
+    func prepareDatePickerToShowWithDate(_ date : Date)
     {
         datePicker.setDate(date, animated: false)
     }
 
-    @IBAction func cancelButtonTapped(sender: UIButton)
+    @IBAction func cancelButtonTapped(_ sender: UIButton)
     {
         if let delegate = delegate
         {
@@ -39,7 +39,7 @@ class DatePickerViewController: UIViewController {
         }
     }
 
-    @IBAction func doneButtonTapped(sender: UIButton)
+    @IBAction func doneButtonTapped(_ sender: UIButton)
     {
         if let delegate = delegate
         {

@@ -11,8 +11,8 @@ import CoreData
 
 enum ActionSheetButton: Int
 {
-    case Camera = 1
-    case PhotoLibrary
+    case camera = 1
+    case photoLibrary
 }
 
 class ProgressPointsToCompare
@@ -22,7 +22,7 @@ class ProgressPointsToCompare
     
     init(firstProgressPoint : ProgressPoint, secondProgressPoint : ProgressPoint)
     {
-        if firstProgressPoint.date.compare(secondProgressPoint.date) == NSComparisonResult.OrderedAscending
+        if firstProgressPoint.date.compare(secondProgressPoint.date) == ComparisonResult.orderedAscending
         {
             self.firstProgressPoint = firstProgressPoint
             self.secondProgressPoint = secondProgressPoint
@@ -59,69 +59,72 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
         if let context = context
         {
-            let fetchRequest = NSFetchRequest(entityName: "ProgressCollection")
-            var progressCollectionArray : [ProgressCollection] = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressCollection]
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressCollection")
+            do { let progressCollectionArray : [ProgressCollection] = try  context.fetch(fetchRequest) as! [ProgressCollection]
             progressCollection = progressCollectionArray.first
+            } catch {}
         }
         
-        if let progressCollection = progressCollection, context = context
+        if let progressCollection = progressCollection, let context = context
         {
-            let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressPoint")
             let predicate = NSPredicate(format: "progressCollection == %@", progressCollection)
             
             fetchRequest.predicate = predicate
-                        
-            var array = context.executeFetchRequest(fetchRequest, error: nil)
             
-            if let arraySafe = array
-            {
-                if ((arraySafe.first?.isKindOfClass(ProgressPoint)) != nil)
+            do {
+                let array = try context.fetch(fetchRequest)
+
+
+                if (array.first is ProgressPoint)
                 {
-                    progressPoints = arraySafe as! [ProgressPoint]
+                    progressPoints = array as! [ProgressPoint]
                     progressPointCollectionViewHelper.progressPoints = progressPoints
                 }
-                
-            }
-            title = progressCollection.name
-            navigationController?.navigationBar.translucent = false
-            navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
-            navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-            navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+
+            } catch  {}
             
-            var barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("openMenu"))
+            
+            title = progressCollection.name
+            navigationController?.navigationBar.isTranslucent = false
+            navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
+            navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+            navigationController?.navigationBar.tintColor = UIColor.white
+            
+            let barButtonItem = UIBarButtonItem(image: UIImage(named: "hamburger"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(PhotoSelectionCollectionViewController.openMenu))
             
             navigationItem.leftBarButtonItem = barButtonItem
             
             collectionView?.allowsMultipleSelection = true
             
-            buttonForRightBarButton = UIButton.buttonWithType(UIButtonType.Custom) as? UIButton
+            buttonForRightBarButton = UIButton(type: UIButtonType.custom)
             if let button = buttonForRightBarButton
             {
                 var image = UIImage(named: "muscle")
-                image = image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-                button.setImage(image, forState: UIControlState.Normal)
-                button.frame = CGRectMake(0, 0, 25, 25)
-                button.addTarget(self, action: "rightBarButtonTapped", forControlEvents: UIControlEvents.TouchUpInside)
-                button.imageView?.tintColor = UIColor.whiteColor()
+                image = image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+                button.setImage(image, for: UIControlState())
+                button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+                button.addTarget(self, action: #selector(PhotoSelectionCollectionViewController.rightBarButtonTapped), for: UIControlEvents.touchUpInside)
+                button.imageView?.tintColor = UIColor.white
                 
-                var rightBarButtonItem = UIBarButtonItem(customView: button)
+                let rightBarButtonItem = UIBarButtonItem(customView: button)
                 navigationItem.rightBarButtonItem = rightBarButtonItem
             }
             
             
             
             
-            var tapNavGesture = UITapGestureRecognizer(target: self, action: "navBarTapped")
+            let tapNavGesture = UITapGestureRecognizer(target: self, action: #selector(PhotoSelectionCollectionViewController.navBarTapped))
             navigationController?.navigationBar.addGestureRecognizer(tapNavGesture)
         }
         clearsSelectionOnViewWillAppear = true
     }
     
-    override func viewWillAppear(animated: Bool)
+    override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
         
-        var copyCollection = progressCollection
+        _ = progressCollection
         loadProgressPointsForProgressCollection(nil)
         
         progressPointCollectionViewHelper.collectionView.performBatchUpdates({ () -> Void in
@@ -132,18 +135,18 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     
     func navBarTapped()
     {
-        performSegueWithIdentifier(SegueToEditCollection, sender: self)
+        performSegue(withIdentifier: SegueToEditCollection, sender: self)
     }
     
     func openMenu()
     {
-        if slidingViewController().currentTopViewPosition == ECSlidingViewControllerTopViewPosition.Centered
+        if slidingViewController().currentTopViewPosition == ECSlidingViewControllerTopViewPosition.centered
         {
-            slidingViewController().anchorTopViewToRightAnimated(true)
+            slidingViewController().anchorTopViewToRight(animated: true)
         }
         else
         {
-            slidingViewController().resetTopViewAnimated(true)
+            slidingViewController().resetTopView(animated: true)
         }
         
     }
@@ -153,15 +156,15 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         if selectMode
         {
             navigationItem.title = progressCollection?.name
-            buttonForRightBarButton?.imageView?.tintColor = UIColor.whiteColor()
+            buttonForRightBarButton?.imageView?.tintColor = UIColor.white
             //deselect all cells
             progressPointCollectionViewHelper.deselectAllCellsInCollectionView()
         }
         else
         {
             navigationItem.title = "Select Two Cells"
-            navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
-            buttonForRightBarButton?.imageView?.tintColor = UIColor.yellowColor()
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+            buttonForRightBarButton?.imageView?.tintColor = UIColor.yellow
         }
         
         selectMode = !selectMode
@@ -172,80 +175,81 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     
     func initiateNewProgressCollection()
     {
-        slidingViewController().resetTopViewAnimated(true)
+        slidingViewController().resetTopView(animated: true)
         setupAlertController()
     }
     
     func setupAlertController()
     {
-        alertController = UIAlertController(title: "New Collection", message: "Edit name", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController = UIAlertController(title: "New Collection", message: "Edit name", preferredStyle: UIAlertControllerStyle.alert)
         
         var nameTextField : UITextField?
         
-        alertController!.addTextFieldWithConfigurationHandler { (textField) -> Void in
+        alertController!.addTextField { (textField) -> Void in
             textField.placeholder = "name"
             nameTextField = textField
             nameTextField?.delegate = self
-            nameTextField?.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
+            nameTextField?.addTarget(self, action: #selector(PhotoSelectionCollectionViewController.textFieldChanged(_:)), for: UIControlEvents.editingChanged)
         }
         
-        var cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (_) -> Void in
-            self.slidingViewController().anchorTopViewToRightAnimated(true)
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (_) -> Void in
+            self.slidingViewController().anchorTopViewToRight(animated: true)
         }
-        var OKAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default) { (action) -> Void in
+        let OKAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default) { (action) -> Void in
             if let name = nameTextField?.text
             {
                 self.createNewProgressCollectionWithName(name)
             }
         }
         
-        OKAction.enabled = false
+        OKAction.isEnabled = false
         alertController!.addAction(cancelAction)
         alertController!.addAction(OKAction)
         
-        presentViewController(alertController!, animated: true, completion: nil)
+        present(alertController!, animated: true, completion: nil)
     }
     
-    func textFieldChanged(textField : UITextField)
+    func textFieldChanged(_ textField : UITextField)
     {
-        if let alertController = alertController, actions = alertController.actions as? [UIAlertAction]
+        if let alertController = alertController
         {
-            if count(textField.text) > 0
+            let actions = alertController.actions
+            if (textField.text?.characters.count)! > 0
             {
                 
                 for action in actions
                 {
-                    action.enabled = true
+                    action.isEnabled = true
                 }
             }
             else
             {
                 
-                actions[1].enabled = false
+                actions[1].isEnabled = false
             }
         }
     }
     
     // actionsheet delegate
     
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int)
+    func actionSheet(_ actionSheet: UIActionSheet, clickedButtonAt buttonIndex: Int)
     {
         switch buttonIndex
         {
-        case ActionSheetButton.Camera.rawValue:
-            println("open custom camera")
+        case ActionSheetButton.camera.rawValue:
+            print("open custom camera")
             
-            var imagePickerController = imagePickerControllerHelper.getCameraFromHelper()
+            let imagePickerController = imagePickerControllerHelper.getCameraFromHelper()
             
-            presentViewController(imagePickerController, animated: true, completion: nil)
+            present(imagePickerController, animated: true, completion: nil)
             
             break
-        case ActionSheetButton.PhotoLibrary.rawValue:
-            println("Open photos to select photo")
+        case ActionSheetButton.photoLibrary.rawValue:
+            print("Open photos to select photo")
             
-            var imagePickerController = imagePickerControllerHelper.getImagePickerFromHelper()
+            let imagePickerController = imagePickerControllerHelper.getImagePickerFromHelper()
             
-            presentViewController(imagePickerController, animated: true, completion: nil)
+            present(imagePickerController, animated: true, completion: nil)
             
             break
         default:
@@ -254,25 +258,25 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     }
     
     
-    func createNewProgressPoint(image : UIImage)
+    func createNewProgressPoint(_ image : UIImage)
     {
-        let date : NSDate = NSDate()
+        let date : Date = Date()
         
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        var paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
-        let uuid = NSUUID().UUIDString
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] 
+        let uuid = UUID().uuidString
         
         let fileName = "\(uuid).png"
         
-        var filePathToWrite = "\(paths)/\(fileName)"
+        let filePathToWrite = "\(paths)/\(fileName)"
         
-        var imageData : NSData = UIImagePNGRepresentation(image)
+        let imageData : Data = UIImagePNGRepresentation(image)!
         
-        fileManager.createFileAtPath(filePathToWrite, contents: imageData, attributes: nil)
+        fileManager.createFile(atPath: filePathToWrite, contents: imageData, attributes: nil)
         
         
-        var newProgressPoint :ProgressPoint = NSEntityDescription.insertNewObjectForEntityForName("ProgressPoint", inManagedObjectContext: context!) as! ProgressPoint
+        let newProgressPoint :ProgressPoint = NSEntityDescription.insertNewObject(forEntityName: "ProgressPoint", into: context!) as! ProgressPoint
         
         newProgressPoint.progressCollection = progressCollection
         newProgressPoint.imageName = fileName
@@ -280,44 +284,46 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
         NotificationFactory().scheduleNotificationForProgressCollection(newProgressPoint.progressCollection)
         
-        var error : NSError?
-        if context?.save(&error) == false
-        {
-            println("error \(error?.description)")
+        do {
+            try context?.save()
+        } catch let error {
+            print("error \(error.localizedDescription)")
         }
         
         if let proCol = progressCollection
         {
-            var copyProgressCollection : ProgressCollection = proCol
+            let copyProgressCollection : ProgressCollection = proCol
             loadProgressPointsForProgressCollection(copyProgressCollection)
         }
     }
     
     //menu delegate
     
-    func loadProgressPointsForProgressCollection(progressCollection: ProgressCollection?) {
+    func loadProgressPointsForProgressCollection(_ progressCollection: ProgressCollection?) {
         
         if let progressCollection = progressCollection
         {
             self.progressCollection = progressCollection
         }
         
-        if let safeProgressCollection = self.progressCollection, context = context
+        if let safeProgressCollection = self.progressCollection, let context = context
         {
-            let fetchRequest = NSFetchRequest(entityName: "ProgressPoint")
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressPoint")
             let predicate = NSPredicate(format: "progressCollection == %@", safeProgressCollection)
             let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor]
             
             fetchRequest.predicate = predicate
             
+            do {
+                try progressPoints = context.fetch(fetchRequest) as! [ProgressPoint]
+                progressPointCollectionViewHelper.progressPoints = progressPoints
+            } catch {}
             
-            progressPoints = context.executeFetchRequest(fetchRequest, error: nil) as! [ProgressPoint]
-            progressPointCollectionViewHelper.progressPoints = progressPoints
             
             
             title = safeProgressCollection.name
-            navigationController?.navigationBar.translucent = false
+            navigationController?.navigationBar.isTranslucent = false
             navigationController?.navigationBar.barTintColor = UIColor(rgba: safeProgressCollection.colour)
             
             collectionView?.reloadData()
@@ -328,28 +334,29 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     {
         let actionSheet = UIActionSheet(title: "New photo", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Use Camera", "Photo library")
         
-        actionSheet.showInView(view)
+        actionSheet.show(in: view)
     }
     
-    func createNewProgressCollectionWithName(name : String?)
+    func createNewProgressCollectionWithName(_ name : String?)
     {
         if let context = context
         {
-            var newProgressCollection :ProgressCollection = NSEntityDescription.insertNewObjectForEntityForName("ProgressCollection", inManagedObjectContext: context) as! ProgressCollection
+            let newProgressCollection :ProgressCollection = NSEntityDescription.insertNewObject(forEntityName: "ProgressCollection", into: context) as! ProgressCollection
             newProgressCollection.name = name
             newProgressCollection.colour = UIColor.hexValuesFromUIColor(UIColor.randomColor())
-            newProgressCollection.identifier = NSUUID().UUIDString
-            context.save(nil)
+            newProgressCollection.identifier = UUID().uuidString
+            
+            do { try context.save() } catch {}
             loadProgressPointsForProgressCollection(newProgressCollection)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier!
         {
         case "ShowProgressPointDetailId":
             
-            var viewController = segue.destinationViewController as! ProgressPointDetailTableViewController
+            let viewController = segue.destination as! ProgressPointDetailTableViewController
             viewController.progressPoint = selectedProgressPoint
             
             if let context = context
@@ -358,16 +365,16 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             }
             
         case SegueToEditCollection:
-            var viewController = segue.destinationViewController.childViewControllers.first as! EditProgressCollectionViewController
+            let viewController = segue.destination.childViewControllers.first as! EditProgressCollectionViewController
             
-            if let context = context, progressCollection = progressCollection
+            if let context = context, let progressCollection = progressCollection
             {
                 viewController.context = context
                 viewController.progressCollection = progressCollection
             }
         case SegueToCompareTabBar:
 
-            var tabBar = segue.destinationViewController as! CompareTabViewController
+            let tabBar = segue.destination as! CompareTabViewController
             tabBar.progressPointsToCompare = progressPointsToCompare
             
         default:

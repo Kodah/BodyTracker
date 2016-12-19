@@ -31,10 +31,10 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
             colorPickerView.color = UIColor(rgba: progressCollection.colour)
             navigationItem.title = progressCollection.name
             
-            navigationController?.navigationBar.translucent = false
+            navigationController?.navigationBar.isTranslucent = false
             navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
-            navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-            navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+            navigationController?.navigationBar.tintColor = UIColor.white
             changeNameTextField.text = progressCollection.name
             
             if progressCollection.interval == 0
@@ -48,19 +48,19 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
             stepper.value = progressCollection.interval.doubleValue
         }
         
-        colorPickerView.tintAdjustmentMode = UIViewTintAdjustmentMode.Normal
-        colorPickerView.addTarget(self, action: "colorDidChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        colorPickerView.tintAdjustmentMode = UIViewTintAdjustmentMode.normal
+        colorPickerView.addTarget(self, action: "colorDidChanged:", for: UIControlEvents.valueChanged)
         changeNameTextField.delegate = self
         
         // Do any additional setup after loading the view.
     }
     
     
-    @IBAction func stepperDidChange(sender: UIStepper)
+    @IBAction func stepperDidChange(_ sender: UIStepper)
     {
         if let progressCollection = progressCollection
         {
-            progressCollection.interval = stepper.value
+            progressCollection.interval = stepper.value as NSNumber!
             
             if stepper.value == 0
             {
@@ -73,49 +73,52 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
         }
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        textField.text = NSString(string: textField.text).stringByReplacingCharactersInRange(range, withString: string)
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        textField.text = NSString(string: textField.text!).replacingCharacters(in: range, with: string)
         
         navigationItem.title = textField.text
         inputtedName = textField.text
         
-        navigationItem.rightBarButtonItem?.enabled = count(textField.text) > 0 ? true : false
+        navigationItem.rightBarButtonItem?.isEnabled = (textField.text?.characters.count)! > 0 ? true : false
         
         return false
     }
     
-    @IBAction func tapBackground(sender: AnyObject)
+    @IBAction func tapBackground(_ sender: AnyObject)
     {
         changeNameTextField.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    func colorDidChanged(pickerView : HRColorPickerView)
+    func colorDidChanged(_ pickerView : HRColorPickerView)
     {
         navigationController?.navigationBar.barTintColor = pickerView.color
     }
     
-    @IBAction func cancelButtonTapped(sender: AnyObject)
+    @IBAction func cancelButtonTapped(_ sender: AnyObject)
     {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     
-    @IBAction func saveButtonTapped(sender: UIBarButtonItem)
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem)
     {
-        if let progressCollection = progressCollection, context = context
+        if let progressCollection = progressCollection, let context = context
         {
             progressCollection.name = navigationItem.title
             progressCollection.colour = UIColor.hexValuesFromUIColor(colorPickerView.color)
             
             NotificationFactory().scheduleNotificationForProgressCollection(progressCollection)
 
-            context.save(nil)
-            dismissViewControllerAnimated(true, completion: nil)
+            do {
+                try context.save()
+            } catch  {}
+            
+            dismiss(animated: true, completion: nil)
         }
     }
     

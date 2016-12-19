@@ -14,16 +14,18 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
     
     var image : UIImage?
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!)
-    {
-        photoSelectionCollectionViewController.createNewProgressPoint(image)
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage
+        {
+            photoSelectionCollectionViewController.createNewProgressPoint(image)
+            picker.dismiss(animated: true, completion: nil)
+        }
     }
     
     
-    func imagePickerControllerDidCancel(picker: UIImagePickerController)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
     {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
     }
     
     
@@ -31,10 +33,10 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
     
     func getImagePickerFromHelper() -> UIImagePickerController
     {
-        var picker : UIImagePickerController = UIImagePickerController()
+        let picker : UIImagePickerController = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
-        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
 
         return picker
     }
@@ -42,14 +44,14 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
     
     func getCameraFromHelper() -> UIImagePickerController
     {
-        var picker = UIImagePickerController()
+        let picker = UIImagePickerController()
         
         picker.delegate = self
         picker.allowsEditing = true
-        picker.sourceType = UIImagePickerControllerSourceType.Camera
+        picker.sourceType = UIImagePickerControllerSourceType.camera
     
         picker.showsCameraControls = true
-        picker.navigationBarHidden = true
+        picker.isNavigationBarHidden = true
     
         return picker
     }

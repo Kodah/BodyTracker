@@ -22,10 +22,10 @@ class CompareOverlayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        topImageView.layer.borderColor = UIColor.grayColor().CGColor
+        topImageView.layer.borderColor = UIColor.gray.cgColor
         topImageView.layer.borderWidth = 2
         
-        if let tabBar = tabBarController as? CompareTabViewController, progressPointToCompare = tabBar.progressPointsToCompare
+        if let tabBar = tabBarController as? CompareTabViewController, let progressPointToCompare = tabBar.progressPointsToCompare
         {
             bottomImageView.image = progressPointToCompare.firstProgressPoint.getImage()
             topImageView.image = progressPointToCompare.secondProgressPoint.getImage()
@@ -34,11 +34,11 @@ class CompareOverlayViewController: UIViewController {
             
         }
         
-        var leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "dismissSelf")
+        var leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(CompareOverlayViewController.dismissSelf))
         
         navigationItem.leftBarButtonItem = leftBarButtonItem
         
-        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "showShareImageViewController")
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(CompareOverlayViewController.showShareImageViewController))
         
         navigationItem.rightBarButtonItem = rightBarButtonItem;
         
@@ -48,7 +48,7 @@ class CompareOverlayViewController: UIViewController {
     
     func dismissSelf()
     {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     func showShareImageViewController()
@@ -59,10 +59,10 @@ class CompareOverlayViewController: UIViewController {
             
             var instagramActivity = UIActivity()
             
-            var activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-            navigationController?.presentViewController(activityViewController, animated: true, completion: nil)
+            let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+            navigationController?.present(activityViewController, animated: true, completion: nil)
             
-            activityViewController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypePostToWeibo, UIActivityTypeCopyToPasteboard, UIActivityTypeAddToReadingList, UIActivityTypePostToVimeo]
+            activityViewController.excludedActivityTypes = [UIActivityType.print, UIActivityType.postToWeibo, UIActivityType.copyToPasteboard, UIActivityType.addToReadingList, UIActivityType.postToVimeo]
             
 //            activityViewController.completionWithItemsHandler = { activity, success, items, error in
 //            
@@ -75,44 +75,42 @@ class CompareOverlayViewController: UIViewController {
         }
     }
 
-    @IBAction func pinchGesture(recognizer: UIPinchGestureRecognizer)
+    @IBAction func pinchGesture(_ recognizer: UIPinchGestureRecognizer)
     {
 
         
-        if recognizer.numberOfTouches() >= 2
+        if recognizer.numberOfTouches >= 2
         {
-            if recognizer.state == UIGestureRecognizerState.Began
+            if recognizer.state == UIGestureRecognizerState.began
             {
                 lastScale = 1.0
-                lastPoint = recognizer.locationInView(recognizer.view)
+                lastPoint = recognizer.location(in: recognizer.view)
             }
         }
         
-        var scale = 1.0 - (lastScale! - recognizer.scale)
+        let scale = 1.0 - (lastScale! - recognizer.scale)
         
-        topImageView.layer.setAffineTransform(CGAffineTransformScale(topImageView.layer.affineTransform(), scale, scale))
+        topImageView.layer.setAffineTransform(topImageView.layer.affineTransform().scaledBy(x: scale, y: scale))
         
         
         lastScale = recognizer.scale
         
-        var point = recognizer.locationInView(recognizer.view)
+        let point = recognizer.location(in: recognizer.view)
         
         topImageView.layer.setAffineTransform(
-            CGAffineTransformTranslate(
-                topImageView.layer.affineTransform(),
-                point.x - lastPoint!.x,
-                point.y - lastPoint!.y))
+            topImageView.layer.affineTransform().translatedBy(x: point.x - lastPoint!.x,
+                y: point.y - lastPoint!.y))
         
-        lastPoint = recognizer.locationInView(recognizer.view)
+        lastPoint = recognizer.location(in: recognizer.view)
 
     }
 
-    @IBAction func panGesture(recognizer: UIPanGestureRecognizer)
+    @IBAction func panGesture(_ recognizer: UIPanGestureRecognizer)
     {
         
-        var translation = recognizer.translationInView(topImageView)
+        let translation = recognizer.translation(in: topImageView)
         
-        recognizer.setTranslation(CGPointMake(0, 0), inView: topImageView)
+        recognizer.setTranslation(CGPoint(x: 0, y: 0), in: topImageView)
         
         var center = topImageView.center
         center.y += translation.y
@@ -120,14 +118,14 @@ class CompareOverlayViewController: UIViewController {
         topImageView.center = center
     }
     
-    @IBAction func sliderValueChanged(slider: UISlider)
+    @IBAction func sliderValueChanged(_ slider: UISlider)
     {
         topImageView.alpha = CGFloat(slider.value)
     }
     
-    @IBAction func resetBarButtonTapped(sender: UIBarButtonItem)
+    @IBAction func resetBarButtonTapped(_ sender: UIBarButtonItem)
     {
-        topImageView.transform = CGAffineTransformIdentity
+        topImageView.transform = CGAffineTransform.identity
         topImageView.frame = bottomImageView.bounds
         topImageView.setNeedsLayout()
         topImageView.layoutIfNeeded()

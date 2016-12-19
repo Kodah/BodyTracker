@@ -13,11 +13,11 @@ extension UIColor
 {
     class func randomColor() -> UIColor
     {
-        var randomRed:CGFloat = CGFloat(arc4random_uniform(100)) / 100
+        let randomRed:CGFloat = CGFloat(arc4random_uniform(100)) / 100
         
-        var randomGreen:CGFloat = CGFloat(arc4random_uniform(50)) / 100 + 0.2
+        let randomGreen:CGFloat = CGFloat(arc4random_uniform(50)) / 100 + 0.2
         
-        var randomBlue:CGFloat = CGFloat(arc4random_uniform(80)) / 100 + 0.1
+        let randomBlue:CGFloat = CGFloat(arc4random_uniform(80)) / 100 + 0.1
         
         return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1.0)
     }
@@ -30,12 +30,12 @@ extension UIColor
         var alpha: CGFloat = 1.0
         
         if rgba.hasPrefix("#") {
-            let index   = advance(rgba.startIndex, 1)
-            let hex     = rgba.substringFromIndex(index)
-            let scanner = NSScanner(string: hex)
+            let index   = rgba.index(rgba.startIndex, offsetBy: 1)
+            let hex :String     = rgba.substring(from: index)
+            let scanner = Scanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
-            if scanner.scanHexLongLong(&hexValue) {
-                switch (count(hex)) {
+            if scanner.scanHexInt64(&hexValue) {
+                switch (hex.characters.count) {
                 case 3:
                     red   = CGFloat((hexValue & 0xF00) >> 8)       / 15.0
                     green = CGFloat((hexValue & 0x0F0) >> 4)       / 15.0
@@ -58,7 +58,7 @@ extension UIColor
                     print("Invalid RGB string, number of characters after '#' should be either 3, 4, 6 or 8")
                 }
             } else {
-                println("Scan hex error")
+                print("Scan hex error")
             }
         } else {
             print("Invalid RGB string, missing '#' as prefix")
@@ -67,9 +67,9 @@ extension UIColor
     }
     
     
-    class func hexValuesFromUIColor(color : UIColor) -> String
+    class func hexValuesFromUIColor(_ color : UIColor) -> String
     {
-        if color == UIColor.whiteColor()
+        if color == UIColor.white
         {
             return "ffffff"
         }
@@ -81,9 +81,9 @@ extension UIColor
         
         color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         
-        var redDec = Int(red * 255)
-        var greenDec = Int(green * 255)
-        var blueDec = Int(blue * 255)
+        let redDec = Int(red * 255)
+        let greenDec = Int(green * 255)
+        let blueDec = Int(blue * 255)
         
         return NSString(format: "#%02X%02X%02X", redDec, greenDec, blueDec) as String
         

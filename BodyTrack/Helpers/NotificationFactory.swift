@@ -10,15 +10,15 @@ import UIKit
 
 class NotificationFactory: NSObject {
     
-    func scheduleNotificationForProgressCollection(progressCollection:ProgressCollection)
+    func scheduleNotificationForProgressCollection(_ progressCollection:ProgressCollection)
     {
-        var application = UIApplication.sharedApplication()
+        let application = UIApplication.shared
         
         if !notificationEnabled()
         {
-            if application.respondsToSelector("registerUserNotificationSettings:")
+            if application.responds(to: #selector(UIApplication.registerUserNotificationSettings(_:)))
             {
-                application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))
+                application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
             }
             if notificationEnabled()
             {
@@ -32,44 +32,44 @@ class NotificationFactory: NSObject {
 
     }
     
-    func createNotification(progressCollection : ProgressCollection)
+    func createNotification(_ progressCollection : ProgressCollection)
     {
         let PROGRESS_ITEMS = "progressItems"
         
-        var progressDictionary = NSUserDefaults.standardUserDefaults().dictionaryForKey(PROGRESS_ITEMS) ?? Dictionary()
+        var progressDictionary = UserDefaults.standard.dictionary(forKey: PROGRESS_ITEMS) ?? Dictionary()
         
         if let reminderDate = calculateNotificationFireDateFor(progressCollection)
         {
-            if reminderDate.compare(NSDate()) == NSComparisonResult.OrderedDescending
+            if reminderDate.compare(Date()) == ComparisonResult.orderedDescending
             {
                 progressDictionary[progressCollection.identifier] = ["deadline": reminderDate, "title": progressCollection.name]
                 
-                var notification = UILocalNotification()
+                let notification = UILocalNotification()
                 notification.alertBody = "BodyTrack progress picture due for \(progressCollection.name)"
                 notification.alertAction = "open"
                 notification.fireDate = reminderDate
                 notification.soundName = UILocalNotificationDefaultSoundName
                 notification.userInfo = ["UUID": progressCollection.identifier]
                 notification.category = "PROGRESS_CATEGORY"
-                UIApplication.sharedApplication().scheduleLocalNotification(notification)
+                UIApplication.shared.scheduleLocalNotification(notification)
             }
             else
             {
-                progressDictionary.removeValueForKey(progressCollection.identifier)
+                _ = progressDictionary.removeValue(forKey: progressCollection.identifier)
                 deleteNotificationWith(progressCollection.identifier)
                 
             }
-            NSUserDefaults.standardUserDefaults().setObject(progressDictionary, forKey: PROGRESS_ITEMS)
+            UserDefaults.standard.set(progressDictionary, forKey: PROGRESS_ITEMS)
 
         }
     }
     
-    func deleteNotificationWith(UUIDToDelete : String)
+    func deleteNotificationWith(_ UUIDToDelete : String)
     {
-        var app:UIApplication = UIApplication.sharedApplication()
-        for oneEvent in app.scheduledLocalNotifications
+        let app:UIApplication = UIApplication.shared
+        for oneEvent in app.scheduledLocalNotifications!
         {
-            var notification = oneEvent as! UILocalNotification
+            let notification = oneEvent 
             let userInfoCurrent = notification.userInfo! as! [String:AnyObject]
             let uid = userInfoCurrent["UUID"]! as! String
             if uid == UUIDToDelete
@@ -80,15 +80,17 @@ class NotificationFactory: NSObject {
         }
     }
     
-    func calculateNotificationFireDateFor(progressCollection : ProgressCollection) -> NSDate?
+    func calculateNotificationFireDateFor(_ progressCollection : ProgressCollection) -> Date?
     {
         if let progressPoint = progressCollection.latestProgressPoint()
         {
-            var components = NSDateComponents()
-            let numOfWeeks = progressCollection.interval
-            components.day = numOfWeeks.integerValue * 7
+            var components = DateComponents()
+            if let numOfWeeks = progressCollection.interval {
+                
+                components.day = numOfWeeks.intValue * 7
+            }
             
-            return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: progressPoint.date, options: nil)
+            return NSCalendar.current.date(byAdding: components, to: progressPoint.date)
         }
         return nil
     }
@@ -96,7 +98,7 @@ class NotificationFactory: NSObject {
     
     func notificationEnabled() ->Bool
     {
-        let settings = UIApplication.sharedApplication().currentUserNotificationSettings()
-        return settings.types != UIUserNotificationType.None
+        let settings = UIApplication.shared.currentUserNotificationSettings
+        return settings!.types != []
     }
 }
