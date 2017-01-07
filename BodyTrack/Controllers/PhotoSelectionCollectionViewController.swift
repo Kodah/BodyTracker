@@ -35,10 +35,11 @@ class ProgressPointsToCompare
     }
 }
 
-class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate, UITextFieldDelegate, UIActionSheetDelegate {
+class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate, UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     
-    let SegueToCompareTabBar : String = "GoToCompareSegueId"
-    let SegueToEditCollection : String = "EditProgressCollectionSegue"
+    let SegueToCompareTabBar = "GoToCompareSegueId"
+    let SegueToEditCollection = "EditProgressCollectionSegue"
+    let SegueToCustomCamera = "ShowCustomCamera"
     
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
     @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
@@ -237,9 +238,11 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         case ActionSheetButton.camera.rawValue:
             print("open custom camera")
             
-            let imagePickerController = imagePickerControllerHelper.getCameraFromHelper()
+            performSegue(withIdentifier: "ShowCustomCamera", sender: self)
             
-            present(imagePickerController, animated: true, completion: nil)
+//            let imagePickerController = imagePickerControllerHelper.getCameraFromHelper()
+//            
+//            present(imagePickerController, animated: true, completion: nil)
             
             break
         case ActionSheetButton.photoLibrary.rawValue:
@@ -294,6 +297,10 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             let copyProgressCollection : ProgressCollection = proCol
             loadProgressPointsForProgressCollection(copyProgressCollection)
         }
+    }
+    
+    func customCameraDidFinishTakingPicture(image: UIImage) {
+        createNewProgressPoint(image)
     }
     
     //menu delegate
@@ -376,11 +383,15 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
             let tabBar = segue.destination as! CompareTabViewController
             tabBar.progressPointsToCompare = progressPointsToCompare
             
+        case SegueToCustomCamera:
+            let customCameraViewController = segue.destination as! CustomCameraViewController
+            
+            customCameraViewController.delegate = self
+            
         default:
             break;
         }
     }
-    
 }
 
 

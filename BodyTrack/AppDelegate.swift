@@ -19,34 +19,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.setupContext()
         
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil);
-//        let slidingViewController = storyboard.instantiateViewController(withIdentifier: "slidingViewControllerId") as! ECSlidingViewController;
-//        let topViewController = storyboard.instantiateViewController(withIdentifier: "homeNavigationControllerId") as! PhotoSelectionCollectionViewController
-//        let underLeftViewController = storyboard.instantiateViewController(withIdentifier: "menuTableViewControllerId") as! MenuTableViewController
-//        
-//        let navigationController = UINavigationController(rootViewController: topViewController);
-//        
-//        navigationController.view.clipsToBounds = false
-//        navigationController.view.layer.shadowOpacity = 0.75;
-//        navigationController.view.layer.shadowRadius = 10.0;
-//        navigationController.view.layer.shadowColor = UIColor.black.cgColor
-//        
-//        underLeftViewController.context = self.managedObjectContext
-//        topViewController.context = self.managedObjectContext
-//        
-//        underLeftViewController.edgesForExtendedLayout = [.top, .bottom, .left]
-//        
-//        slidingViewController.topViewController = navigationController
-//        slidingViewController.underLeftViewController = underLeftViewController
-//        topViewController.view.addGestureRecognizer(slidingViewController.panGesture)
-//        
-//        underLeftViewController.delegate = topViewController
-//        
-//        slidingViewController.anchorLeftRevealAmount = 50
-//        
-//        self.window?.rootViewController = slidingViewController
-//        
-//        self.window?.makeKeyAndVisible()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil);
+        let slidingViewController = storyboard.instantiateViewController(withIdentifier: "slidingViewControllerId") as! ECSlidingViewController;
+        let topViewController = storyboard.instantiateViewController(withIdentifier: "homeNavigationControllerId") as! PhotoSelectionCollectionViewController
+        let underLeftViewController = storyboard.instantiateViewController(withIdentifier: "menuTableViewControllerId") as! MenuTableViewController
+        
+        let navigationController = UINavigationController(rootViewController: topViewController);
+        
+        navigationController.view.clipsToBounds = false
+        navigationController.view.layer.shadowOpacity = 0.75;
+        navigationController.view.layer.shadowRadius = 10.0;
+        navigationController.view.layer.shadowColor = UIColor.black.cgColor
+        
+        underLeftViewController.context = self.managedObjectContext
+        topViewController.context = self.managedObjectContext
+        
+        underLeftViewController.edgesForExtendedLayout = [.top, .bottom, .left]
+        
+        slidingViewController.topViewController = navigationController
+        slidingViewController.underLeftViewController = underLeftViewController
+        topViewController.view.addGestureRecognizer(slidingViewController.panGesture)
+        
+        underLeftViewController.delegate = topViewController
+        
+        slidingViewController.anchorLeftRevealAmount = 50
+        
+        self.window?.rootViewController = slidingViewController
+        
+        self.window?.makeKeyAndVisible()
         
         return true
     }

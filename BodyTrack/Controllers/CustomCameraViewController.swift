@@ -9,18 +9,21 @@
 import UIKit
 import AVFoundation
 
+protocol CustomCameraViewControllerDelegate {
+    func customCameraDidFinishTakingPicture(image: UIImage)
+}
 
 class CustomCameraViewController: UIViewController {
-
-    @IBOutlet weak var capturedImageView: UIImageView!
     
+    @IBOutlet weak var capturedImageView: UIImageView!
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
-    
     @IBOutlet weak var controlView: UIView!
     @IBOutlet var photoTakenView: UIView!
+    @IBOutlet weak var camView: UIView!
     
-    
+    var delegate: CustomCameraViewControllerDelegate?
+    var finalImage: UIImage?
     let captureSession = AVCaptureSession()
     let stillImageOutput = AVCaptureStillImageOutput()
     var captureDeviceBack : AVCaptureDevice?
@@ -39,19 +42,17 @@ class CustomCameraViewController: UIViewController {
             }
         }
     }
+    
     var timerCounter = 0.0 {
         didSet{
             if timerCounter > 0 {
-                timerLabel.text = "\(Int(timerCounter))"
+                timerLabel.text = "\(Int(timerCounter-timerStep))"
                 
             } else {
                 timerLabel.text = ""
             }
         }
     }
-    
-
-    @IBOutlet weak var camView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +96,7 @@ class CustomCameraViewController: UIViewController {
         if let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession) {
             camView.layer.addSublayer(previewLayer)
             previewLayer.frame = camView.layer.frame
+            previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         }
         
         
@@ -146,7 +148,8 @@ class CustomCameraViewController: UIViewController {
                 let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
                 
                 if let data = imageData {
-                    self.capturedImageView.image = UIImage(data: data)
+                    self.finalImage = UIImage(data: data)
+                    self.capturedImageView.image = self.finalImage
                     self.showKeepOrRetakeView()
                 }
             }
@@ -175,16 +178,17 @@ class CustomCameraViewController: UIViewController {
     }
     
     
-    
     func showKeepOrRetakeView() {
         
         controlView.addSubview(photoTakenView)
     }
     
-    
     @IBAction func usePhoto(_ sender: UIButton) {
         
-        
+        if let delegate = delegate, let finalImage = finalImage {
+            delegate.customCameraDidFinishTakingPicture(image: finalImage)
+        }
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func retakePhoto(_ sender: UIButton) {
