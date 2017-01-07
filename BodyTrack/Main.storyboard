@@ -642,6 +642,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ig-p7-mB5">
                                         <rect key="frame" x="285" y="25" width="50" height="50"/>
                                         <state key="normal" title="Button" image="switchCam"/>
+                                        <connections>
+                                            <action selector="flipCamera:" destination="7P9-TT-3wU" eventType="touchUpInside" id="V6k-GO-fyz"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Timer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kKB-T6-9xH">
                                         <rect key="frame" x="50" y="14" width="44" height="21"/>
@@ -691,7 +694,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSs-Xm-AWv">
                                 <rect key="frame" x="-25" y="0.0" width="424" height="565"/>
-                                <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="VSs-Xm-AWv" secondAttribute="height" multiplier="3:4" id="AwY-Zv-T3f"/>
                                 </constraints>
@@ -725,11 +728,51 @@
                     <connections>
                         <outlet property="camView" destination="VSs-Xm-AWv" id="JZv-g9-qD6"/>
                         <outlet property="capturedImageView" destination="tQc-92-Y5t" id="7vr-Uz-FRs"/>
+                        <outlet property="controlView" destination="zi5-8A-yWf" id="Oeg-Oj-ZoD"/>
+                        <outlet property="photoTakenView" destination="f6A-ZZ-6X3" id="yRg-Ns-r6P"/>
                         <outlet property="timerButton" destination="W7E-Fm-lDJ" id="wvy-6U-l9c"/>
                         <outlet property="timerLabel" destination="KnL-tT-J3g" id="cmJ-wh-2Hb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7A-qc-xEu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="f6A-ZZ-6X3">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Fz4-vM-L2j">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xm-gg-fOG">
+                                    <rect key="frame" x="0.0" y="32" width="187.5" height="36"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <state key="normal" title="Retake">
+                                        <color key="titleColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="retakePhoto:" destination="7P9-TT-3wU" eventType="touchUpInside" id="6yv-hM-Jem"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sis-xl-seZ">
+                                    <rect key="frame" x="187.5" y="32" width="187.5" height="36"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <state key="normal" title="Use Photo">
+                                        <color key="titleColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="usePhoto:" destination="7P9-TT-3wU" eventType="touchUpInside" id="cfc-DZ-iyJ"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="Fz4-vM-L2j" firstAttribute="top" secondItem="f6A-ZZ-6X3" secondAttribute="top" id="sJZ-lq-vnh"/>
+                        <constraint firstAttribute="trailing" secondItem="Fz4-vM-L2j" secondAttribute="trailing" id="suU-HO-fec"/>
+                        <constraint firstAttribute="bottom" secondItem="Fz4-vM-L2j" secondAttribute="bottom" id="thw-rl-uLG"/>
+                        <constraint firstItem="Fz4-vM-L2j" firstAttribute="leading" secondItem="f6A-ZZ-6X3" secondAttribute="leading" id="uGu-ja-zQl"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="2402.4000000000001" y="-534.78260869565224"/>
         </scene>

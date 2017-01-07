@@ -9,12 +9,16 @@
 import UIKit
 import AVFoundation
 
+
 class CustomCameraViewController: UIViewController {
 
     @IBOutlet weak var capturedImageView: UIImageView!
     
     @IBOutlet weak var timerButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBOutlet weak var controlView: UIView!
+    @IBOutlet var photoTakenView: UIView!
     
     
     let captureSession = AVCaptureSession()
@@ -103,7 +107,6 @@ class CustomCameraViewController: UIViewController {
 
     func configureDevice() {
         if let device = captureDeviceFront  {
-            
             if (device.isFocusModeSupported(.locked)) {
                 do {
                     try device.lockForConfiguration()
@@ -116,7 +119,6 @@ class CustomCameraViewController: UIViewController {
     
     
     @IBAction func takePhotoButtonPressed(_ sender: Any) {
-        
         if timerStep > 0 {
             
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countDown), userInfo: nil, repeats: true)
@@ -127,9 +129,7 @@ class CustomCameraViewController: UIViewController {
     }
     
     func countDown() {
-        
         timerCounter += 1
-        
         print(timerCounter)
         if timerCounter >= timerStep {
             timerCounter = 0
@@ -147,12 +147,51 @@ class CustomCameraViewController: UIViewController {
                 
                 if let data = imageData {
                     self.capturedImageView.image = UIImage(data: data)
-                    
+                    self.showKeepOrRetakeView()
                 }
             }
         }
     }
     
+    @IBAction func flipCamera(_ sender: Any) {
+        
+        captureSession.beginConfiguration()
+        
+        let currentCamera = captureSession.inputs.first as? AVCaptureDeviceInput
+        captureSession.removeInput(currentCamera)
+        
+        var newCamera: AVCaptureDevice?
+        if currentCamera?.device.position == AVCaptureDevicePosition.front {
+            newCamera = captureDeviceBack
+        } else {
+            newCamera = captureDeviceFront
+        }
+        
+        do {
+            try captureSession.addInput(AVCaptureDeviceInput(device: newCamera))
+        } catch {}
+        
+        captureSession.commitConfiguration()
+    }
+    
+    
+    
+    func showKeepOrRetakeView() {
+        
+        controlView.addSubview(photoTakenView)
+    }
+    
+    
+    @IBAction func usePhoto(_ sender: UIButton) {
+        
+        
+    }
+    
+    @IBAction func retakePhoto(_ sender: UIButton) {
+        
+        capturedImageView.image = nil
+        photoTakenView.removeFromSuperview()
+    }
     @IBAction func timerButtonPressed(_ sender: UIButton) {
         
         if (timerStep == 10)
