@@ -8,8 +8,44 @@
 
 import Foundation
 
+
 extension UIImage
 {
+    
+    func imageRotatedBy90Degrees(flip: Bool) -> UIImage {
+
+        
+        let rotatedViewBox = UIView(frame: CGRect(x: 0, y: 0, width: self.size.height, height: self.size.width))
+        let t = CGAffineTransform(rotationAngle: 0.5 * CGFloat(M_PI));
+        rotatedViewBox.transform = t
+        let rotatedSize = rotatedViewBox.frame.size
+        
+        UIGraphicsBeginImageContext(rotatedSize)
+        let bitmap = UIGraphicsGetCurrentContext()
+        
+        bitmap!.translateBy(x: rotatedSize.width / 2.0, y: rotatedSize.height / 2.0);
+        
+        //   // Rotate the image context
+        bitmap!.rotate(by: 0.5 * CGFloat(M_PI));
+        
+        // Now, draw the rotated/scaled image into the context
+        var yFlip: CGFloat
+        
+        if(flip){
+            yFlip = CGFloat(-1.0)
+        } else {
+            yFlip = CGFloat(1.0)
+        }
+        
+        bitmap!.scaleBy(x: yFlip, y: -1.0)
+        
+        bitmap!.draw(self.cgImage!, in: CGRect(x: -size.height / 2, y: -size.width / 2, width: size.height, height: size.width))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
     
     class func createCompareImage(_ progressPoint1 : ProgressPoint, progressPoint2 : ProgressPoint, statsEnabled : Bool) -> UIImage
     {

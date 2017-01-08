@@ -262,6 +262,9 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
     
     func createNewProgressPoint(_ image : UIImage)
     {
+        let rotatedImage = image.imageRotatedBy90Degrees(flip: false)
+        
+        
         let date : Date = Date()
         
         let fileManager = FileManager.default
@@ -273,7 +276,7 @@ class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTa
         
         let filePathToWrite = "\(paths)/\(fileName)"
         
-        let imageData : Data = UIImagePNGRepresentation(image)!
+        let imageData : Data = UIImagePNGRepresentation(rotatedImage)!
         
         fileManager.createFile(atPath: filePathToWrite, contents: imageData, attributes: nil)
         

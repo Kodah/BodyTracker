@@ -46,7 +46,7 @@ class CustomCameraViewController: UIViewController {
     var timerCounter = 0.0 {
         didSet{
             if timerCounter > 0 {
-                timerLabel.text = "\(Int(timerCounter-timerStep))"
+                timerLabel.text = "\(Int(timerStep - timerCounter))"
                 
             } else {
                 timerLabel.text = ""
