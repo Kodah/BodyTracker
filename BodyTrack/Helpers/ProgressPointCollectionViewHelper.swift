@@ -23,10 +23,6 @@ UICollectionViewDelegateFlowLayout {
     var selectMode: Bool = false
     var selectedProgressPoints = [ProgressPoint]()
     var imageCache = [String: UIImage]()
-
-    let photoSyncQueue = DispatchQueue(label: "photoSync", attributes: .concurrent)
-    let getCellImageQueue = DispatchQueue(label: "cellImageSync", attributes: .concurrent)
-
     let dateformatter = DateFormatter()
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -77,8 +73,9 @@ UICollectionViewDelegateFlowLayout {
             if let image = imageCache[progressPoint.imageName] {
 
                 cell.progressPicImageView.image = image
+                
             } else {
-                if let image = progressPoint.getImage() {
+                if let image = progressPoint.getImage(.low) {
                     self.imageCache[progressPoint.imageName] = image
                     cell.progressPicImageView.image = image
                 }
@@ -98,9 +95,10 @@ UICollectionViewDelegateFlowLayout {
     func syncImages() {
         imageCache.removeAll(keepingCapacity: false)
         for point in progressPoints {
-            photoSyncQueue.sync {
+            
+            DispatchQueue.global(qos: .background).async {
                 print("populated cache with \(point.imageName)")
-                self.imageCache[point.imageName] = point.getImage()
+                self.imageCache[point.imageName] = point.getImage(.high)
             }
         }
     }

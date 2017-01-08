@@ -9,7 +9,16 @@
 import Foundation
 
 extension ProgressPoint {
-    func getImage() -> UIImage? {
+    
+    enum JPEGQuality: CGFloat {
+        case lowest  = 0
+        case low     = 0.25
+        case medium  = 0.5
+        case high    = 0.75
+        case highest = 1
+    }
+    
+    func getImage(_ quality: JPEGQuality = .highest) -> UIImage? {
         let fileManager = FileManager.default
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
@@ -17,11 +26,12 @@ extension ProgressPoint {
         let fullPath = documentsDirectory.appendingPathComponent(imageName)
 
         if fileManager.fileExists(atPath: fullPath.path) {
-            let imageis: UIImage = UIImage(contentsOfFile: fullPath.path)!
-            return imageis
-        } else {
-            return nil
+            if let imageis: UIImage = UIImage(contentsOfFile: fullPath.path),
+                let imageData = UIImageJPEGRepresentation(imageis, quality.rawValue) {
+                return UIImage(data: imageData)
+            }
         }
+        return nil
     }
 
     func getStats() -> NSString {
