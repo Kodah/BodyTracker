@@ -13,36 +13,20 @@ extension ProgressPoint
 {
     func getImage() -> UIImage?
     {
-        
-        
         let fileManager = FileManager.default
-        
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
         
-//        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] 
-        
-//        let fullPath = "\(path)/\(imageName)"
-        
         let fullPath = documentsDirectory.appendingPathComponent(imageName)
 
-        
         if (fileManager.fileExists(atPath: fullPath.path))
         {
-            print("FILE AVAILABLE");
-            
-            //Pick Image and Use accordingly
             let imageis: UIImage = UIImage(contentsOfFile: fullPath.path)!
-            
             return imageis
-            
         }
         else
         {
-            print("FILE NOT AVAILABLE");
-            
             return nil
-            
         }
     }
     

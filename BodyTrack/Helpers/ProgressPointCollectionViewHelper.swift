@@ -15,12 +15,28 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
     let ProgressPointSegueId = "showProgressPointId"
     let bodyReuseIdentifier = "BodyCollectionViewCellId"
     let addReuseIdentifier = "AddCollectionViewId"
-    var progressPoints = [ProgressPoint]()
+    var progressPoints = [ProgressPoint]() {
+        didSet {
+            syncImages()
+        }
+    }
     var selectMode : Bool = false
     var selectedProgressPoints = [ProgressPoint]()
+    var imageCache = [String:UIImage]()
+    
+    let photoSyncQueue = DispatchQueue(label: "photoSync", attributes: .concurrent)
+    let getCellImageQueue = DispatchQueue(label: "cellImageSync", attributes: .concurrent)
+    
+    let dateformatter = DateFormatter()
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var photoSelectionCollectionViewController: PhotoSelectionCollectionViewController!
+    
+    private override init () {
+        dateformatter.timeStyle = DateFormatter.Style.none
+        dateformatter.dateStyle = DateFormatter.Style.short
+        dateformatter.dateFormat = "dd MMM yyyy"
+    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int
     {
@@ -53,17 +69,25 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: bodyReuseIdentifier, for: indexPath) as! ProgressPointCollectionViewCell
             
+            cell.layer.shouldRasterize = true
+            cell.layer.rasterizationScale = UIScreen.main.scale
+            cell.progressPicImageView.layer.shouldRasterize = true
+            cell.progressPicImageView.layer.rasterizationScale = UIScreen.main.scale
+            
             cell.selectedBackgroundView = UIView(frame: cell.bounds)
             cell.selectedBackgroundView?.backgroundColor = UIColor.blue
+            cell.progressPicImageView.image = nil
             
-            if let imageView = cell.progressPicImageView, let image = progressPoint.getImage()
-            {
-                imageView.image = image
+            if let image = imageCache[progressPoint.imageName] {
+                
+                cell.progressPicImageView.image = image
             }
-            let dateformatter = DateFormatter()
-            dateformatter.timeStyle = DateFormatter.Style.none
-            dateformatter.dateStyle = DateFormatter.Style.short
-            dateformatter.dateFormat = "dd MMM yyyy"
+            else {
+                if let image = progressPoint.getImage() {
+                    self.imageCache[progressPoint.imageName] = image
+                    cell.progressPicImageView.image = image
+                }
+            }
             
             cell.date.text = dateformatter.string(from: progressPoint.date)
                     
@@ -73,6 +97,16 @@ class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UIC
             cell.layer.borderColor = UIColor(rgba: progressCollection.colour).cgColor
             cell.layer.borderWidth = 1.0
             return cell
+        }
+    }
+    
+    func syncImages() {
+        imageCache.removeAll(keepingCapacity: false)
+        for point in progressPoints {
+            photoSyncQueue.sync {
+                print("populated cache with \(point.imageName)")
+                self.imageCache[point.imageName] = point.getImage()
+            }
         }
     }
     
