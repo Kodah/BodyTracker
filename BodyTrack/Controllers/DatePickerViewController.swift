@@ -8,41 +8,33 @@
 
 import UIKit
 
-protocol DatePickerViewControllerDelegate
-{
+protocol DatePickerViewControllerDelegate: class {
     func dismissDatePicker()
-    func datePickerDidChoose(_ date : Date)
+    func datePickerDidChoose(_ date: Date)
 }
 
 class DatePickerViewController: UIViewController {
 
-    
-    var delegate : DatePickerViewControllerDelegate?
-    
+    weak var delegate: DatePickerViewControllerDelegate?
+
     @IBOutlet weak var datePicker: UIDatePicker!
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    func prepareDatePickerToShowWithDate(_ date : Date)
-    {
+
+    func prepareDatePickerToShowWithDate(_ date: Date) {
         datePicker.setDate(date, animated: false)
     }
 
-    @IBAction func cancelButtonTapped(_ sender: UIButton)
-    {
-        if let delegate = delegate
-        {
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        if let delegate = delegate {
             delegate.dismissDatePicker()
         }
     }
 
-    @IBAction func doneButtonTapped(_ sender: UIButton)
-    {
-        if let delegate = delegate
-        {
+    @IBAction func doneButtonTapped(_ sender: UIButton) {
+        if let delegate = delegate {
             delegate.datePickerDidChoose(datePicker.date)
         }
     }

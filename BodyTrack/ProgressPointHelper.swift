@@ -8,49 +8,38 @@
 
 import Foundation
 
-
-extension ProgressPoint
-{
-    func getImage() -> UIImage?
-    {
+extension ProgressPoint {
+    func getImage() -> UIImage? {
         let fileManager = FileManager.default
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
-        
+
         let fullPath = documentsDirectory.appendingPathComponent(imageName)
 
-        if (fileManager.fileExists(atPath: fullPath.path))
-        {
+        if fileManager.fileExists(atPath: fullPath.path) {
             let imageis: UIImage = UIImage(contentsOfFile: fullPath.path)!
             return imageis
-        }
-        else
-        {
+        } else {
             return nil
         }
     }
-    
-    func getStats() -> NSString
-    {
+
+    func getStats() -> NSString {
         var description = ""
-        
-        if let date = date
-        {
+
+        if let date = date {
             description += "Date: \(date) \n"
         }
-        if let measurement = measurement
-        {
+        if let measurement = measurement {
             description += "Measurement: \(measurement)cm \n"
         }
-        if let weight = weight
-        {
+        if let weight = weight {
             description += "Weight: \(weight)kg \n"
         }
-        if let bodyFat = bodyFat
-        {
+        if let bodyFat = bodyFat {
             description += "Body fat: \(bodyFat)% \n"
         }
-        
+
         return description as NSString
     }
 }

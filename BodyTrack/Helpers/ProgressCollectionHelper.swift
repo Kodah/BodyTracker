@@ -8,16 +8,26 @@
 
 import Foundation
 
-
-extension ProgressCollection
-{
-    func latestProgressPoint() -> ProgressPoint?
-    {
-        let pointsArray : Array<ProgressPoint> = Array(progressPoints) as! Array<ProgressPoint>
+extension ProgressCollection {
+    
+    static func GetFirstProgressCollectionIn(_ context: NSManagedObjectContext,
+                                             _ completion: (ProgressCollection) -> Void) {
         
-        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressCollection")
+        do {
+            let progressCollectionArray: [ProgressCollection] =
+                try (context.fetch(fetchRequest) as? [ProgressCollection])!
+            if let firstProgressCollection = progressCollectionArray.first {
+                completion(firstProgressCollection)
+            }
+        } catch {}
+    }
+    
+    func latestProgressPoint() -> ProgressPoint? {
+        guard let pointsArray = Array(progressPoints) as? [ProgressPoint] else {
+            return nil
+        }
         _ = pointsArray.sorted(by: {$0.date.compare($1.date) == ComparisonResult.orderedDescending})
-        
         return pointsArray.first
     }
 }

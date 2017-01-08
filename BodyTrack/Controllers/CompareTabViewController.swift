@@ -10,6 +10,6 @@ import UIKit
 
 class CompareTabViewController: UITabBarController {
 
-    var progressPointsToCompare : ProgressPointsToCompare?
-    
+    var progressPointsToCompare: ProgressPointsToCompare?
+
 }
