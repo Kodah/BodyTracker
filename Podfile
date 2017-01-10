@@ -1,3 +1,5 @@
+use_frameworks!
+
 target 'BodyTrack' do
 
 pod 'ECSlidingViewController', '~> 2.0.3'

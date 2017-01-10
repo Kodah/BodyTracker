@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Color_Picker_for_iOS
+
 
 class EditProgressCollectionViewController: UIViewController, UITextFieldDelegate {
 

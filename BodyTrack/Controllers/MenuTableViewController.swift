@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import ECSlidingViewController
+
 
 protocol MenuTableViewControllerDelegate: class {
     func initiateNewProgressCollection()

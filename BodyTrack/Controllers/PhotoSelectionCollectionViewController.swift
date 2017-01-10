@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import ECSlidingViewController
 
 enum ActionSheetButton: Int {
     case camera = 1
