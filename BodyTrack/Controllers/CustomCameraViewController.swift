@@ -21,9 +21,11 @@ class CustomCameraViewController: UIViewController {
     @IBOutlet weak var controlView: UIView!
     @IBOutlet var photoTakenView: UIView!
     @IBOutlet weak var camView: UIView!
+    @IBOutlet weak var outlineImageView: UIImageView!
 
     weak var delegate: CustomCameraViewControllerDelegate?
     var finalImage: UIImage?
+    var overlayImage: UIImage?
     let captureSession = AVCaptureSession()
     let stillImageOutput = AVCaptureStillImageOutput()
     var captureDeviceBack: AVCaptureDevice?
@@ -56,7 +58,13 @@ class CustomCameraViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if let overlayImg = overlayImage {
+            outlineImageView.image = UIImage(cgImage: overlayImg.cgImage!,
+                                             scale: overlayImg.scale,
+                                             orientation: .upMirrored)
+        }
+        
         navigationController?.setNavigationBarHidden(true, animated: false)
 
         captureSession.sessionPreset = AVCaptureSessionPresetPhoto

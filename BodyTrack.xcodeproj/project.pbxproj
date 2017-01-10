@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F6076051E24226E006FD504 /* ProgressCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6076041E24226E006FD504 /* ProgressCollectionTests.swift */; };
 		0FD5628A1E08448300158935 /* CustomCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD562891E08448300158935 /* CustomCameraViewController.swift */; };
 		1D5E10B7D5EC72DEB08B2B89 /* libPods-BodyTrack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44119826BA0C336DA7D406DF /* libPods-BodyTrack.a */; };
 		7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F171B2CECD4002F443A /* AppDelegate.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F6076041E24226E006FD504 /* ProgressCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressCollectionTests.swift; sourceTree = "<group>"; };
 		0FD562891E08448300158935 /* CustomCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCameraViewController.swift; path = Controllers/CustomCameraViewController.swift; sourceTree = "<group>"; };
 		1078676C70E32C4C7385636B /* Pods-BodyTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyTrack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BodyTrack/Pods-BodyTrack.debug.xcconfig"; sourceTree = "<group>"; };
 		3ACB2747C005CE6DA43C41BD /* Pods-BodyTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyTrackTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BodyTrackTests/Pods-BodyTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				7E115F301B2CECD4002F443A /* BodyTrackTests.swift */,
 				7E115F2E1B2CECD4002F443A /* Supporting Files */,
+				0F6076041E24226E006FD504 /* ProgressCollectionTests.swift */,
 			);
 			path = BodyTrackTests;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				C50D48773B9E9D0730D02825 /* [CP] Embed Pods Frameworks */,
 				CF1A11FBD54C4F06E327A008 /* [CP] Copy Pods Resources */,
 				0F0F43A81E227B13008AE32E /* Swiftlint */,
+				0FFDE3381E2509FF00BCA783 /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -359,6 +363,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		0FFDE3381E2509FF00BCA783 /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 54ae24c17dbf86f1b6b1ccdfd6489358ee80ab69 04d764c32c2c8e8a2d4c54555ae1d95b224e812e288d3ab2501ca52f7e1248ab";
 		};
 		2905617D006F3A8FE1A89119 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -485,6 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F6076051E24226E006FD504 /* ProgressCollectionTests.swift in Sources */,
 				7E115F311B2CECD4002F443A /* BodyTrackTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

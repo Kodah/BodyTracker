@@ -1,15 +1,22 @@
 PODS:
   - Color-Picker-for-iOS (2.0)
+  - Crashlytics (3.8.3):
+    - Fabric (~> 1.6.3)
   - ECSlidingViewController (2.0.3)
+  - Fabric (1.6.11)
 
 DEPENDENCIES:
   - Color-Picker-for-iOS (~> 2.0)
+  - Crashlytics
   - ECSlidingViewController (~> 2.0.3)
+  - Fabric
 
 SPEC CHECKSUMS:
   Color-Picker-for-iOS: 4f02cd927f9b1d9292831bcdbd0ab55cd8ace4f6
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
 
-PODFILE CHECKSUM: f9b77b2ee2283d652804930b9c6f66e11660e63a
+PODFILE CHECKSUM: 1639c836302442170ce184da23c598f1cd32e94d
 
 COCOAPODS: 1.1.1

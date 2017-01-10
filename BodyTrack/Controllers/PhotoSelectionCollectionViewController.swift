@@ -37,7 +37,6 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     let segueToCustomCamera = "ShowCustomCamera"
 
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
-    @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
 
     var progressCollection: ProgressCollection?
 //    var progressPoints = [ProgressPoint]()
@@ -48,6 +47,12 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     var selectMode: Bool = false
     var buttonForRightBarButton: UIButton?
     var progressPointsToCompare: ProgressPointsToCompare?
+    
+    var progressPoints = [ProgressPoint]() {
+        didSet {
+            syncImages()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,16 +115,17 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
         _ = progressCollection
         loadProgressPointsForProgressCollection(nil)
 
-        progressPointCollectionViewHelper.collectionView.performBatchUpdates({ () -> Void in
-            self.progressPointCollectionViewHelper.collectionView.reloadData()
+        if let collectionView = collectionView {
+            collectionView.performBatchUpdates({ () -> Void in
+                collectionView.reloadData()
             }, completion: { (_) -> Void in })
-
+        }
     }
     
     func sendProgressPointsToCollectionView () {
         if let proCol = progressCollection, let proPoints = Array(proCol.progressPoints) as? [ProgressPoint] {
             
-            progressPointCollectionViewHelper.progressPoints = proPoints.sorted {$0.0.date < $0.1.date}
+            progressPoints = proPoints.sorted {$0.0.date < $0.1.date}
         }
     }
 
@@ -137,14 +143,14 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     }
 
     func rightBarButtonTapped() {
-        if progressPointCollectionViewHelper.selectMode {
-            progressPointCollectionViewHelper.selectMode = false
+        if selectMode {
+            selectMode = false
             navigationItem.title = progressCollection?.name
             buttonForRightBarButton?.imageView?.tintColor = UIColor.white
             //deselect all cells
-            progressPointCollectionViewHelper.deselectAllCellsInCollectionView()
+            deselectAllCellsInCollectionView()
         } else {
-            progressPointCollectionViewHelper.selectMode = true
+            selectMode = true
             navigationItem.title = "Select Two Cells"
             navigationItem.rightBarButtonItem?.tintColor = UIColor.white
             buttonForRightBarButton?.imageView?.tintColor = UIColor.yellow
@@ -355,6 +361,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
         case segueToCustomCamera:
             if let customCameraViewController = segue.destination as? CustomCameraViewController {
                 customCameraViewController.delegate = self
+                customCameraViewController.overlayImage = progressCollection?.latestProgressPoint()?.getImage()
             }
         default:
             break
