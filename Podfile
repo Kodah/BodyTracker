@@ -1,12 +1,17 @@
-use_frameworks!
-
 target 'BodyTrack' do
+    use_frameworks!
 
-pod 'ECSlidingViewController', '~> 2.0.3'
-pod 'Color-Picker-for-iOS', '~> 2.0'
+    
+    pod 'ECSlidingViewController', '~> 2.0.3'
+    pod 'Color-Picker-for-iOS', '~> 2.0'
 
-end
-
-target 'BodyTrackTests' do
-
+    
+    target 'BodyTrackTests' do
+        inherit! :search_paths
+    end
+    
+    target 'BodyTrackUITests' do
+        inherit! :search_paths
+    end
+    
 end

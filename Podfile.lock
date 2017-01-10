@@ -1,5 +1,5 @@
 PODS:
-  - Color-Picker-for-iOS (2.0)
+  - Color-Picker-for-iOS (2.0.2)
   - ECSlidingViewController (2.0.3)
 
 DEPENDENCIES:
@@ -7,9 +7,9 @@ DEPENDENCIES:
   - ECSlidingViewController (~> 2.0.3)
 
 SPEC CHECKSUMS:
-  Color-Picker-for-iOS: 4f02cd927f9b1d9292831bcdbd0ab55cd8ace4f6
+  Color-Picker-for-iOS: 4980589b3e3cfe7198f227dd50be9adb02d8bc0b
   ECSlidingViewController: 6485c14f23b4487e9946535421ca8f111f86cc53
 
-PODFILE CHECKSUM: 64fdd33e41728fd7141a9bcc29866b1e4d3f1a39
+PODFILE CHECKSUM: 461a274db65cfe65aff75dee820848c75e16ca4b
 
 COCOAPODS: 1.1.1
