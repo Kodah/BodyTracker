@@ -75,21 +75,21 @@ extension UIImage {
             let rectForLeftImageStats = CGRect(
                 x: 10,
                 y: image1.size.height - 100,
-                width: progressPoint1.getStats().size(attributes: attributes).width,
+                width: progressPoint1.description.size(attributes: attributes).width,
                 height: 100
 
             )
 
-            progressPoint1.getStats().draw(in: rectForLeftImageStats, withAttributes: attributes)
+            progressPoint1.description.draw(in: rectForLeftImageStats, withAttributes: attributes)
 
             let rectForRightImageStats = CGRect(
                 x: image2.size.width + 10,
                 y: image2.size.height - 100,
-                width: progressPoint2.getStats().size(attributes: attributes).width,
+                width: progressPoint2.description.size(attributes: attributes).width,
                 height: 100
             )
 
-            progressPoint2.getStats().draw(in: rectForRightImageStats, withAttributes:attributes)
+            progressPoint2.description.draw(in: rectForRightImageStats, withAttributes:attributes)
         }
 
         let finalImage = UIGraphicsGetImageFromCurrentImageContext()

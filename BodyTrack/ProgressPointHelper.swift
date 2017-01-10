@@ -34,10 +34,10 @@ extension ProgressPoint {
         }
         return nil
     }
-
-    func getStats() -> NSString {
+    
+    open override var description: String {
         var description = ""
-
+        
         if let date = date {
             description += "Date: \(date) \n"
         }
@@ -50,7 +50,7 @@ extension ProgressPoint {
         if let bodyFat = bodyFat {
             description += "Body fat: \(bodyFat)% \n"
         }
-
-        return description as NSString
+        
+        return description
     }
 }
