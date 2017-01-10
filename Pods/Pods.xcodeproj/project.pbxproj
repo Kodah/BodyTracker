@@ -7,43 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		001CE018E274B16E6E007AB08660D8B5 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = E895A86C96DF2D08D4D61E26FF4CCCC2 /* HRBrightnessCursor.m */; };
-		00E443C182B18069127C44C90395492E /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D633E55F4AE5C52CA553FE8E4CA6A82 /* ECSlidingViewController.m */; };
+		001CE018E274B16E6E007AB08660D8B5 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = E7195B8DBFCC4CB6D884F8ED120861EC /* HRBrightnessCursor.m */; };
+		00E443C182B18069127C44C90395492E /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6326D00875280B279F17C803BFA2BCFD /* ECSlidingViewController.m */; };
 		026F94EB25869D67D7287B7449418C5B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		04257969E3C94A6640E82C51FA539FEE /* ECSlidingViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 863080C106FFD302D08447094CB60575 /* ECSlidingViewController-dummy.m */; };
-		0C6D778032F53179DC4B56F440498B68 /* UIViewController+ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47222237D42C727DD2BD2B96861CBC98 /* UIViewController+ECSlidingViewController.m */; };
-		11B69DF4F439BD54C077D9ED79ED532A /* UIImage+CoreGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C44311D15A5E0936F6B134FA78C6F96 /* UIImage+CoreGraphics.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2483BFAB5600F39F74BF2E836C06B602 /* HRColorMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D76DB8F5E7CF6B343F8E3A22E5AC084 /* HRColorMapView.m */; };
-		275FA8A5C33D35324F093CAC4A4447E5 /* HRBrightnessCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A97D9815A5E4CDD654F919723F9A8A0 /* HRBrightnessCursor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3353666CED8075BB126EC6DC7CEBB321 /* HRHSVColorUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = DFF0701E53877D9EB7C7D848062ADDC1 /* HRHSVColorUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		04257969E3C94A6640E82C51FA539FEE /* ECSlidingViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DA9827CF968504B6BC5679B513B314 /* ECSlidingViewController-dummy.m */; };
+		0C6D778032F53179DC4B56F440498B68 /* UIViewController+ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1780207050E42361DDDC20576DAB45E1 /* UIViewController+ECSlidingViewController.m */; };
+		11B69DF4F439BD54C077D9ED79ED532A /* UIImage+CoreGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 89C5564BABCBB86C1EE14375A9B2AC5E /* UIImage+CoreGraphics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2483BFAB5600F39F74BF2E836C06B602 /* HRColorMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4D52F9C602325EED9F0B7791484F52 /* HRColorMapView.m */; };
+		275FA8A5C33D35324F093CAC4A4447E5 /* HRBrightnessCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B0BD562915F719CCAD161AFB21EBE4D /* HRBrightnessCursor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3353666CED8075BB126EC6DC7CEBB321 /* HRHSVColorUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = EA72DFBC2C860C20846A6D991F89D70A /* HRHSVColorUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AAFF9705586E9DA9ECD5AE685F8FB28 /* Pods-BodyTrackTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2EE5F73634E9E6DF91AB2313D3252E52 /* Pods-BodyTrackTests-dummy.m */; };
-		3EB5591DB744B515CB32E003BACAD07A /* HRColorInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2CCF6D235A467AD13CA9327528187 /* HRColorInfoView.m */; };
-		4C1C480A1DE477ACE7A4A10EA8573A57 /* HRColorPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C7AEE8B7AE09E29829947F55BE717A5 /* HRColorPickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		572209CC1D07596191F8F796473BCA1C /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = EDB65AD894BF49530AEB509BB56189E7 /* ECSlidingInteractiveTransition.m */; };
+		3EB5591DB744B515CB32E003BACAD07A /* HRColorInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CDB483776C1A542D0593968F01AC80E /* HRColorInfoView.m */; };
+		4C1C480A1DE477ACE7A4A10EA8573A57 /* HRColorPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F3C1902162ACDC914DE4BC051495106 /* HRColorPickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		572209CC1D07596191F8F796473BCA1C /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = D64537CF980F74A1B27E9A3DFFB56A3A /* ECSlidingInteractiveTransition.m */; };
 		60B3A1E8573DD832F389894393293004 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		61C6D5DD82CB7A9728A0CFB60ADEED76 /* HRColorMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = F19CE20A8DF9E9C272B36AB626F6155B /* HRColorMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6DCF6D758A9AACCA4046BE7B0E855C70 /* Color-Picker-for-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2AC257C26555A8FBF97747FAA3EE56 /* Color-Picker-for-iOS-dummy.m */; };
-		7369A4350C26B6D184D0A77572378A9D /* HRColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB6BD786C02C0476CB7C559B8152544 /* HRColorPickerView.m */; };
-		7C3CD9C3541F55F7CDCDB5C7B919C74A /* HRColorInfoView.h in Headers */ = {isa = PBXBuildFile; fileRef = 31B4DF71F1F1D12925FE2A86C59392C9 /* HRColorInfoView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F3A2CBC131FC82BB3B839763E458464 /* ECSlidingAnimationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 38856D2043B96420E1C8606DC8F6B9E9 /* ECSlidingAnimationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		86664B02578B4978B587D194FEB48926 /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EECBC33F544D2F1CD278ADF5F0989F /* HRColorCursor.m */; };
-		873C3967C51F24DCAA41D56BB98AF5C7 /* ECSlidingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A471E72D76E289AC51C0D5AA6C18268F /* ECSlidingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		89081D96B45A88C13D4903DC81AF7456 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 9943F579F6187E81A273080561760F0F /* ECPercentDrivenInteractiveTransition.m */; };
-		8C56BDE167A7CA16BA8EEF4DA98B3C5C /* HRHSVColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AA3D5DC1F85BD563BB13CF03F38BECBD /* HRHSVColorUtil.m */; };
-		968B6596F10E6BB7D411153F2DDA54B5 /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8871907DFFED346A9380D2ED679CFFB0 /* ECSlidingSegue.m */; };
-		9AB53B08B9F78F6BCEB27E92CA9A4CBB /* ECSlidingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FE527EBBCB801607EBD9CAAB24818CC /* ECSlidingConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B678BD26B6FB6D60E7B4382F0385F270 /* HRBrightnessSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B20FB08E8738DEA3A0BC97CE2081C707 /* HRBrightnessSlider.m */; };
-		B9CDE30C88938E380047B1DF3F26598E /* ECSlidingInteractiveTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 4100FFA3832C07B5AAAA86A395754E52 /* ECSlidingInteractiveTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B9E45D5B8A02EBBE5951FBEC8A1DCC44 /* HRBrightnessSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 2868CE3DE21F34D92DB0FFF6B328BE04 /* HRBrightnessSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C40C2D27B028D43368344112D5C6A4EE /* HRColorCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = BEFCAD1D4F4A12FF237861579E9EEBD1 /* HRColorCursor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61C6D5DD82CB7A9728A0CFB60ADEED76 /* HRColorMapView.h in Headers */ = {isa = PBXBuildFile; fileRef = D89C03D0C5F7F2657AA6BBC9459F0425 /* HRColorMapView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6DCF6D758A9AACCA4046BE7B0E855C70 /* Color-Picker-for-iOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F4A36850A8F844DA29F9FC22F273AC /* Color-Picker-for-iOS-dummy.m */; };
+		7369A4350C26B6D184D0A77572378A9D /* HRColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8072CF2CF84B8BBC32FDFAD992C59E2F /* HRColorPickerView.m */; };
+		7C3CD9C3541F55F7CDCDB5C7B919C74A /* HRColorInfoView.h in Headers */ = {isa = PBXBuildFile; fileRef = D0926DE9997E6734C8DF6B0D379463AC /* HRColorInfoView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7F3A2CBC131FC82BB3B839763E458464 /* ECSlidingAnimationController.h in Headers */ = {isa = PBXBuildFile; fileRef = CCC7CB194DB13D462CBFFE94A98E1227 /* ECSlidingAnimationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86664B02578B4978B587D194FEB48926 /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E39547EF8B1CCE8A268DF3C49FCF383 /* HRColorCursor.m */; };
+		873C3967C51F24DCAA41D56BB98AF5C7 /* ECSlidingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 015E4C566DDE819620BB59BE37CD266F /* ECSlidingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		89081D96B45A88C13D4903DC81AF7456 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AA831D821BA1C8814973BE185177FA7B /* ECPercentDrivenInteractiveTransition.m */; };
+		8C56BDE167A7CA16BA8EEF4DA98B3C5C /* HRHSVColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = EE16305F462B44952CD47DC42B4E3574 /* HRHSVColorUtil.m */; };
+		968B6596F10E6BB7D411153F2DDA54B5 /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 59D0A4686F59619A4E99F8F0AFCFB3FB /* ECSlidingSegue.m */; };
+		9AB53B08B9F78F6BCEB27E92CA9A4CBB /* ECSlidingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D12E1EEA3478A05C37989B13BFABE4B /* ECSlidingConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B678BD26B6FB6D60E7B4382F0385F270 /* HRBrightnessSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 34D17B867D99D792CC479A4ADE16D79E /* HRBrightnessSlider.m */; };
+		B9CDE30C88938E380047B1DF3F26598E /* ECSlidingInteractiveTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E067A71F8CDC57602546988DA3D7350 /* ECSlidingInteractiveTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B9E45D5B8A02EBBE5951FBEC8A1DCC44 /* HRBrightnessSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = F9824C4F5B8E4225AE030E426615DB95 /* HRBrightnessSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C40C2D27B028D43368344112D5C6A4EE /* HRColorCursor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B97A9F55164F076539D264C480F2519 /* HRColorCursor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C452949C50C66535D41D16E6A779348A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		C50C2D1A8814B8FAFAAE3C0A5F373AD0 /* UIImage+CoreGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD0E1E807D533B8D783366787E03FCF /* UIImage+CoreGraphics.m */; };
+		C50C2D1A8814B8FAFAAE3C0A5F373AD0 /* UIImage+CoreGraphics.m in Sources */ = {isa = PBXBuildFile; fileRef = 31190431D9C4525829E124276105CEBB /* UIImage+CoreGraphics.m */; };
 		CD3702FD19029B3F84218850BDDB1F09 /* Pods-BodyTrack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FE24D764938DCA0368CB03DF52EE255A /* Pods-BodyTrack-dummy.m */; };
-		DE012E6BB5B7386D052CF3DAA83350C6 /* UIViewController+ECSlidingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 70D5E135D2F853CD492F925442E56554 /* UIViewController+ECSlidingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DE63F2C9384437A0214162A2F60C4806 /* ECSlidingSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FC04D7E551FC76808C4442B2110FCCC /* ECSlidingSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EFF49AA820D604CC6F085F1E2EB0C1D8 /* ECPercentDrivenInteractiveTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 41DDC097A532E33D35BA5035516750F7 /* ECPercentDrivenInteractiveTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE012E6BB5B7386D052CF3DAA83350C6 /* UIViewController+ECSlidingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F43BE97AD2B28D842FE975EAF1B6371C /* UIViewController+ECSlidingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE63F2C9384437A0214162A2F60C4806 /* ECSlidingSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 35E798236D182D698473FDAE6A5AD01D /* ECSlidingSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EFF49AA820D604CC6F085F1E2EB0C1D8 /* ECPercentDrivenInteractiveTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = AF83FF3B0269ADD081E4B3D37B134332 /* ECPercentDrivenInteractiveTransition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA918F7E009AD4FC4B2665E498284CC2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		FC5CC39CB93E485C9940A23B9FF0E48D /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56CF6D3ADD1ADF72221FD861589A5A59 /* ECSlidingAnimationController.m */; };
+		FC5CC39CB93E485C9940A23B9FF0E48D /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815098AE2D10E0F957052DC6A3294DBB /* ECSlidingAnimationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,71 +64,60 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0337580867C608FDC6705E95064DEA31 /* Color-Picker-for-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Color-Picker-for-iOS-prefix.pch"; sourceTree = "<group>"; };
+		015E4C566DDE819620BB59BE37CD266F /* ECSlidingViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingViewController.h; path = ECSlidingViewController/ECSlidingViewController.h; sourceTree = "<group>"; };
 		097A60A8F16BCFC2580A4E84293B9A58 /* Pods-BodyTrackTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BodyTrackTests-resources.sh"; sourceTree = "<group>"; };
-		0A97D9815A5E4CDD654F919723F9A8A0 /* HRBrightnessCursor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRBrightnessCursor.h; path = ColorPicker/HRBrightnessCursor.h; sourceTree = "<group>"; };
-		0DBE1B8DCDF94767F15C7D9D40020029 /* CLSReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSReport.h; path = iOS/Crashlytics.framework/Headers/CLSReport.h; sourceTree = "<group>"; };
-		1AC5981B33DBD80083661713687C3458 /* CLSAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSAttributes.h; path = iOS/Crashlytics.framework/Headers/CLSAttributes.h; sourceTree = "<group>"; };
-		1F2226F24C0CE77038E106FCB1F87B8A /* ANSCompatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ANSCompatibility.h; path = iOS/Crashlytics.framework/Headers/ANSCompatibility.h; sourceTree = "<group>"; };
+		0B97A9F55164F076539D264C480F2519 /* HRColorCursor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRColorCursor.h; path = ColorPicker/HRColorCursor.h; sourceTree = "<group>"; };
+		1780207050E42361DDDC20576DAB45E1 /* UIViewController+ECSlidingViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+ECSlidingViewController.m"; path = "ECSlidingViewController/UIViewController+ECSlidingViewController.m"; sourceTree = "<group>"; };
 		217B67907894501C417F557B94B01674 /* libPods-BodyTrack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-BodyTrack.a"; path = "libPods-BodyTrack.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28285526D0FA474B14E78CD027B452FC /* Pods-BodyTrackTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BodyTrackTests-frameworks.sh"; sourceTree = "<group>"; };
-		2868CE3DE21F34D92DB0FFF6B328BE04 /* HRBrightnessSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRBrightnessSlider.h; path = ColorPicker/HRBrightnessSlider.h; sourceTree = "<group>"; };
-		2A5E2F9245299B13E90FA0AE91848732 /* Fabric.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Fabric.h; path = iOS/Fabric.framework/Headers/Fabric.h; sourceTree = "<group>"; };
 		2EE5F73634E9E6DF91AB2313D3252E52 /* Pods-BodyTrackTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BodyTrackTests-dummy.m"; sourceTree = "<group>"; };
-		31B4DF71F1F1D12925FE2A86C59392C9 /* HRColorInfoView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRColorInfoView.h; path = ColorPicker/HRColorInfoView.h; sourceTree = "<group>"; };
-		38856D2043B96420E1C8606DC8F6B9E9 /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingAnimationController.h; path = ECSlidingViewController/ECSlidingAnimationController.h; sourceTree = "<group>"; };
-		38F32F8826BC73EC53A76AB5A3D4A95A /* CLSStackFrame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSStackFrame.h; path = iOS/Crashlytics.framework/Headers/CLSStackFrame.h; sourceTree = "<group>"; };
-		4100FFA3832C07B5AAAA86A395754E52 /* ECSlidingInteractiveTransition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingInteractiveTransition.h; path = ECSlidingViewController/ECSlidingInteractiveTransition.h; sourceTree = "<group>"; };
-		41DDC097A532E33D35BA5035516750F7 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECPercentDrivenInteractiveTransition.h; path = ECSlidingViewController/ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
-		46A17D99BD30D003130E64A6771CF735 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = iOS/Crashlytics.framework; sourceTree = "<group>"; };
-		47222237D42C727DD2BD2B96861CBC98 /* UIViewController+ECSlidingViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+ECSlidingViewController.m"; path = "ECSlidingViewController/UIViewController+ECSlidingViewController.m"; sourceTree = "<group>"; };
-		4C7AEE8B7AE09E29829947F55BE717A5 /* HRColorPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRColorPickerView.h; path = ColorPicker/HRColorPickerView.h; sourceTree = "<group>"; };
+		31190431D9C4525829E124276105CEBB /* UIImage+CoreGraphics.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+CoreGraphics.m"; path = "ColorPicker/UIImage+CoreGraphics.m"; sourceTree = "<group>"; };
+		34D17B867D99D792CC479A4ADE16D79E /* HRBrightnessSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRBrightnessSlider.m; path = ColorPicker/HRBrightnessSlider.m; sourceTree = "<group>"; };
+		35E798236D182D698473FDAE6A5AD01D /* ECSlidingSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingSegue.h; path = ECSlidingViewController/ECSlidingSegue.h; sourceTree = "<group>"; };
+		3F3C1902162ACDC914DE4BC051495106 /* HRColorPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRColorPickerView.h; path = ColorPicker/HRColorPickerView.h; sourceTree = "<group>"; };
 		4CA7BCCC836021121706D70FA0D54CE4 /* Pods-BodyTrack-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BodyTrack-resources.sh"; sourceTree = "<group>"; };
-		4D633E55F4AE5C52CA553FE8E4CA6A82 /* ECSlidingViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECSlidingViewController.m; path = ECSlidingViewController/ECSlidingViewController.m; sourceTree = "<group>"; };
-		4FC04D7E551FC76808C4442B2110FCCC /* ECSlidingSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingSegue.h; path = ECSlidingViewController/ECSlidingSegue.h; sourceTree = "<group>"; };
-		4FE527EBBCB801607EBD9CAAB24818CC /* ECSlidingConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingConstants.h; path = ECSlidingViewController/ECSlidingConstants.h; sourceTree = "<group>"; };
-		53A5D7BE8B613464ED9FF535895D6B13 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = iOS/Fabric.framework; sourceTree = "<group>"; };
-		56CF6D3ADD1ADF72221FD861589A5A59 /* ECSlidingAnimationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECSlidingAnimationController.m; path = ECSlidingViewController/ECSlidingAnimationController.m; sourceTree = "<group>"; };
-		5BF2CCF6D235A467AD13CA9327528187 /* HRColorInfoView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRColorInfoView.m; path = ColorPicker/HRColorInfoView.m; sourceTree = "<group>"; };
-		5C44311D15A5E0936F6B134FA78C6F96 /* UIImage+CoreGraphics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+CoreGraphics.h"; path = "ColorPicker/UIImage+CoreGraphics.h"; sourceTree = "<group>"; };
-		5DE235EE86856A9022ABE53174E10D5E /* Color-Picker-for-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Color-Picker-for-iOS.xcconfig"; sourceTree = "<group>"; };
-		5E2AC257C26555A8FBF97747FAA3EE56 /* Color-Picker-for-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Color-Picker-for-iOS-dummy.m"; sourceTree = "<group>"; };
+		59D0A4686F59619A4E99F8F0AFCFB3FB /* ECSlidingSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECSlidingSegue.m; path = ECSlidingViewController/ECSlidingSegue.m; sourceTree = "<group>"; };
+		5D5A333D801F127DD9EB6B826C77888B /* Color-Picker-for-iOS.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Color-Picker-for-iOS.xcconfig"; sourceTree = "<group>"; };
+		5E067A71F8CDC57602546988DA3D7350 /* ECSlidingInteractiveTransition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingInteractiveTransition.h; path = ECSlidingViewController/ECSlidingInteractiveTransition.h; sourceTree = "<group>"; };
 		5FB9E78D6BEFDA39AA1DC199C2D7338E /* Pods-BodyTrackTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BodyTrackTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		60DA9827CF968504B6BC5679B513B314 /* ECSlidingViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ECSlidingViewController-dummy.m"; sourceTree = "<group>"; };
+		61F4A36850A8F844DA29F9FC22F273AC /* Color-Picker-for-iOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Color-Picker-for-iOS-dummy.m"; sourceTree = "<group>"; };
+		6326D00875280B279F17C803BFA2BCFD /* ECSlidingViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECSlidingViewController.m; path = ECSlidingViewController/ECSlidingViewController.m; sourceTree = "<group>"; };
 		6A99D70E058F06E057B86677D6B5595D /* Pods-BodyTrackTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BodyTrackTests.release.xcconfig"; sourceTree = "<group>"; };
-		70D5E135D2F853CD492F925442E56554 /* UIViewController+ECSlidingViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+ECSlidingViewController.h"; path = "ECSlidingViewController/UIViewController+ECSlidingViewController.h"; sourceTree = "<group>"; };
 		73094B01230EB5DCEC6BE591CFAF28C3 /* Pods-BodyTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BodyTrack.debug.xcconfig"; sourceTree = "<group>"; };
+		74B91B50997C7842D1677317F89BDDEA /* ECSlidingViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ECSlidingViewController.xcconfig; sourceTree = "<group>"; };
 		74C0F186BC0AE283398EF02E8C01800A /* libECSlidingViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libECSlidingViewController.a; path = libECSlidingViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BF54F939098AE58C5A4DAED398E2580 /* Answers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Answers.h; path = iOS/Crashlytics.framework/Headers/Answers.h; sourceTree = "<group>"; };
-		7D76DB8F5E7CF6B343F8E3A22E5AC084 /* HRColorMapView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRColorMapView.m; path = ColorPicker/HRColorMapView.m; sourceTree = "<group>"; };
-		7DF6FC1ACF9D4FDD798ADB812F0735D6 /* ECSlidingViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ECSlidingViewController-prefix.pch"; sourceTree = "<group>"; };
-		83313C2B5C1E4BD3F27F85A1BE590C3E /* CLSLogging.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CLSLogging.h; path = iOS/Crashlytics.framework/Headers/CLSLogging.h; sourceTree = "<group>"; };
-		863080C106FFD302D08447094CB60575 /* ECSlidingViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ECSlidingViewController-dummy.m"; sourceTree = "<group>"; };
-		8871907DFFED346A9380D2ED679CFFB0 /* ECSlidingSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECSlidingSegue.m; path = ECSlidingViewController/ECSlidingSegue.m; sourceTree = "<group>"; };
+		7B0BD562915F719CCAD161AFB21EBE4D /* HRBrightnessCursor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRBrightnessCursor.h; path = ColorPicker/HRBrightnessCursor.h; sourceTree = "<group>"; };
+		8072CF2CF84B8BBC32FDFAD992C59E2F /* HRColorPickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRColorPickerView.m; path = ColorPicker/HRColorPickerView.m; sourceTree = "<group>"; };
+		815098AE2D10E0F957052DC6A3294DBB /* ECSlidingAnimationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECSlidingAnimationController.m; path = ECSlidingViewController/ECSlidingAnimationController.m; sourceTree = "<group>"; };
+		89C5564BABCBB86C1EE14375A9B2AC5E /* UIImage+CoreGraphics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+CoreGraphics.h"; path = "ColorPicker/UIImage+CoreGraphics.h"; sourceTree = "<group>"; };
+		8D12E1EEA3478A05C37989B13BFABE4B /* ECSlidingConstants.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingConstants.h; path = ECSlidingViewController/ECSlidingConstants.h; sourceTree = "<group>"; };
+		8D4D52F9C602325EED9F0B7791484F52 /* HRColorMapView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRColorMapView.m; path = ColorPicker/HRColorMapView.m; sourceTree = "<group>"; };
+		8E39547EF8B1CCE8A268DF3C49FCF383 /* HRColorCursor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRColorCursor.m; path = ColorPicker/HRColorCursor.m; sourceTree = "<group>"; };
 		9236726BFE7F156EAB297817BBA6C4B0 /* Pods-BodyTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BodyTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
-		92EECBC33F544D2F1CD278ADF5F0989F /* HRColorCursor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRColorCursor.m; path = ColorPicker/HRColorCursor.m; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		97410DABD6A4CEF931DE7A3318B34F96 /* Pods-BodyTrack-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-BodyTrack-acknowledgements.markdown"; sourceTree = "<group>"; };
-		9943F579F6187E81A273080561760F0F /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECPercentDrivenInteractiveTransition.m; path = ECSlidingViewController/ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
-		9CD0E1E807D533B8D783366787E03FCF /* UIImage+CoreGraphics.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+CoreGraphics.m"; path = "ColorPicker/UIImage+CoreGraphics.m"; sourceTree = "<group>"; };
-		A471E72D76E289AC51C0D5AA6C18268F /* ECSlidingViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingViewController.h; path = ECSlidingViewController/ECSlidingViewController.h; sourceTree = "<group>"; };
-		AA3D5DC1F85BD563BB13CF03F38BECBD /* HRHSVColorUtil.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRHSVColorUtil.m; path = ColorPicker/HRHSVColorUtil.m; sourceTree = "<group>"; };
-		B05CD3C4B92C2DA8C5183304A2FA0D58 /* Crashlytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Crashlytics.h; path = iOS/Crashlytics.framework/Headers/Crashlytics.h; sourceTree = "<group>"; };
-		B20FB08E8738DEA3A0BC97CE2081C707 /* HRBrightnessSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRBrightnessSlider.m; path = ColorPicker/HRBrightnessSlider.m; sourceTree = "<group>"; };
+		9CDB483776C1A542D0593968F01AC80E /* HRColorInfoView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRColorInfoView.m; path = ColorPicker/HRColorInfoView.m; sourceTree = "<group>"; };
+		AA831D821BA1C8814973BE185177FA7B /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECPercentDrivenInteractiveTransition.m; path = ECSlidingViewController/ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
+		AB867FA4D1726E44FA4035063AC86579 /* ECSlidingViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ECSlidingViewController-prefix.pch"; sourceTree = "<group>"; };
+		AF83FF3B0269ADD081E4B3D37B134332 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECPercentDrivenInteractiveTransition.h; path = ECSlidingViewController/ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
+		B23723523A76F31C7E0937334B0021C0 /* Color-Picker-for-iOS-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Color-Picker-for-iOS-prefix.pch"; sourceTree = "<group>"; };
 		B2D125AF0A6BB85E6AD8F76D5F6505AE /* Pods-BodyTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BodyTrack.release.xcconfig"; sourceTree = "<group>"; };
-		BEFCAD1D4F4A12FF237861579E9EEBD1 /* HRColorCursor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRColorCursor.h; path = ColorPicker/HRColorCursor.h; sourceTree = "<group>"; };
-		CAB6BD786C02C0476CB7C559B8152544 /* HRColorPickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRColorPickerView.m; path = ColorPicker/HRColorPickerView.m; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		D25429A7BABBA9789E1E2C41CF0DFF49 /* ECSlidingViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ECSlidingViewController.xcconfig; sourceTree = "<group>"; };
+		CCC7CB194DB13D462CBFFE94A98E1227 /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ECSlidingAnimationController.h; path = ECSlidingViewController/ECSlidingAnimationController.h; sourceTree = "<group>"; };
+		D0926DE9997E6734C8DF6B0D379463AC /* HRColorInfoView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRColorInfoView.h; path = ColorPicker/HRColorInfoView.h; sourceTree = "<group>"; };
+		D64537CF980F74A1B27E9A3DFFB56A3A /* ECSlidingInteractiveTransition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECSlidingInteractiveTransition.m; path = ECSlidingViewController/ECSlidingInteractiveTransition.m; sourceTree = "<group>"; };
 		D698D00DB34061CFAAB7AC6E25FD591F /* Pods-BodyTrackTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BodyTrackTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		D89C03D0C5F7F2657AA6BBC9459F0425 /* HRColorMapView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRColorMapView.h; path = ColorPicker/HRColorMapView.h; sourceTree = "<group>"; };
 		DF73EB4BDF949DF35F47BC17BE05B267 /* libPods-BodyTrackTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-BodyTrackTests.a"; path = "libPods-BodyTrackTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF76BBB42E52E7051B78A4E6205A5732 /* Pods-BodyTrack-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BodyTrack-frameworks.sh"; sourceTree = "<group>"; };
-		DFF0701E53877D9EB7C7D848062ADDC1 /* HRHSVColorUtil.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRHSVColorUtil.h; path = ColorPicker/HRHSVColorUtil.h; sourceTree = "<group>"; };
-		E1C90F8A52BDBDFD4B916F61D4D3CDD7 /* FABAttributes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FABAttributes.h; path = iOS/Fabric.framework/Headers/FABAttributes.h; sourceTree = "<group>"; };
+		E7195B8DBFCC4CB6D884F8ED120861EC /* HRBrightnessCursor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRBrightnessCursor.m; path = ColorPicker/HRBrightnessCursor.m; sourceTree = "<group>"; };
 		E85620229595B77D3466535C6CFD404B /* Pods-BodyTrack-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-BodyTrack-acknowledgements.plist"; sourceTree = "<group>"; };
-		E895A86C96DF2D08D4D61E26FF4CCCC2 /* HRBrightnessCursor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRBrightnessCursor.m; path = ColorPicker/HRBrightnessCursor.m; sourceTree = "<group>"; };
-		EDB65AD894BF49530AEB509BB56189E7 /* ECSlidingInteractiveTransition.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ECSlidingInteractiveTransition.m; path = ECSlidingViewController/ECSlidingInteractiveTransition.m; sourceTree = "<group>"; };
+		EA72DFBC2C860C20846A6D991F89D70A /* HRHSVColorUtil.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRHSVColorUtil.h; path = ColorPicker/HRHSVColorUtil.h; sourceTree = "<group>"; };
+		EE16305F462B44952CD47DC42B4E3574 /* HRHSVColorUtil.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HRHSVColorUtil.m; path = ColorPicker/HRHSVColorUtil.m; sourceTree = "<group>"; };
 		EE9A4191DF181421AD27359BE4C78604 /* libColor-Picker-for-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libColor-Picker-for-iOS.a"; path = "libColor-Picker-for-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F19CE20A8DF9E9C272B36AB626F6155B /* HRColorMapView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRColorMapView.h; path = ColorPicker/HRColorMapView.h; sourceTree = "<group>"; };
+		F43BE97AD2B28D842FE975EAF1B6371C /* UIViewController+ECSlidingViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+ECSlidingViewController.h"; path = "ECSlidingViewController/UIViewController+ECSlidingViewController.h"; sourceTree = "<group>"; };
+		F9824C4F5B8E4225AE030E426615DB95 /* HRBrightnessSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HRBrightnessSlider.h; path = ColorPicker/HRBrightnessSlider.h; sourceTree = "<group>"; };
 		FE24D764938DCA0368CB03DF52EE255A /* Pods-BodyTrack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-BodyTrack-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,28 +157,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0750062DE2A845189D327F99366C2377 /* ECSlidingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				41DDC097A532E33D35BA5035516750F7 /* ECPercentDrivenInteractiveTransition.h */,
-				9943F579F6187E81A273080561760F0F /* ECPercentDrivenInteractiveTransition.m */,
-				38856D2043B96420E1C8606DC8F6B9E9 /* ECSlidingAnimationController.h */,
-				56CF6D3ADD1ADF72221FD861589A5A59 /* ECSlidingAnimationController.m */,
-				4FE527EBBCB801607EBD9CAAB24818CC /* ECSlidingConstants.h */,
-				4100FFA3832C07B5AAAA86A395754E52 /* ECSlidingInteractiveTransition.h */,
-				EDB65AD894BF49530AEB509BB56189E7 /* ECSlidingInteractiveTransition.m */,
-				4FC04D7E551FC76808C4442B2110FCCC /* ECSlidingSegue.h */,
-				8871907DFFED346A9380D2ED679CFFB0 /* ECSlidingSegue.m */,
-				A471E72D76E289AC51C0D5AA6C18268F /* ECSlidingViewController.h */,
-				4D633E55F4AE5C52CA553FE8E4CA6A82 /* ECSlidingViewController.m */,
-				70D5E135D2F853CD492F925442E56554 /* UIViewController+ECSlidingViewController.h */,
-				47222237D42C727DD2BD2B96861CBC98 /* UIViewController+ECSlidingViewController.m */,
-				A4A94C4B6F339E71033007F3E268E92F /* Support Files */,
-			);
-			name = ECSlidingViewController;
-			path = ECSlidingViewController;
-			sourceTree = "<group>";
-		};
 		0BDC59220C80256BF888D0C77DA5D293 /* Pods-BodyTrackTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,23 +172,26 @@
 			path = "Target Support Files/Pods-BodyTrackTests";
 			sourceTree = "<group>";
 		};
-		0FD3A0E622D2BC2C4EBDC7CF253957A8 /* Frameworks */ = {
+		4893329AAED447AC4C4F161FE94EE427 /* ECSlidingViewController */ = {
 			isa = PBXGroup;
 			children = (
-				53A5D7BE8B613464ED9FF535895D6B13 /* Fabric.framework */,
+				AF83FF3B0269ADD081E4B3D37B134332 /* ECPercentDrivenInteractiveTransition.h */,
+				AA831D821BA1C8814973BE185177FA7B /* ECPercentDrivenInteractiveTransition.m */,
+				CCC7CB194DB13D462CBFFE94A98E1227 /* ECSlidingAnimationController.h */,
+				815098AE2D10E0F957052DC6A3294DBB /* ECSlidingAnimationController.m */,
+				8D12E1EEA3478A05C37989B13BFABE4B /* ECSlidingConstants.h */,
+				5E067A71F8CDC57602546988DA3D7350 /* ECSlidingInteractiveTransition.h */,
+				D64537CF980F74A1B27E9A3DFFB56A3A /* ECSlidingInteractiveTransition.m */,
+				35E798236D182D698473FDAE6A5AD01D /* ECSlidingSegue.h */,
+				59D0A4686F59619A4E99F8F0AFCFB3FB /* ECSlidingSegue.m */,
+				015E4C566DDE819620BB59BE37CD266F /* ECSlidingViewController.h */,
+				6326D00875280B279F17C803BFA2BCFD /* ECSlidingViewController.m */,
+				F43BE97AD2B28D842FE975EAF1B6371C /* UIViewController+ECSlidingViewController.h */,
+				1780207050E42361DDDC20576DAB45E1 /* UIViewController+ECSlidingViewController.m */,
+				E13D3DEC904C2A6C5D9181BFEAC3E8DC /* Support Files */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		24F581378528BEA2BE50A6015129471D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				69E92CEAD50EAF98848EED8E3E772D61 /* Color-Picker-for-iOS */,
-				DAC2728653C4E6B755D67C7A09B41C9C /* Crashlytics */,
-				0750062DE2A845189D327F99366C2377 /* ECSlidingViewController */,
-				830681ECE5396F62F38B5F06FBCBE974 /* Fabric */,
-			);
-			name = Pods;
+			name = ECSlidingViewController;
+			path = ECSlidingViewController;
 			sourceTree = "<group>";
 		};
 		4E584864A28D70602AB450EF21772066 /* Targets Support Files */ = {
@@ -244,6 +214,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5B6519D8BCB48D6F61237B6A1B2C9AC3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				731EB7B7529018177E259CCD71F8BB6D /* Color-Picker-for-iOS */,
+				4893329AAED447AC4C4F161FE94EE427 /* ECSlidingViewController */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		62991247C80F5263300B69A8BAD8E92A /* Pods-BodyTrack */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,26 +238,26 @@
 			path = "Target Support Files/Pods-BodyTrack";
 			sourceTree = "<group>";
 		};
-		69E92CEAD50EAF98848EED8E3E772D61 /* Color-Picker-for-iOS */ = {
+		731EB7B7529018177E259CCD71F8BB6D /* Color-Picker-for-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				0A97D9815A5E4CDD654F919723F9A8A0 /* HRBrightnessCursor.h */,
-				E895A86C96DF2D08D4D61E26FF4CCCC2 /* HRBrightnessCursor.m */,
-				2868CE3DE21F34D92DB0FFF6B328BE04 /* HRBrightnessSlider.h */,
-				B20FB08E8738DEA3A0BC97CE2081C707 /* HRBrightnessSlider.m */,
-				BEFCAD1D4F4A12FF237861579E9EEBD1 /* HRColorCursor.h */,
-				92EECBC33F544D2F1CD278ADF5F0989F /* HRColorCursor.m */,
-				31B4DF71F1F1D12925FE2A86C59392C9 /* HRColorInfoView.h */,
-				5BF2CCF6D235A467AD13CA9327528187 /* HRColorInfoView.m */,
-				F19CE20A8DF9E9C272B36AB626F6155B /* HRColorMapView.h */,
-				7D76DB8F5E7CF6B343F8E3A22E5AC084 /* HRColorMapView.m */,
-				4C7AEE8B7AE09E29829947F55BE717A5 /* HRColorPickerView.h */,
-				CAB6BD786C02C0476CB7C559B8152544 /* HRColorPickerView.m */,
-				DFF0701E53877D9EB7C7D848062ADDC1 /* HRHSVColorUtil.h */,
-				AA3D5DC1F85BD563BB13CF03F38BECBD /* HRHSVColorUtil.m */,
-				5C44311D15A5E0936F6B134FA78C6F96 /* UIImage+CoreGraphics.h */,
-				9CD0E1E807D533B8D783366787E03FCF /* UIImage+CoreGraphics.m */,
-				FF499111AC325944AFAF75161DE1020D /* Support Files */,
+				7B0BD562915F719CCAD161AFB21EBE4D /* HRBrightnessCursor.h */,
+				E7195B8DBFCC4CB6D884F8ED120861EC /* HRBrightnessCursor.m */,
+				F9824C4F5B8E4225AE030E426615DB95 /* HRBrightnessSlider.h */,
+				34D17B867D99D792CC479A4ADE16D79E /* HRBrightnessSlider.m */,
+				0B97A9F55164F076539D264C480F2519 /* HRColorCursor.h */,
+				8E39547EF8B1CCE8A268DF3C49FCF383 /* HRColorCursor.m */,
+				D0926DE9997E6734C8DF6B0D379463AC /* HRColorInfoView.h */,
+				9CDB483776C1A542D0593968F01AC80E /* HRColorInfoView.m */,
+				D89C03D0C5F7F2657AA6BBC9459F0425 /* HRColorMapView.h */,
+				8D4D52F9C602325EED9F0B7791484F52 /* HRColorMapView.m */,
+				3F3C1902162ACDC914DE4BC051495106 /* HRColorPickerView.h */,
+				8072CF2CF84B8BBC32FDFAD992C59E2F /* HRColorPickerView.m */,
+				EA72DFBC2C860C20846A6D991F89D70A /* HRHSVColorUtil.h */,
+				EE16305F462B44952CD47DC42B4E3574 /* HRHSVColorUtil.m */,
+				89C5564BABCBB86C1EE14375A9B2AC5E /* UIImage+CoreGraphics.h */,
+				31190431D9C4525829E124276105CEBB /* UIImage+CoreGraphics.m */,
+				FBBC7E629F4F82D6F92F9EAB1342824B /* Support Files */,
 			);
 			name = "Color-Picker-for-iOS";
 			path = "Color-Picker-for-iOS";
@@ -297,40 +276,10 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				24F581378528BEA2BE50A6015129471D /* Pods */,
+				5B6519D8BCB48D6F61237B6A1B2C9AC3 /* Pods */,
 				4EE7F1A0D64EC5820F62B83813612EBF /* Products */,
 				4E584864A28D70602AB450EF21772066 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		830681ECE5396F62F38B5F06FBCBE974 /* Fabric */ = {
-			isa = PBXGroup;
-			children = (
-				E1C90F8A52BDBDFD4B916F61D4D3CDD7 /* FABAttributes.h */,
-				2A5E2F9245299B13E90FA0AE91848732 /* Fabric.h */,
-				0FD3A0E622D2BC2C4EBDC7CF253957A8 /* Frameworks */,
-			);
-			name = Fabric;
-			path = Fabric;
-			sourceTree = "<group>";
-		};
-		88006DFDE5650A432BF549AEA5AB5484 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				46A17D99BD30D003130E64A6771CF735 /* Crashlytics.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A4A94C4B6F339E71033007F3E268E92F /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				D25429A7BABBA9789E1E2C41CF0DFF49 /* ECSlidingViewController.xcconfig */,
-				863080C106FFD302D08447094CB60575 /* ECSlidingViewController-dummy.m */,
-				7DF6FC1ACF9D4FDD798ADB812F0735D6 /* ECSlidingViewController-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/ECSlidingViewController";
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -341,28 +290,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DAC2728653C4E6B755D67C7A09B41C9C /* Crashlytics */ = {
+		E13D3DEC904C2A6C5D9181BFEAC3E8DC /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1F2226F24C0CE77038E106FCB1F87B8A /* ANSCompatibility.h */,
-				7BF54F939098AE58C5A4DAED398E2580 /* Answers.h */,
-				1AC5981B33DBD80083661713687C3458 /* CLSAttributes.h */,
-				83313C2B5C1E4BD3F27F85A1BE590C3E /* CLSLogging.h */,
-				0DBE1B8DCDF94767F15C7D9D40020029 /* CLSReport.h */,
-				38F32F8826BC73EC53A76AB5A3D4A95A /* CLSStackFrame.h */,
-				B05CD3C4B92C2DA8C5183304A2FA0D58 /* Crashlytics.h */,
-				88006DFDE5650A432BF549AEA5AB5484 /* Frameworks */,
+				74B91B50997C7842D1677317F89BDDEA /* ECSlidingViewController.xcconfig */,
+				60DA9827CF968504B6BC5679B513B314 /* ECSlidingViewController-dummy.m */,
+				AB867FA4D1726E44FA4035063AC86579 /* ECSlidingViewController-prefix.pch */,
 			);
-			name = Crashlytics;
-			path = Crashlytics;
+			name = "Support Files";
+			path = "../Target Support Files/ECSlidingViewController";
 			sourceTree = "<group>";
 		};
-		FF499111AC325944AFAF75161DE1020D /* Support Files */ = {
+		FBBC7E629F4F82D6F92F9EAB1342824B /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				5DE235EE86856A9022ABE53174E10D5E /* Color-Picker-for-iOS.xcconfig */,
-				5E2AC257C26555A8FBF97747FAA3EE56 /* Color-Picker-for-iOS-dummy.m */,
-				0337580867C608FDC6705E95064DEA31 /* Color-Picker-for-iOS-prefix.pch */,
+				5D5A333D801F127DD9EB6B826C77888B /* Color-Picker-for-iOS.xcconfig */,
+				61F4A36850A8F844DA29F9FC22F273AC /* Color-Picker-for-iOS-dummy.m */,
+				B23723523A76F31C7E0937334B0021C0 /* Color-Picker-for-iOS-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Color-Picker-for-iOS";
@@ -590,7 +534,7 @@
 		};
 		0975BC817594761006FAB505CF305F7C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DE235EE86856A9022ABE53174E10D5E /* Color-Picker-for-iOS.xcconfig */;
+			baseConfigurationReference = 5D5A333D801F127DD9EB6B826C77888B /* Color-Picker-for-iOS.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -614,7 +558,7 @@
 		};
 		0F3190EFC8DD4CAB44C12685CB326183 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DE235EE86856A9022ABE53174E10D5E /* Color-Picker-for-iOS.xcconfig */;
+			baseConfigurationReference = 5D5A333D801F127DD9EB6B826C77888B /* Color-Picker-for-iOS.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -638,7 +582,7 @@
 		};
 		1435CE84CE41B61EF5B2B9B06C2D744C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D25429A7BABBA9789E1E2C41CF0DFF49 /* ECSlidingViewController.xcconfig */;
+			baseConfigurationReference = 74B91B50997C7842D1677317F89BDDEA /* ECSlidingViewController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -706,7 +650,7 @@
 		};
 		8A1E1F6568305139DC8E941E64F14027 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D25429A7BABBA9789E1E2C41CF0DFF49 /* ECSlidingViewController.xcconfig */;
+			baseConfigurationReference = 74B91B50997C7842D1677317F89BDDEA /* ECSlidingViewController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";

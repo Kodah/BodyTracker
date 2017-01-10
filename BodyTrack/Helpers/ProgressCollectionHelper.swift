@@ -27,6 +27,7 @@ extension ProgressCollection {
         guard let pointsArray = Array(progressPoints) as? [ProgressPoint] else {
             return nil
         }
-        return pointsArray.sorted( by: {$0.date.compare($1.date) == ComparisonResult.orderedDescending}).first
+        _ = pointsArray.sorted(by: {$0.date.compare($1.date) == ComparisonResult.orderedDescending})
+        return pointsArray.first
     }
 }

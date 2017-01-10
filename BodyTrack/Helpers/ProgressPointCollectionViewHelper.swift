@@ -8,39 +8,46 @@
 
 import UIKit
 
-private enum Identifiers: String {
-    case progressPointSegue = "showProgressPointId"
-    case reuseBody = "BodyCollectionViewCellId"
-    case reuseAdd = "AddCollectionViewId"
-}
+class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UICollectionViewDataSource,
+UICollectionViewDelegateFlowLayout {
+    let segueToCompareTabBar: String = "GoToCompareSegueId"
+    let reuseIdentifier = "Cell"
+    let progressPointSegueId = "showProgressPointId"
+    let bodyReuseIdentifier = "BodyCollectionViewCellId"
+    let addReuseIdentifier = "AddCollectionViewId"
+    var progressPoints = [ProgressPoint]() {
+        didSet {
+            syncImages()
+        }
+    }
+    var selectMode: Bool = false
+    var selectedProgressPoints = [ProgressPoint]()
+    var imageCache = [String: UIImage]()
+    let dateformatter = DateFormatter()
 
-var selectedProgressPoints = [ProgressPoint]()
-var imageCache = [String: UIImage]()
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var photoSelectionCollectionViewController: PhotoSelectionCollectionViewController!
 
-var dateformatter = DateFormatter() {
-    didSet {
+    private override init () {
         dateformatter.timeStyle = DateFormatter.Style.none
         dateformatter.dateStyle = DateFormatter.Style.short
         dateformatter.dateFormat = "dd MMM yyyy"
     }
-}
 
-extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLayout {
-
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(progressPoints.count)
         return progressPoints.count + 1
     }
 
-    override func collectionView(_ collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         if indexPath.row == progressPoints.count {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.reuseAdd.rawValue,
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addReuseIdentifier,
                                                           for: indexPath)
 
                 cell.layer.borderColor = UIColor.black.cgColor
@@ -51,9 +58,16 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
             let progressPoint: ProgressPoint = progressPoints[indexPath.row]
             let progressCollection = progressPoint.progressCollection as ProgressCollection
 
-            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: Identifiers.reuseBody.rawValue,
+            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: bodyReuseIdentifier,
                                                            for: indexPath) as? ProgressPointCollectionViewCell)!
 
+            cell.layer.shouldRasterize = true
+            cell.layer.rasterizationScale = UIScreen.main.scale
+            cell.progressPicImageView.layer.shouldRasterize = true
+            cell.progressPicImageView.layer.rasterizationScale = UIScreen.main.scale
+
+            cell.selectedBackgroundView = UIView(frame: cell.bounds)
+            cell.selectedBackgroundView?.backgroundColor = UIColor.blue
             cell.progressPicImageView.image = nil
 
             if let image = imageCache[progressPoint.imageName] {
@@ -62,7 +76,7 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
                 
             } else {
                 if let image = progressPoint.getImage(.low) {
-                    imageCache[progressPoint.imageName] = image
+                    self.imageCache[progressPoint.imageName] = image
                     cell.progressPicImageView.image = image
                 }
             }
@@ -84,7 +98,7 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
             
             DispatchQueue.global(qos: .background).async {
                 print("populated cache with \(point.imageName)")
-                imageCache[point.imageName] = point.getImage(.high)
+                self.imageCache[point.imageName] = point.getImage(.high)
             }
         }
     }
@@ -116,9 +130,9 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
         return 8
     }
 
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == progressPoints.count {
-            showActionSheet()
+            photoSelectionCollectionViewController.showActionSheet()
         } else if selectMode {
             selectedProgressPoints.append(progressPoints[indexPath.row])
             if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
@@ -127,24 +141,24 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
             }
 
             if selectedProgressPoints.count == 2 {
-                progressPointsToCompare =
+                photoSelectionCollectionViewController.progressPointsToCompare =
                     ProgressPointsToCompare(firstProgressPoint: selectedProgressPoints.first!,
                                             secondProgressPoint: selectedProgressPoints.last!)
-                
-                performSegue(withIdentifier: segueToCompareTabBar,
-                                                                    sender: self)
+                deselectAllCellsInCollectionView()
+                photoSelectionCollectionViewController.performSegue(withIdentifier: segueToCompareTabBar,
+                                                                    sender: photoSelectionCollectionViewController)
             }
         } else {
             if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
                 cell.isSelected = false
             }
-            selectedProgressPoint = progressPoints[indexPath.row]
-            performSegue(withIdentifier: "ShowProgressPointDetailId",
-                                                                sender: self)
+            photoSelectionCollectionViewController.selectedProgressPoint = progressPoints[indexPath.row]
+            photoSelectionCollectionViewController.performSegue(withIdentifier: "ShowProgressPointDetailId",
+                                                                sender: photoSelectionCollectionViewController)
         }
     }
 
-    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if indexPath.row != progressPoints.count {
             let progressPoint = progressPoints[indexPath.row]
 
@@ -163,11 +177,8 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
     }
 
     func deselectAllCellsInCollectionView() {
-        if let collectionView = collectionView,
-            let indexPaths = collectionView.indexPathsForSelectedItems {
-            for indexPath in indexPaths {
-                collectionView.deselectItem(at: indexPath, animated: true)
-            }
+        for indexPath in collectionView.indexPathsForSelectedItems! {
+            collectionView(collectionView, didDeselectItemAt: indexPath)
         }
     }
 }
