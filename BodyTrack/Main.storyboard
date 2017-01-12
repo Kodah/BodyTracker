@@ -699,7 +699,7 @@
                                     <constraint firstAttribute="height" constant="567" id="6wx-fr-Hqd"/>
                                 </constraints>
                             </view>
-                            <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="outline" translatesAutoresizingMaskIntoConstraints="NO" id="Lsg-P1-q81">
+                            <imageView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="outline" translatesAutoresizingMaskIntoConstraints="NO" id="Lsg-P1-q81">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tQc-92-Y5t">
@@ -735,6 +735,7 @@
                         <outlet property="camView" destination="VSs-Xm-AWv" id="JZv-g9-qD6"/>
                         <outlet property="capturedImageView" destination="tQc-92-Y5t" id="7vr-Uz-FRs"/>
                         <outlet property="controlView" destination="zi5-8A-yWf" id="Oeg-Oj-ZoD"/>
+                        <outlet property="overlayImageView" destination="Lsg-P1-q81" id="W9L-pG-5fZ"/>
                         <outlet property="photoTakenView" destination="f6A-ZZ-6X3" id="yRg-Ns-r6P"/>
                         <outlet property="timerButton" destination="W7E-Fm-lDJ" id="wvy-6U-l9c"/>
                         <outlet property="timerLabel" destination="KnL-tT-J3g" id="cmJ-wh-2Hb"/>

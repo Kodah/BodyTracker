@@ -357,6 +357,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
 
         case segueToCustomCamera:
             if let customCameraViewController = segue.destination as? CustomCameraViewController {
+                customCameraViewController.overlayImage = progressCollection?.latestProgressPoint()?.getImage()
                 customCameraViewController.delegate = self
             }
         default:
