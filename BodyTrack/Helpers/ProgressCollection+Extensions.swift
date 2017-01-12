@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 extension ProgressCollection {
     
@@ -24,10 +25,10 @@ extension ProgressCollection {
     }
     
     func latestProgressPoint() -> ProgressPoint? {
-        guard let pointsArray = Array(progressPoints) as? [ProgressPoint] else {
+        guard let pointsArray = Array(progressPoints!) as? [ProgressPoint] else {
             return nil
         }
-        _ = pointsArray.sorted(by: {$0.date.compare($1.date) == ComparisonResult.orderedDescending})
+        _ = pointsArray.sorted(by: {$0.date?.compare($1.date as! Date) == ComparisonResult.orderedDescending})
         return pointsArray.first
     }
 }

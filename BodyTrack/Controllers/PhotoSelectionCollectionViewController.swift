@@ -15,12 +15,12 @@ enum ActionSheetButton: Int {
     case photoLibrary
 }
 
-class ProgressPointsToCompare {
+struct ProgressPointsToCompare {
     let firstProgressPoint: ProgressPoint
     let secondProgressPoint: ProgressPoint
 
     init(firstProgressPoint: ProgressPoint, secondProgressPoint: ProgressPoint) {
-        if firstProgressPoint.date.compare(secondProgressPoint.date) == ComparisonResult.orderedAscending {
+        if firstProgressPoint.date?.compare(secondProgressPoint.date as! Date) == ComparisonResult.orderedAscending {
             self.firstProgressPoint = firstProgressPoint
             self.secondProgressPoint = secondProgressPoint
         } else {
@@ -41,7 +41,6 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
 
     var progressCollection: ProgressCollection?
-//    var progressPoints = [ProgressPoint]()
     var context: NSManagedObjectContext?
     var selectedProgressCollection: ProgressCollection?
     var selectedProgressPoint: ProgressPoint?
@@ -62,7 +61,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
             
             ProgressCollection.GetFirstProgressCollectionIn(context) {progressCollection in
                 title = progressCollection.name
-                navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
+                navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour!)
                 self.progressCollection = progressCollection
                 sendProgressPointsToCollectionView()
             }
@@ -108,7 +107,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        _ = progressCollection
+        progressCollection = nil
         loadProgressPointsForProgressCollection(nil)
 
         progressPointCollectionViewHelper.collectionView.performBatchUpdates({ () -> Void in
@@ -118,9 +117,9 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     }
     
     func sendProgressPointsToCollectionView () {
-        if let proCol = progressCollection, let proPoints = Array(proCol.progressPoints) as? [ProgressPoint] {
+        if let proCol = progressCollection, let proPoints = Array(proCol.progressPoints!) as? [ProgressPoint] {
             
-            progressPointCollectionViewHelper.progressPoints = proPoints.sorted {$0.0.date < $0.1.date}
+            progressPointCollectionViewHelper.progressPoints = proPoints.sorted {$0.0.date!.compare($0.1.date! as Date) == ComparisonResult.orderedAscending}
         }
     }
 
@@ -153,7 +152,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
 
     }
 
-    func initiateNewProgressCollection() {
+    func newProgressCollectionButtonTapped() {
         slidingViewController().resetTopView(animated: true)
         setupAlertController()
     }
@@ -254,9 +253,11 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
                                                                                      into: context!) as? ProgressPoint {
             newProgressPoint.progressCollection = progressCollection
             newProgressPoint.imageName = fileName
-            newProgressPoint.date = date
+            newProgressPoint.date = date as NSDate?
 
-            NotificationFactory().scheduleNotificationForProgressCollection(newProgressPoint.progressCollection)
+            if let progressCollection = newProgressPoint.progressCollection {
+                NotificationFactory().scheduleNotificationForProgressCollection(progressCollection)
+            }
 
             do {
                 try context?.save()
@@ -295,7 +296,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
 
             title = safeProgressCollection.name
             navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = UIColor(rgba: safeProgressCollection.colour)
+            navigationController?.navigationBar.barTintColor = UIColor(rgba: safeProgressCollection.colour!)
 
             collectionView?.reloadData()
         }
@@ -311,7 +312,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
         actionSheet.show(in: view)
     }
 
-    func createNewProgressCollectionWithName(_ name: String?) {
+    func createNewProgressCollectionWithName(_ name: String) {
         if let context = context {
             if let newProgressCollection: ProgressCollection =
                 NSEntityDescription.insertNewObject(forEntityName: "ProgressCollection", into: context)
@@ -320,7 +321,9 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
                 newProgressCollection.colour = UIColor.hexValuesFromUIColor(UIColor.randomColor())
                 newProgressCollection.identifier = UUID().uuidString
 
-                do { try context.save() } catch {}
+                do {
+                    try context.save()
+                } catch {}
                 loadProgressPointsForProgressCollection(newProgressCollection)
             }
 

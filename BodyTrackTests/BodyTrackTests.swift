@@ -8,22 +8,53 @@
 
 import UIKit
 import XCTest
+import CoreData
+
 @testable import BodyTrack
 
-class BodyTrackTests: XCTestCase {
 
-    var progressPoint = ProgressPoint()
+extension XCTestCase {
+    func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
+        let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
+        
+        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+        
+        do {
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+        } catch {
+            print("Adding in-memory persistent store failed")
+        }
+        
+        let managedObjectContext = NSManagedObjectContext(concurrencyType:.privateQueueConcurrencyType)
+        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+        
+        return managedObjectContext
+    }
+}
+
+class BodyTrackTests: XCTestCase {
+    
+    var managedObjectContext: NSManagedObjectContext?
+    var progressPoint: ProgressPoint?
+    let date = NSDate()
+    let bodyFat = 10
+    let measurement = 12
+    let weight = 14
     
     override func setUp() {
         super.setUp()
         
-        progressPoint.date = Date()
-        progressPoint.bodyFat = 10
-        progressPoint.measurement = 12
-        progressPoint.weight = 79
+        if managedObjectContext == nil {
+            managedObjectContext = setUpInMemoryManagedObjectContext()
+        }
+        let entity = NSEntityDescription.entity(forEntityName: "ProgressPoint", in:managedObjectContext!)
+        progressPoint = ProgressPoint(entity: entity!, insertInto: managedObjectContext)
         
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        progressPoint?.date = date
+        progressPoint?.bodyFat = bodyFat as NSNumber!
+        progressPoint?.measurement = measurement as NSNumber!
+        progressPoint?.weight = weight as NSNumber!
+
     }
 
     override func tearDown() {
@@ -32,8 +63,8 @@ class BodyTrackTests: XCTestCase {
     }
 
     func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+        XCTAssertEqual(progressPoint?.description,
+                       "Date: \(Date()) \nMeasurement: \(12)cm \nWeight: \(14)kg \nBody fat: \(10)% \n")
     }
 
     func testPerformanceExample() {

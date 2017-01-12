@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProgressPointDetailTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,
 UIAlertViewDelegate, DatePickerViewControllerDelegate {
@@ -94,7 +95,7 @@ UIAlertViewDelegate, DatePickerViewControllerDelegate {
                 dateformatter.timeStyle = DateFormatter.Style.none
                 dateformatter.dateStyle = DateFormatter.Style.short
                 dateformatter.dateFormat = "dd MMM yyyy"
-                cell.detailTextLabel?.text = dateformatter.string(from: date)
+                cell.detailTextLabel?.text = dateformatter.string(from: date as Date)
             }
 
         case TableViewCell.measurement.rawValue:
@@ -140,7 +141,7 @@ UIAlertViewDelegate, DatePickerViewControllerDelegate {
 
             if let datePickerVC = datePickerViewController, let progressPoint = progressPoint {
                 if progressPoint.date != nil {
-                    datePickerVC.datePicker.date = progressPoint.date
+                    datePickerVC.datePicker.date = progressPoint.date as! Date
                 } else {
                     datePickerVC.datePicker.date = Date()
                 }
@@ -237,7 +238,7 @@ UIAlertViewDelegate, DatePickerViewControllerDelegate {
     }
 
     func datePickerDidChoose(_ date: Date) {
-        progressPoint?.date = date
+        progressPoint?.date = date as NSDate?
         do { try context?.save() } catch {}
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: UITableViewRowAnimation.automatic)
         dismissDatePicker()

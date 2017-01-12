@@ -56,7 +56,7 @@ UICollectionViewDelegateFlowLayout {
                 return cell
         } else {
             let progressPoint: ProgressPoint = progressPoints[indexPath.row]
-            let progressCollection = progressPoint.progressCollection as ProgressCollection
+            let progressCollection = progressPoint.progressCollection! as ProgressCollection
 
             let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: bodyReuseIdentifier,
                                                            for: indexPath) as? ProgressPointCollectionViewCell)!
@@ -70,23 +70,23 @@ UICollectionViewDelegateFlowLayout {
             cell.selectedBackgroundView?.backgroundColor = UIColor.blue
             cell.progressPicImageView.image = nil
 
-            if let image = imageCache[progressPoint.imageName] {
+            if let image = imageCache[progressPoint.imageName!] {
 
                 cell.progressPicImageView.image = image
                 
             } else {
                 if let image = progressPoint.getImage(.low) {
-                    self.imageCache[progressPoint.imageName] = image
+                    self.imageCache[progressPoint.imageName!] = image
                     cell.progressPicImageView.image = image
                 }
             }
 
-            cell.date.text = dateformatter.string(from: progressPoint.date)
+            cell.date.text = dateformatter.string(from: progressPoint.date as! Date)
 
             cell.contentView.frame = cell.bounds
             cell.contentView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
 
-            cell.layer.borderColor = UIColor(rgba: progressCollection.colour).cgColor
+            cell.layer.borderColor = UIColor(rgba: progressCollection.colour!).cgColor
             cell.layer.borderWidth = 1.0
             return cell
         }
@@ -98,7 +98,7 @@ UICollectionViewDelegateFlowLayout {
             
             DispatchQueue.global(qos: .background).async {
                 print("populated cache with \(point.imageName)")
-                self.imageCache[point.imageName] = point.getImage(.high)
+                self.imageCache[point.imageName!] = point.getImage(.high)
             }
         }
     }

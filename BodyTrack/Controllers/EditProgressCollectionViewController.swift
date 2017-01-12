@@ -8,7 +8,7 @@
 
 import UIKit
 import Color_Picker_for_iOS
-
+import CoreData
 
 class EditProgressCollectionViewController: UIViewController, UITextFieldDelegate {
 
@@ -26,11 +26,11 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
         super.viewDidLoad()
 
         if let progressCollection = progressCollection {
-            colorPickerView.color = UIColor(rgba: progressCollection.colour)
+            colorPickerView.color = UIColor(rgba: progressCollection.colour!)
             navigationItem.title = progressCollection.name
 
             navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour)
+            navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour!)
             navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
             navigationController?.navigationBar.tintColor = UIColor.white
             changeNameTextField.text = progressCollection.name
@@ -40,7 +40,7 @@ class EditProgressCollectionViewController: UIViewController, UITextFieldDelegat
             } else {
                 reminderLabel.text = "Reminder every \(progressCollection.interval) weeks"
             }
-            stepper.value = progressCollection.interval.doubleValue
+            stepper.value = Double(progressCollection.interval!)
         }
 
         colorPickerView.tintAdjustmentMode = UIViewTintAdjustmentMode.normal

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16B2657" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ProgressCollection" representedClassName="ProgressCollection" syncable="YES">
         <attribute name="colour" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="interval" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="identifier" attributeType="String" syncable="YES"/>
+        <attribute name="interval" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" defaultDateTimeInterval="505946340" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="progressPoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProgressPoint" inverseName="progressCollection" inverseEntity="ProgressPoint" syncable="YES"/>
     </entity>
     <entity name="ProgressPoint" representedClassName="ProgressPoint" syncable="YES">
-        <attribute name="bodyFat" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imageName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="measurement" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="bodyFat" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="date" attributeType="Date" defaultDateTimeInterval="505946280" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="identifier" attributeType="String" syncable="YES"/>
+        <attribute name="imageName" attributeType="String" syncable="YES"/>
+        <attribute name="measurement" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="progressCollection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProgressCollection" inverseName="progressPoints" inverseEntity="ProgressCollection" syncable="YES"/>
     </entity>
     <elements>

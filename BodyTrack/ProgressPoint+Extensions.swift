@@ -24,7 +24,7 @@ extension ProgressPoint {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
 
-        let fullPath = documentsDirectory.appendingPathComponent(imageName)
+        let fullPath = documentsDirectory.appendingPathComponent(imageName!)
 
         if fileManager.fileExists(atPath: fullPath.path) {
             if let imageis: UIImage = UIImage(contentsOfFile: fullPath.path),

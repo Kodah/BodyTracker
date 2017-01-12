@@ -178,7 +178,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddCollectionViewId" id="alr-1g-rif">
-                                <rect key="frame" x="88" y="362" width="200" height="244"/>
+                                <rect key="frame" x="87" y="362" width="200" height="244"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="244"/>
@@ -749,7 +749,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Xm-gg-fOG">
-                                    <rect key="frame" x="0.0" y="32" width="187.5" height="36"/>
+                                    <rect key="frame" x="0.0" y="32" width="188" height="36"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <state key="normal" title="Retake">
                                         <color key="titleColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -759,7 +759,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sis-xl-seZ">
-                                    <rect key="frame" x="187.5" y="32" width="187.5" height="36"/>
+                                    <rect key="frame" x="188" y="32" width="187" height="36"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                     <state key="normal" title="Use Photo">
                                         <color key="titleColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

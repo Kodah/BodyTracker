@@ -34,22 +34,23 @@ class NotificationFactory: NSObject {
 
         var progressDictionary = UserDefaults.standard.dictionary(forKey: PROGRESS_ITEMS) ?? Dictionary()
 
-        if let reminderDate = calculateNotificationFireDateFor(progressCollection) {
+        if let reminderDate = calculateNotificationFireDateFor(progressCollection),
+            let id = progressCollection.identifier {
             if reminderDate.compare(Date()) == ComparisonResult.orderedDescending {
-                progressDictionary[progressCollection.identifier] = ["deadline": reminderDate,
-                                                                     "title": progressCollection.name]
+                progressDictionary[id] = ["deadline": reminderDate,
+                                                                     "title": progressCollection.name!]
 
                 let notification = UILocalNotification()
-                notification.alertBody = "BodyTrack progress picture due for \(progressCollection.name)"
+                notification.alertBody = "BodyTrack progress picture due for \(progressCollection.name!)"
                 notification.alertAction = "open"
                 notification.fireDate = reminderDate
                 notification.soundName = UILocalNotificationDefaultSoundName
-                notification.userInfo = ["UUID": progressCollection.identifier]
+                notification.userInfo = ["UUID": id]
                 notification.category = "PROGRESS_CATEGORY"
                 UIApplication.shared.scheduleLocalNotification(notification)
             } else {
-                _ = progressDictionary.removeValue(forKey: progressCollection.identifier)
-                deleteNotificationWith(progressCollection.identifier)
+                _ = progressDictionary.removeValue(forKey: id)
+                deleteNotificationWith(id)
 
             }
             UserDefaults.standard.set(progressDictionary, forKey: PROGRESS_ITEMS)
@@ -79,7 +80,7 @@ class NotificationFactory: NSObject {
                 components.day = numOfWeeks.intValue * 7
             }
 
-            return NSCalendar.current.date(byAdding: components, to: progressPoint.date)
+            return NSCalendar.current.date(byAdding: components, to: progressPoint.date as! Date)
         }
         return nil
     }

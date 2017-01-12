@@ -10,9 +10,8 @@ import UIKit
 import CoreData
 import ECSlidingViewController
 
-
 protocol MenuTableViewControllerDelegate: class {
-    func initiateNewProgressCollection()
+    func newProgressCollectionButtonTapped()
     func loadProgressPointsForProgressCollection(_ progressCollection: ProgressCollection?)
 }
 
@@ -90,7 +89,7 @@ class MenuTableViewController: UITableViewController {
         switch indexPath.section {
             case TableViewSection.main.rawValue:
 
-                cell.backgroundColor = UIColor(rgba: progressCollections[indexPath.row].colour)
+                cell.backgroundColor = UIColor(rgba: progressCollections[indexPath.row].colour!)
                 cell.textLabel?.text = progressCollections[indexPath.row].name
                 break
             case TableViewSection.more.rawValue:
@@ -132,7 +131,7 @@ class MenuTableViewController: UITableViewController {
             switch indexPath.row {
             case MoreTableViewCell.new.rawValue:
                 print("Create new progressCollection")
-                delegate.initiateNewProgressCollection()
+                delegate.newProgressCollectionButtonTapped()
 
                 break
             case MoreTableViewCell.settings.rawValue:

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		08DB85669222E40C3D4FE994 /* Pods_BodyTrackUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA7E3D72A147068101BA4CC2 /* Pods_BodyTrackUITests.framework */; };
+		0F40871B1E2823AC00DEFF75 /* ProgressCollection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4087171E2823AC00DEFF75 /* ProgressCollection+CoreDataClass.swift */; };
+		0F40871C1E2823AC00DEFF75 /* ProgressCollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4087181E2823AC00DEFF75 /* ProgressCollection+CoreDataProperties.swift */; };
+		0F40871D1E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4087191E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift */; };
+		0F40871E1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40871A1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift */; };
 		0F9B9FB61E25616C0059F66E /* BodyTrackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9B9FB51E25616C0059F66E /* BodyTrackUITests.swift */; };
 		0FD5628A1E08448300158935 /* CustomCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD562891E08448300158935 /* CustomCameraViewController.swift */; };
 		7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F171B2CECD4002F443A /* AppDelegate.swift */; };
@@ -23,15 +27,13 @@
 		7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */; };
 		7EDA17CC1B37292E00BA915D /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EDA17CB1B37292E00BA915D /* DatePickerViewController.swift */; };
 		88110DDB1B4FCBC600B66002 /* NotificationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88110DDA1B4FCBC600B66002 /* NotificationFactory.swift */; };
-		88110DE41B4FCEC200B66002 /* ProgressPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 88110DE31B4FCEC200B66002 /* ProgressPoint.m */; };
-		88110DE71B4FCEC200B66002 /* ProgressCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 88110DE61B4FCEC200B66002 /* ProgressCollection.m */; };
-		88110DE91B4FDDBC00B66002 /* ProgressCollectionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88110DE81B4FDDBC00B66002 /* ProgressCollectionHelper.swift */; };
+		88110DE91B4FDDBC00B66002 /* ProgressCollection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88110DE81B4FDDBC00B66002 /* ProgressCollection+Extensions.swift */; };
 		88111E8A1B3DA3D800C8B45E /* CompareOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88111E891B3DA3D800C8B45E /* CompareOverlayViewController.swift */; };
 		8877E9521B3C10DF000E9054 /* EditProgressCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8877E9511B3C10DF000E9054 /* EditProgressCollectionViewController.swift */; };
-		88BAA97D1B46D54D00368C34 /* UIImage-helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BAA97C1B46D54D00368C34 /* UIImage-helper.swift */; };
+		88BAA97D1B46D54D00368C34 /* UIImage-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BAA97C1B46D54D00368C34 /* UIImage-Extensions.swift */; };
 		88DF6BFD1B3441A000E07033 /* ProgressPointDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */; };
-		88DF6C061B345D2400E07033 /* ProgressPointHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */; };
-		88DF6C081B347BEB00E07033 /* UIColor-helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C071B347BEB00E07033 /* UIColor-helper.swift */; };
+		88DF6C061B345D2400E07033 /* ProgressPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C051B345D2400E07033 /* ProgressPoint+Extensions.swift */; };
+		88DF6C081B347BEB00E07033 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DF6C071B347BEB00E07033 /* UIColor+Extensions.swift */; };
 		88F170B41B45410900C89671 /* CompareTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F170B31B45410900C89671 /* CompareTabViewController.swift */; };
 		88F170B61B45455900C89671 /* TopBottomCompareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F170B51B45455900C89671 /* TopBottomCompareViewController.swift */; };
 		909D5D0D259A014DD3DD983B /* Pods_BodyTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCE0AB230E88E9FF5A95F29 /* Pods_BodyTrack.framework */; };
@@ -57,6 +59,10 @@
 
 /* Begin PBXFileReference section */
 		0CCE0AB230E88E9FF5A95F29 /* Pods_BodyTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BodyTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F4087171E2823AC00DEFF75 /* ProgressCollection+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressCollection+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0F4087181E2823AC00DEFF75 /* ProgressCollection+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressCollection+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0F4087191E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressPoint+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0F40871A1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressPoint+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0F9B9FAB1E255E5E0059F66E /* HealthKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKitUI.framework; path = System/Library/Frameworks/HealthKitUI.framework; sourceTree = SDKROOT; };
 		0F9B9FB31E25616B0059F66E /* BodyTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BodyTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F9B9FB51E25616C0059F66E /* BodyTrackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTrackUITests.swift; sourceTree = "<group>"; };
@@ -77,7 +83,6 @@
 		7E115F2F1B2CECD4002F443A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E115F301B2CECD4002F443A /* BodyTrackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTrackTests.swift; sourceTree = "<group>"; };
 		7E115F3A1B2CECE6002F443A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		7E115F3E1B2CF568002F443A /* BodyTrack-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "BodyTrack-Bridging-Header.h"; path = "BodyTrack/BodyTrack-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E2ECF5E1B3357DC004F2033 /* ImagePickerControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagePickerControllerHelper.swift; path = Helpers/ImagePickerControllerHelper.swift; sourceTree = "<group>"; };
 		7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointCollectionViewHelper.swift; path = Helpers/ProgressPointCollectionViewHelper.swift; sourceTree = "<group>"; };
 		7E2ECF621B33637B004F2033 /* ProgressPointCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointCollectionViewCell.swift; path = View/ProgressPointCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -85,17 +90,13 @@
 		7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoSelectionCollectionViewController.swift; path = Controllers/PhotoSelectionCollectionViewController.swift; sourceTree = "<group>"; };
 		7EDA17CB1B37292E00BA915D /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerViewController.swift; path = Controllers/DatePickerViewController.swift; sourceTree = "<group>"; };
 		88110DDA1B4FCBC600B66002 /* NotificationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationFactory.swift; path = Helpers/NotificationFactory.swift; sourceTree = "<group>"; };
-		88110DE21B4FCEC200B66002 /* ProgressPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressPoint.h; path = model/ProgressPoint.h; sourceTree = "<group>"; };
-		88110DE31B4FCEC200B66002 /* ProgressPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressPoint.m; path = model/ProgressPoint.m; sourceTree = "<group>"; };
-		88110DE51B4FCEC200B66002 /* ProgressCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressCollection.h; path = model/ProgressCollection.h; sourceTree = "<group>"; };
-		88110DE61B4FCEC200B66002 /* ProgressCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProgressCollection.m; path = model/ProgressCollection.m; sourceTree = "<group>"; };
-		88110DE81B4FDDBC00B66002 /* ProgressCollectionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressCollectionHelper.swift; path = Helpers/ProgressCollectionHelper.swift; sourceTree = "<group>"; };
+		88110DE81B4FDDBC00B66002 /* ProgressCollection+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ProgressCollection+Extensions.swift"; path = "Helpers/ProgressCollection+Extensions.swift"; sourceTree = "<group>"; };
 		88111E891B3DA3D800C8B45E /* CompareOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareOverlayViewController.swift; path = Controllers/CompareOverlayViewController.swift; sourceTree = "<group>"; };
 		8877E9511B3C10DF000E9054 /* EditProgressCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditProgressCollectionViewController.swift; path = Controllers/EditProgressCollectionViewController.swift; sourceTree = "<group>"; };
-		88BAA97C1B46D54D00368C34 /* UIImage-helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage-helper.swift"; sourceTree = "<group>"; };
+		88BAA97C1B46D54D00368C34 /* UIImage-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage-Extensions.swift"; sourceTree = "<group>"; };
 		88DF6BFC1B3441A000E07033 /* ProgressPointDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointDetailTableViewController.swift; path = Controllers/ProgressPointDetailTableViewController.swift; sourceTree = "<group>"; };
-		88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPointHelper.swift; sourceTree = "<group>"; };
-		88DF6C071B347BEB00E07033 /* UIColor-helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor-helper.swift"; path = "Helpers/UIColor-helper.swift"; sourceTree = "<group>"; };
+		88DF6C051B345D2400E07033 /* ProgressPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressPoint+Extensions.swift"; sourceTree = "<group>"; };
+		88DF6C071B347BEB00E07033 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Extensions.swift"; path = "Helpers/UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		88F170B31B45410900C89671 /* CompareTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareTabViewController.swift; path = Controllers/CompareTabViewController.swift; sourceTree = "<group>"; };
 		88F170B51B45455900C89671 /* TopBottomCompareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopBottomCompareViewController.swift; sourceTree = "<group>"; };
 		A7A3E456EEB22B9E75E4DDCA /* Pods-BodyTrackTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyTrackTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BodyTrackTests/Pods-BodyTrackTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -167,7 +168,6 @@
 		7E115F091B2CECD4002F443A = {
 			isa = PBXGroup;
 			children = (
-				7E115F3E1B2CF568002F443A /* BodyTrack-Bridging-Header.h */,
 				7E115F141B2CECD4002F443A /* BodyTrack */,
 				7E115F2D1B2CECD4002F443A /* BodyTrackTests */,
 				0F9B9FB41E25616C0059F66E /* BodyTrackUITests */,
@@ -194,7 +194,7 @@
 				7EC64C241B2DB18E001B2CBE /* Controller */,
 				7EC64C231B2DB183001B2CBE /* View */,
 				7EC64C221B2DB17D001B2CBE /* Model */,
-				7E2ECF5D1B3357AC004F2033 /* Helpers */,
+				7E2ECF5D1B3357AC004F2033 /* Extensions */,
 				7E115F151B2CECD4002F443A /* Supporting Files */,
 			);
 			path = BodyTrack;
@@ -226,27 +226,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7E2ECF5D1B3357AC004F2033 /* Helpers */ = {
+		7E2ECF5D1B3357AC004F2033 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				7E2ECF5E1B3357DC004F2033 /* ImagePickerControllerHelper.swift */,
 				7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */,
-				88DF6C051B345D2400E07033 /* ProgressPointHelper.swift */,
-				88DF6C071B347BEB00E07033 /* UIColor-helper.swift */,
-				88BAA97C1B46D54D00368C34 /* UIImage-helper.swift */,
+				88DF6C051B345D2400E07033 /* ProgressPoint+Extensions.swift */,
+				88DF6C071B347BEB00E07033 /* UIColor+Extensions.swift */,
+				88BAA97C1B46D54D00368C34 /* UIImage-Extensions.swift */,
 				88110DDA1B4FCBC600B66002 /* NotificationFactory.swift */,
-				88110DE81B4FDDBC00B66002 /* ProgressCollectionHelper.swift */,
+				88110DE81B4FDDBC00B66002 /* ProgressCollection+Extensions.swift */,
 			);
-			name = Helpers;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		7EC64C221B2DB17D001B2CBE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				88110DE51B4FCEC200B66002 /* ProgressCollection.h */,
-				88110DE61B4FCEC200B66002 /* ProgressCollection.m */,
-				88110DE21B4FCEC200B66002 /* ProgressPoint.h */,
-				88110DE31B4FCEC200B66002 /* ProgressPoint.m */,
+				0F4087171E2823AC00DEFF75 /* ProgressCollection+CoreDataClass.swift */,
+				0F4087181E2823AC00DEFF75 /* ProgressCollection+CoreDataProperties.swift */,
+				0F4087191E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift */,
+				0F40871A1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift */,
 				7E115F191B2CECD4002F443A /* BodyTrack.xcdatamodeld */,
 			);
 			name = Model;
@@ -586,26 +586,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				88111E8A1B3DA3D800C8B45E /* CompareOverlayViewController.swift in Sources */,
+				0F40871D1E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift in Sources */,
 				88F170B61B45455900C89671 /* TopBottomCompareViewController.swift in Sources */,
 				88110DDB1B4FCBC600B66002 /* NotificationFactory.swift in Sources */,
-				88110DE41B4FCEC200B66002 /* ProgressPoint.m in Sources */,
 				7E2ECF631B33637B004F2033 /* ProgressPointCollectionViewCell.swift in Sources */,
 				8877E9521B3C10DF000E9054 /* EditProgressCollectionViewController.swift in Sources */,
 				0FD5628A1E08448300158935 /* CustomCameraViewController.swift in Sources */,
 				7EDA17CC1B37292E00BA915D /* DatePickerViewController.swift in Sources */,
+				0F40871C1E2823AC00DEFF75 /* ProgressCollection+CoreDataProperties.swift in Sources */,
 				7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */,
 				88F170B41B45410900C89671 /* CompareTabViewController.swift in Sources */,
-				88110DE71B4FCEC200B66002 /* ProgressCollection.m in Sources */,
-				88110DE91B4FDDBC00B66002 /* ProgressCollectionHelper.swift in Sources */,
+				88110DE91B4FDDBC00B66002 /* ProgressCollection+Extensions.swift in Sources */,
 				7E2ECF5F1B3357DC004F2033 /* ImagePickerControllerHelper.swift in Sources */,
-				88BAA97D1B46D54D00368C34 /* UIImage-helper.swift in Sources */,
+				88BAA97D1B46D54D00368C34 /* UIImage-Extensions.swift in Sources */,
 				88DF6BFD1B3441A000E07033 /* ProgressPointDetailTableViewController.swift in Sources */,
-				88DF6C081B347BEB00E07033 /* UIColor-helper.swift in Sources */,
+				88DF6C081B347BEB00E07033 /* UIColor+Extensions.swift in Sources */,
 				7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */,
 				7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */,
 				7E2ECF611B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift in Sources */,
+				0F40871E1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift in Sources */,
 				7E115F1B1B2CECD4002F443A /* BodyTrack.xcdatamodeld in Sources */,
-				88DF6C061B345D2400E07033 /* ProgressPointHelper.swift in Sources */,
+				0F40871B1E2823AC00DEFF75 /* ProgressCollection+CoreDataClass.swift in Sources */,
+				88DF6C061B345D2400E07033 /* ProgressPoint+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,7 +790,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Sug.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BodyTrack/BodyTrack-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -809,7 +811,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Sug.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BodyTrack/BodyTrack-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -864,6 +866,7 @@
 				0F9B9FBB1E25616E0059F66E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7E115F0D1B2CECD4002F443A /* Build configuration list for PBXProject "BodyTrack" */ = {
 			isa = XCConfigurationList;
