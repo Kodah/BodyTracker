@@ -184,9 +184,9 @@ class CustomCameraViewController: UIViewController {
     }
 
     @IBAction func usePhoto(_ sender: UIButton) {
-
         if let delegate = delegate, let finalImage = finalImage {
-            delegate.customCameraDidFinishTakingPicture(image: finalImage)
+            let rotatedImage = finalImage.imageRotatedBy90Degrees(flip: false)
+            delegate.customCameraDidFinishTakingPicture(image: rotatedImage)
         }
         dismiss(animated: true, completion: nil)
     }

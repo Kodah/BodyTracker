@@ -119,17 +119,17 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BodyCollectionViewCellId" id="Oxj-71-81G" customClass="ProgressPointCollectionViewCell" customModule="BodyTrack" customModuleProvider="target">
-                                <rect key="frame" x="37" y="8" width="301" height="344"/>
+                                <rect key="frame" x="38" y="8" width="300" height="344"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="301" height="344"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="344"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QSa-sb-iCh">
-                                            <rect key="frame" x="0.0" y="301" width="301" height="43"/>
+                                            <rect key="frame" x="0.0" y="300" width="300" height="44"/>
                                             <subviews>
                                                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GXq-dx-aXD">
-                                                    <rect key="frame" x="271" y="11" width="22" height="22"/>
+                                                    <rect key="frame" x="270" y="11" width="22" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="dGY-F3-6LA"/>
                                                         <constraint firstAttribute="height" constant="22" id="kv3-cU-2xf"/>
@@ -139,7 +139,7 @@
                                                     </state>
                                                 </button>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19/07/2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-7K-xCb">
-                                                    <rect key="frame" x="8" y="11" width="255" height="21"/>
+                                                    <rect key="frame" x="8" y="11.5" width="254" height="21"/>
                                                     <color key="backgroundColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -155,7 +155,7 @@
                                             </constraints>
                                         </view>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="outline" translatesAutoresizingMaskIntoConstraints="NO" id="E3S-Ys-Ykg">
-                                            <rect key="frame" x="0.0" y="0.0" width="301" height="301"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="E3S-Ys-Ykg" secondAttribute="height" multiplier="1:1" id="OkU-TM-ROe"/>
                                             </constraints>
@@ -178,7 +178,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddCollectionViewId" id="alr-1g-rif">
-                                <rect key="frame" x="87" y="362" width="200" height="244"/>
+                                <rect key="frame" x="88" y="362" width="200" height="244"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="244"/>
@@ -639,7 +639,7 @@
                                             <action selector="takePhotoButtonPressed:" destination="7P9-TT-3wU" eventType="touchUpInside" id="RLz-9Z-cCM"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ig-p7-mB5">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ig-p7-mB5">
                                         <rect key="frame" x="285" y="25" width="50" height="50"/>
                                         <state key="normal" title="Button" image="switchCam"/>
                                         <connections>

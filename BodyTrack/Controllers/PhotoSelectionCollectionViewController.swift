@@ -107,7 +107,6 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        progressCollection = nil
         loadProgressPointsForProgressCollection(nil)
 
         progressPointCollectionViewHelper.collectionView.performBatchUpdates({ () -> Void in
@@ -232,7 +231,6 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     }
 
     func createNewProgressPoint(_ image: UIImage) {
-        let rotatedImage = image.imageRotatedBy90Degrees(flip: false)
 
         let date: Date = Date()
 
@@ -245,7 +243,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
 
         let filePathToWrite = "\(paths)/\(fileName)"
 
-        let imageData: Data = UIImagePNGRepresentation(rotatedImage)!
+        let imageData: Data = UIImagePNGRepresentation(image)!
 
         fileManager.createFile(atPath: filePathToWrite, contents: imageData, attributes: nil)
 
@@ -254,7 +252,8 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
             newProgressPoint.progressCollection = progressCollection
             newProgressPoint.imageName = fileName
             newProgressPoint.date = date as NSDate?
-
+            newProgressPoint.identifier = uuid
+            
             if let progressCollection = newProgressPoint.progressCollection {
                 NotificationFactory().scheduleNotificationForProgressCollection(progressCollection)
             }
