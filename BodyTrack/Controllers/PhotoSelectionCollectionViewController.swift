@@ -33,40 +33,43 @@ struct ProgressPointsToCompare {
 class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate,
 UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
 
-    let segueToCompareTabBar = "GoToCompareSegueId"
-    let segueToEditCollection = "EditProgressCollectionSegue"
-    let segueToCustomCamera = "ShowCustomCamera"
 
+    
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
-    @IBOutlet var progressPointCollectionViewHelper: ProgressPointCollectionViewHelper!
 
-    var progressCollection: ProgressCollection?
+    var progressCollection: ProgressCollection {
+        didSet {
+            progressPoints = progressCollection.progressPoints?.sortedArray(using:
+                [NSSortDescriptor(key: "date",
+                                  ascending: true)]) as! [ProgressPoint]
+        }
+    }
+    
     var context: NSManagedObjectContext?
-    var selectedProgressCollection: ProgressCollection?
     var selectedProgressPoint: ProgressPoint?
     var alertController: UIAlertController?
     var selectMode: Bool = false
     var buttonForRightBarButton: UIButton?
     var progressPointsToCompare: ProgressPointsToCompare?
+    
+    // from extension 
+    var progressPoints = [ProgressPoint]() {
+        didSet {
+            syncImages()
+        }
+    }
+    var selectedProgressPoints = [ProgressPoint]()
+    var imageCache = [String: UIImage]()
+    let dateformatter = DateFormatter()
+    // end
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Get first progress collection
         
-        // Send progress collections points to collection view
-        // fill out nav bar with info from progress collection
-        
-        if let context = context {
-            
-            ProgressCollection.GetFirstProgressCollectionIn(context) {progressCollection in
-                title = progressCollection.name
-                navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour!)
-                self.progressCollection = progressCollection
-                sendProgressPointsToCollectionView()
-            }
-        }
+        loadInitialProgressCollection()
 
+        // something here init
+        
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         navigationController?.navigationBar.tintColor = UIColor.white
@@ -103,27 +106,39 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
         
         clearsSelectionOnViewWillAppear = true
     }
+    
+    func loadInitialProgressCollection() {
+        if let context = context {
+            ProgressCollection.getFirstProgressCollectionIn(context) {progressCollection in
+                self.progressCollection = progressCollection
+            }
+        }
+    }
+    
+//    func updateViewForProgressCollection() {
+//        if let proPoints = Array(progressCollection.progressPoints?) as? [ProgressPoint] {
+//            progressPoints = proPoints.sorted {$0.0.date!.compare($0.1.date! as Date) == ComparisonResult.orderedAscending}
+//            title = progressCollection.name
+//            navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour!)
+//        }
+//    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadProgressPointsForProgressCollection(nil)
+        selectedProgressPoint = nil
+        progressPointsToCompare = nil
 
-        progressPointCollectionViewHelper.collectionView.performBatchUpdates({ () -> Void in
-            self.progressPointCollectionViewHelper.collectionView.reloadData()
+        collectionView?.performBatchUpdates({ () -> Void in
+            self.collectionView?.reloadData()
             }, completion: { (_) -> Void in })
-
     }
     
-    func sendProgressPointsToCollectionView () {
-        if let proCol = progressCollection, let proPoints = Array(proCol.progressPoints!) as? [ProgressPoint] {
-            
-            progressPointCollectionViewHelper.progressPoints = proPoints.sorted {$0.0.date!.compare($0.1.date! as Date) == ComparisonResult.orderedAscending}
-        }
-    }
+
 
     func navBarTapped() {
-        performSegue(withIdentifier: segueToEditCollection, sender: self)
+        performSegue(withIdentifier: SegueIdentifier.segueToEditCollection,
+                     sender: self)
     }
 
     func openMenu() {
@@ -136,14 +151,14 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     }
 
     func rightBarButtonTapped() {
-        if progressPointCollectionViewHelper.selectMode {
-            progressPointCollectionViewHelper.selectMode = false
-            navigationItem.title = progressCollection?.name
+        if selectMode {
+            selectMode = false
+            navigationItem.title = progressCollection.name
             buttonForRightBarButton?.imageView?.tintColor = UIColor.white
             //deselect all cells
-            progressPointCollectionViewHelper.deselectAllCellsInCollectionView()
+            deselectAllCellsInCollectionView()
         } else {
-            progressPointCollectionViewHelper.selectMode = true
+            selectMode = true
             navigationItem.title = "Select Two Cells"
             navigationItem.rightBarButtonItem?.tintColor = UIColor.white
             buttonForRightBarButton?.imageView?.tintColor = UIColor.yellow
@@ -264,10 +279,10 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
                 print("error \(error.localizedDescription)")
             }
 
-            if let proCol = progressCollection {
-                let copyProgressCollection: ProgressCollection = proCol
-                loadProgressPointsForProgressCollection(copyProgressCollection)
-            }
+            // TODO: Reload collection view?
+//            let copyProgressCollection: ProgressCollection = progressCollection
+//            loadProgressPointsForProgressCollection(copyProgressCollection)
+        
         }
     }
 
@@ -276,30 +291,6 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     }
 
     //menu delegate
-
-    func loadProgressPointsForProgressCollection(_ progressCollection: ProgressCollection?) {
-
-        if let progressCollection = progressCollection {
-            self.progressCollection = progressCollection
-        }
-
-        if let safeProgressCollection = progressCollection {
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressPoint")
-            let predicate = NSPredicate(format: "progressCollection == %@", safeProgressCollection)
-            let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-            fetchRequest.sortDescriptors = [sortDescriptor]
-
-            fetchRequest.predicate = predicate
-
-            sendProgressPointsToCollectionView()
-
-            title = safeProgressCollection.name
-            navigationController?.navigationBar.isTranslucent = false
-            navigationController?.navigationBar.barTintColor = UIColor(rgba: safeProgressCollection.colour!)
-
-            collectionView?.reloadData()
-        }
-    }
 
     func showActionSheet() {
         let actionSheet = UIActionSheet(title: "New photo",
@@ -323,15 +314,16 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
                 do {
                     try context.save()
                 } catch {}
-                loadProgressPointsForProgressCollection(newProgressCollection)
+                progressCollection = newProgressCollection
             }
 
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier! {
-        case "ShowProgressPointDetailId":
+        
+        switch segueIdentifierForSegue(segue: segue) {
+        case .segueToProgressPoint:
 
             if let viewController = segue.destination as? ProgressPointDetailTableViewController {
                 viewController.progressPoint = selectedProgressPoint
@@ -341,27 +333,24 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
                 }
             }
 
-        case segueToEditCollection:
+        case .segueToEditCollection :
             if let viewController = segue.destination.childViewControllers.first
                 as? EditProgressCollectionViewController,
-                let context = context,
-                let progressCollection = progressCollection {
+                let context = context{
                 viewController.context = context
                 viewController.progressCollection = progressCollection
             }
-        case segueToCompareTabBar:
+        case .segueToCompareTabBar:
 
             if let tabBar = segue.destination as? CompareTabViewController {
                 tabBar.progressPointsToCompare = progressPointsToCompare
             }
 
-        case segueToCustomCamera:
+        case .segueToCustomCamera:
             if let customCameraViewController = segue.destination as? CustomCameraViewController {
-                customCameraViewController.overlayImage = progressCollection?.latestProgressPoint()?.getImage()
+                customCameraViewController.overlayImage = progressCollection.latestProgressPoint()?.getImage()
                 customCameraViewController.delegate = self
             }
-        default:
-            break
         }
     }
 }

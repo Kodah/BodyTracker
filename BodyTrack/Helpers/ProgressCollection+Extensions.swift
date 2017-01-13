@@ -11,7 +11,7 @@ import CoreData
 
 extension ProgressCollection {
     
-    static func GetFirstProgressCollectionIn(_ context: NSManagedObjectContext,
+    static func getFirstProgressCollectionIn(_ context: NSManagedObjectContext,
                                              _ completion: (ProgressCollection) -> Void) {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressCollection")
@@ -20,7 +20,7 @@ extension ProgressCollection {
                 try (context.fetch(fetchRequest) as? [ProgressCollection])!
             if let firstProgressCollection = progressCollectionArray.first {
                 completion(firstProgressCollection)
-            }
+            } 
         } catch {}
     }
     

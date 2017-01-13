@@ -8,42 +8,35 @@
 
 import UIKit
 
-class ProgressPointCollectionViewHelper: NSObject, UICollectionViewDelegate, UICollectionViewDataSource,
-UICollectionViewDelegateFlowLayout {
-    let segueToCompareTabBar: String = "GoToCompareSegueId"
-    let reuseIdentifier = "Cell"
-    let progressPointSegueId = "showProgressPointId"
-    let bodyReuseIdentifier = "BodyCollectionViewCellId"
-    let addReuseIdentifier = "AddCollectionViewId"
-    var progressPoints = [ProgressPoint]() {
-        didSet {
-            syncImages()
-        }
-    }
-    var selectMode: Bool = false
-    var selectedProgressPoints = [ProgressPoint]()
-    var imageCache = [String: UIImage]()
-    let dateformatter = DateFormatter()
-
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var photoSelectionCollectionViewController: PhotoSelectionCollectionViewController!
-
-    private override init () {
+fileprivate let bodyReuseIdentifier = "BodyCollectionViewCellId"
+fileprivate let addReuseIdentifier = "AddCollectionViewId"
+fileprivate var dateformatter = DateFormatter() {
+    didSet {
         dateformatter.timeStyle = DateFormatter.Style.none
         dateformatter.dateStyle = DateFormatter.Style.short
         dateformatter.dateFormat = "dd MMM yyyy"
     }
+}
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLayout, SegueHandlerType {
+
+    enum SegueIdentifier: String {
+        case segueToCompareTabBar = "GoToCompareSegueId"
+        case segueToProgressPoint = "ShowProgressPointDetailId"
+        case segueToEditCollection = "EditProgressCollectionSegue"
+        case segueToCustomCamera = "ShowCustomCamera"
+    }
+
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(progressPoints.count)
         return progressPoints.count + 1
     }
 
-    func collectionView(_ collectionView: UICollectionView,
+    override func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         if indexPath.row == progressPoints.count {
@@ -130,9 +123,9 @@ UICollectionViewDelegateFlowLayout {
         return 8
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == progressPoints.count {
-            photoSelectionCollectionViewController.showActionSheet()
+            showActionSheet()
         } else if selectMode {
             selectedProgressPoints.append(progressPoints[indexPath.row])
             if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
@@ -141,24 +134,25 @@ UICollectionViewDelegateFlowLayout {
             }
 
             if selectedProgressPoints.count == 2 {
-                photoSelectionCollectionViewController.progressPointsToCompare =
+                progressPointsToCompare =
                     ProgressPointsToCompare(firstProgressPoint: selectedProgressPoints.first!,
                                             secondProgressPoint: selectedProgressPoints.last!)
                 deselectAllCellsInCollectionView()
-                photoSelectionCollectionViewController.performSegue(withIdentifier: segueToCompareTabBar,
-                                                                    sender: photoSelectionCollectionViewController)
+                performSegue(withIdentifier: SegueIdentifier.segueToCompareTabBar,
+                                                                    sender: self)
             }
         } else {
             if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
                 cell.isSelected = false
             }
-            photoSelectionCollectionViewController.selectedProgressPoint = progressPoints[indexPath.row]
-            photoSelectionCollectionViewController.performSegue(withIdentifier: "ShowProgressPointDetailId",
-                                                                sender: photoSelectionCollectionViewController)
+            selectedProgressPoint = progressPoints[indexPath.row]
+            deselectAllCellsInCollectionView()
+            performSegue(withIdentifier: SegueIdentifier.segueToProgressPoint,
+                                                                sender: self)
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if indexPath.row != progressPoints.count {
             let progressPoint = progressPoints[indexPath.row]
 
@@ -177,8 +171,10 @@ UICollectionViewDelegateFlowLayout {
     }
 
     func deselectAllCellsInCollectionView() {
-        for indexPath in collectionView.indexPathsForSelectedItems! {
-            collectionView(collectionView, didDeselectItemAt: indexPath)
+        if let collectionView = collectionView {
+            for indexPath in collectionView.indexPathsForSelectedItems! {
+                collectionView.deselectItem(at: indexPath, animated: false)
+            }
         }
     }
 }

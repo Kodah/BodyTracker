@@ -12,6 +12,7 @@
 		0F40871C1E2823AC00DEFF75 /* ProgressCollection+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4087181E2823AC00DEFF75 /* ProgressCollection+CoreDataProperties.swift */; };
 		0F40871D1E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4087191E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift */; };
 		0F40871E1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40871A1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift */; };
+		0F8569841E28530800410414 /* SegwayHandlerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8569831E28530800410414 /* SegwayHandlerExtension.swift */; };
 		0F9B9FB61E25616C0059F66E /* BodyTrackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9B9FB51E25616C0059F66E /* BodyTrackUITests.swift */; };
 		0FD5628A1E08448300158935 /* CustomCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD562891E08448300158935 /* CustomCameraViewController.swift */; };
 		7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F171B2CECD4002F443A /* AppDelegate.swift */; };
@@ -21,7 +22,7 @@
 		7E115F311B2CECD4002F443A /* BodyTrackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F301B2CECD4002F443A /* BodyTrackTests.swift */; };
 		7E115F3B1B2CECE6002F443A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E115F3A1B2CECE6002F443A /* Main.storyboard */; };
 		7E2ECF5F1B3357DC004F2033 /* ImagePickerControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECF5E1B3357DC004F2033 /* ImagePickerControllerHelper.swift */; };
-		7E2ECF611B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */; };
+		7E2ECF611B335CE1004F2033 /* PhotoSelectionCollectionViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECF601B335CE1004F2033 /* PhotoSelectionCollectionViewController+Extensions.swift */; };
 		7E2ECF631B33637B004F2033 /* ProgressPointCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2ECF621B33637B004F2033 /* ProgressPointCollectionViewCell.swift */; };
 		7EC64C261B2DB1DA001B2CBE /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */; };
 		7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */; };
@@ -63,6 +64,7 @@
 		0F4087181E2823AC00DEFF75 /* ProgressCollection+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressCollection+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0F4087191E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressPoint+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0F40871A1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProgressPoint+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0F8569831E28530800410414 /* SegwayHandlerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegwayHandlerExtension.swift; sourceTree = "<group>"; };
 		0F9B9FAB1E255E5E0059F66E /* HealthKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKitUI.framework; path = System/Library/Frameworks/HealthKitUI.framework; sourceTree = SDKROOT; };
 		0F9B9FB31E25616B0059F66E /* BodyTrackUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BodyTrackUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F9B9FB51E25616C0059F66E /* BodyTrackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTrackUITests.swift; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		7E115F301B2CECD4002F443A /* BodyTrackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTrackTests.swift; sourceTree = "<group>"; };
 		7E115F3A1B2CECE6002F443A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7E2ECF5E1B3357DC004F2033 /* ImagePickerControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagePickerControllerHelper.swift; path = Helpers/ImagePickerControllerHelper.swift; sourceTree = "<group>"; };
-		7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointCollectionViewHelper.swift; path = Helpers/ProgressPointCollectionViewHelper.swift; sourceTree = "<group>"; };
+		7E2ECF601B335CE1004F2033 /* PhotoSelectionCollectionViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PhotoSelectionCollectionViewController+Extensions.swift"; path = "Helpers/PhotoSelectionCollectionViewController+Extensions.swift"; sourceTree = "<group>"; };
 		7E2ECF621B33637B004F2033 /* ProgressPointCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointCollectionViewCell.swift; path = View/ProgressPointCollectionViewCell.swift; sourceTree = "<group>"; };
 		7EC64C251B2DB1DA001B2CBE /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = Controllers/MenuTableViewController.swift; sourceTree = "<group>"; };
 		7EC64C271B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoSelectionCollectionViewController.swift; path = Controllers/PhotoSelectionCollectionViewController.swift; sourceTree = "<group>"; };
@@ -230,12 +232,13 @@
 			isa = PBXGroup;
 			children = (
 				7E2ECF5E1B3357DC004F2033 /* ImagePickerControllerHelper.swift */,
-				7E2ECF601B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift */,
+				7E2ECF601B335CE1004F2033 /* PhotoSelectionCollectionViewController+Extensions.swift */,
 				88DF6C051B345D2400E07033 /* ProgressPoint+Extensions.swift */,
 				88DF6C071B347BEB00E07033 /* UIColor+Extensions.swift */,
 				88BAA97C1B46D54D00368C34 /* UIImage-Extensions.swift */,
 				88110DDA1B4FCBC600B66002 /* NotificationFactory.swift */,
 				88110DE81B4FDDBC00B66002 /* ProgressCollection+Extensions.swift */,
+				0F8569831E28530800410414 /* SegwayHandlerExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 			files = (
 				88111E8A1B3DA3D800C8B45E /* CompareOverlayViewController.swift in Sources */,
 				0F40871D1E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift in Sources */,
+				0F8569841E28530800410414 /* SegwayHandlerExtension.swift in Sources */,
 				88F170B61B45455900C89671 /* TopBottomCompareViewController.swift in Sources */,
 				88110DDB1B4FCBC600B66002 /* NotificationFactory.swift in Sources */,
 				7E2ECF631B33637B004F2033 /* ProgressPointCollectionViewCell.swift in Sources */,
@@ -603,7 +607,7 @@
 				88DF6C081B347BEB00E07033 /* UIColor+Extensions.swift in Sources */,
 				7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */,
 				7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */,
-				7E2ECF611B335CE1004F2033 /* ProgressPointCollectionViewHelper.swift in Sources */,
+				7E2ECF611B335CE1004F2033 /* PhotoSelectionCollectionViewController+Extensions.swift in Sources */,
 				0F40871E1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift in Sources */,
 				7E115F1B1B2CECD4002F443A /* BodyTrack.xcdatamodeld in Sources */,
 				0F40871B1E2823AC00DEFF75 /* ProgressCollection+CoreDataClass.swift in Sources */,

@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        
         self.setupContext()
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -60,36 +61,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupContext() {
 
-        let context = self.managedObjectContext
-
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressCollection")
-
+        let request = ProgressCollection.fetchRequest() as NSFetchRequest<ProgressCollection>
+        
         do {
-            if let fetchResults = try managedObjectContext!.fetch(fetchRequest) as? [ProgressCollection] {
-
-                if fetchResults.count > 0 {
-                    print("ProgressCollection \'\(fetchResults.first!.name)\' found")
+            if let progressCollections = try managedObjectContext?.fetch(request) {
+                
+                
+                if progressCollections.count > 0 {
+                    print("ProgressCollection \'\(progressCollections.first!.name)\' found")
                 } else {
-                    if let progressCollection =
-                        NSEntityDescription.insertNewObject(forEntityName: "ProgressCollection",
-                                                            into: context!) as? ProgressCollection {
-                        let color = UIColor(red:91/255.0, green:140/255.0, blue:231/255.0, alpha:1.0)
-                        let hex = UIColor.hexValuesFromUIColor(color)
-                        progressCollection.colour = hex
-                        progressCollection.interval = 2
-                        progressCollection.name = "front"
-                        progressCollection.identifier = UUID().uuidString
-                        do {try context?.save() } catch {}
-                    }
+                    createInitialProgressCollection()
                 }
             }
-        } catch {}
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+
+    }
+    
+    func createInitialProgressCollection() {
+        if let progressCollection =
+            NSEntityDescription.insertNewObject(forEntityName: "ProgressCollection",
+                                                into: managedObjectContext!) as? ProgressCollection {
+            let color = UIColor(red:91/255.0, green:140/255.0, blue:231/255.0, alpha:1.0)
+            let hex = UIColor.hexValuesFromUIColor(color)
+            progressCollection.colour = hex
+            progressCollection.interval = 2
+            progressCollection.name = "front"
+            progressCollection.identifier = UUID().uuidString
+            do {
+                try managedObjectContext?.save()
+            } catch {}
+        }
     }
     // MARK: - Core Data stack
 
     lazy var applicationDocumentsDirectory: URL = {
-        /* 
-         * The directory the application uses to store the Core Data store file. 
+        /*
+         * The directory the application uses to store the Core Data store file.
          * This code uses a directory named "Sug.BodyTrack" in the application's 
          * documents Application Support directory.
          */
@@ -151,7 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if coordinator == nil {
             return nil
         }
-        var managedObjectContext = NSManagedObjectContext()
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()

@@ -12,7 +12,9 @@ import ECSlidingViewController
 
 protocol MenuTableViewControllerDelegate: class {
     func newProgressCollectionButtonTapped()
-    func loadProgressPointsForProgressCollection(_ progressCollection: ProgressCollection?)
+    
+    // Change this to a didSet delegate thing
+    var progressCollection: ProgressCollection {get}
 }
 
 class MenuTableViewController: UITableViewController {
@@ -120,7 +122,7 @@ class MenuTableViewController: UITableViewController {
 
             selectedProgressCollection = progressCollections[indexPath.row]
 
-            delegate.loadProgressPointsForProgressCollection(selectedProgressCollection!)
+            delegate.progressCollection = selectedProgressCollection!
 
             slidingViewController().resetTopView(animated: true)
 
@@ -184,7 +186,7 @@ class MenuTableViewController: UITableViewController {
 
                 self.loadProgressCollections()
                 tableView.reloadData()
-                self.delegate.loadProgressPointsForProgressCollection(self.selectedProgressCollection)
+                self.delegate.progressCollection = self.selectedProgressCollection!
             })
 
             alertVC.addAction(cancelAction)
