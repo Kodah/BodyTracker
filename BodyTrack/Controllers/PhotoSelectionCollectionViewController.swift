@@ -32,16 +32,18 @@ struct ProgressPointsToCompare {
 
 class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate,
 UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
-
-
     
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
 
-    var progressCollection: ProgressCollection {
+    var progressCollection = ProgressCollection() {
         didSet {
-            progressPoints = progressCollection.progressPoints?.sortedArray(using:
-                [NSSortDescriptor(key: "date",
-                                  ascending: true)]) as! [ProgressPoint]
+            updateViewForProgressCollection()
+            
+            DispatchQueue.main.async {
+                self.progressPoints = self.progressCollection.progressPoints?.sortedArray(using:
+                    [NSSortDescriptor(key: "date",
+                                      ascending: true)]) as! [ProgressPoint]
+            }
         }
     }
     
@@ -56,11 +58,11 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     var progressPoints = [ProgressPoint]() {
         didSet {
             syncImages()
+            collectionView?.reloadData()
         }
     }
     var selectedProgressPoints = [ProgressPoint]()
     var imageCache = [String: UIImage]()
-    let dateformatter = DateFormatter()
     // end
 
     override func viewDidLoad() {
@@ -115,27 +117,21 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
         }
     }
     
-//    func updateViewForProgressCollection() {
-//        if let proPoints = Array(progressCollection.progressPoints?) as? [ProgressPoint] {
-//            progressPoints = proPoints.sorted {$0.0.date!.compare($0.1.date! as Date) == ComparisonResult.orderedAscending}
-//            title = progressCollection.name
-//            navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour!)
-//        }
-//    }
+    func updateViewForProgressCollection() {
+        title = progressCollection.name
+        navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour!)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         selectedProgressPoint = nil
         progressPointsToCompare = nil
-
-        collectionView?.performBatchUpdates({ () -> Void in
-            self.collectionView?.reloadData()
-            }, completion: { (_) -> Void in })
+//        collectionView?.performBatchUpdates({ () -> Void in
+//            self.collectionView?.reloadData()
+//            }, completion: { (_) -> Void in })
     }
     
-
-
     func navBarTapped() {
         performSegue(withIdentifier: SegueIdentifier.segueToEditCollection,
                      sender: self)
@@ -156,6 +152,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
             navigationItem.title = progressCollection.name
             buttonForRightBarButton?.imageView?.tintColor = UIColor.white
             //deselect all cells
+            selectedProgressPoints.removeAll()
             deselectAllCellsInCollectionView()
         } else {
             selectMode = true
@@ -166,11 +163,17 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
 
     }
 
+    // Menu Delegate
     func newProgressCollectionButtonTapped() {
         slidingViewController().resetTopView(animated: true)
         setupAlertController()
     }
+    
+    func setProgressCollection(progressCollection: ProgressCollection) {
+        self.progressCollection = progressCollection
+    }
 
+    // Alert Delegate
     func setupAlertController() {
         alertController = UIAlertController(title: "New Collection",
                                             message: "Edit name",
@@ -275,6 +278,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
 
             do {
                 try context?.save()
+                self.progressPoints.append(newProgressPoint)
             } catch let error {
                 print("error \(error.localizedDescription)")
             }
@@ -336,7 +340,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
         case .segueToEditCollection :
             if let viewController = segue.destination.childViewControllers.first
                 as? EditProgressCollectionViewController,
-                let context = context{
+                let context = context {
                 viewController.context = context
                 viewController.progressCollection = progressCollection
             }

@@ -139,13 +139,14 @@
                                                     </state>
                                                 </button>
                                                 <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19/07/2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-7K-xCb">
-                                                    <rect key="frame" x="8" y="12" width="254" height="21"/>
+                                                    <rect key="frame" x="8" y="11" width="254" height="21"/>
                                                     <color key="backgroundColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="tintColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="fcc-7K-xCb" firstAttribute="leading" secondItem="QSa-sb-iCh" secondAttribute="leading" constant="8" id="BT2-KB-uYE"/>
                                                 <constraint firstAttribute="centerY" secondItem="fcc-7K-xCb" secondAttribute="centerY" constant="0.5" id="Hff-fC-DyE"/>
@@ -162,6 +163,7 @@
                                         </imageView>
                                     </subviews>
                                 </view>
+                                <color key="tintColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="QSa-sb-iCh" firstAttribute="leading" secondItem="Oxj-71-81G" secondAttribute="leading" id="BEe-uA-fse"/>
                                     <constraint firstItem="E3S-Ys-Ykg" firstAttribute="top" secondItem="Oxj-71-81G" secondAttribute="top" id="MH4-Wz-m8m"/>

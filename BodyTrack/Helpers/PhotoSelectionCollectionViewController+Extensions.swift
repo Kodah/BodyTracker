@@ -10,13 +10,14 @@ import UIKit
 
 fileprivate let bodyReuseIdentifier = "BodyCollectionViewCellId"
 fileprivate let addReuseIdentifier = "AddCollectionViewId"
-fileprivate var dateformatter = DateFormatter() {
-    didSet {
-        dateformatter.timeStyle = DateFormatter.Style.none
-        dateformatter.dateStyle = DateFormatter.Style.short
-        dateformatter.dateFormat = "dd MMM yyyy"
-    }
-}
+
+var dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.timeStyle = DateFormatter.Style.none
+    formatter.dateStyle = DateFormatter.Style.short
+    formatter.dateFormat = "dd MMM yyyy"
+    return formatter
+}()
 
 extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLayout, SegueHandlerType {
 
@@ -74,7 +75,7 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
                 }
             }
 
-            cell.date.text = dateformatter.string(from: progressPoint.date as! Date)
+            cell.date.text = dateFormatter.string(from: progressPoint.date as! Date)
 
             cell.contentView.frame = cell.bounds
             cell.contentView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
@@ -87,9 +88,9 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
 
     func syncImages() {
         imageCache.removeAll(keepingCapacity: false)
-        for point in progressPoints {
-            
-            DispatchQueue.global(qos: .background).async {
+        
+        DispatchQueue.global(qos: .background).async {
+            for point in self.progressPoints {
                 print("populated cache with \(point.imageName)")
                 self.imageCache[point.imageName!] = point.getImage(.high)
             }
@@ -128,18 +129,18 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
             showActionSheet()
         } else if selectMode {
             selectedProgressPoints.append(progressPoints[indexPath.row])
-            if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
-
-                cell.layer.borderWidth = 6
-            }
 
             if selectedProgressPoints.count == 2 {
                 progressPointsToCompare =
                     ProgressPointsToCompare(firstProgressPoint: selectedProgressPoints.first!,
                                             secondProgressPoint: selectedProgressPoints.last!)
-                deselectAllCellsInCollectionView()
                 performSegue(withIdentifier: SegueIdentifier.segueToCompareTabBar,
                                                                     sender: self)
+                
+                deselectAllCellsInCollectionView()
+                selectedProgressPoints.removeAll()
+                rightBarButtonTapped()
+                
             }
         } else {
             if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
@@ -161,15 +162,9 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
             if let index = index {
                 selectedProgressPoints.remove(at: index)
             }
-
-            if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
-
-                cell.layer.borderWidth = 1
-            }
-
         }
     }
-
+    
     func deselectAllCellsInCollectionView() {
         if let collectionView = collectionView {
             for indexPath in collectionView.indexPathsForSelectedItems! {
