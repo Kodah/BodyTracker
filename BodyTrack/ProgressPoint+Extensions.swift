@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 extension ProgressPoint {
     
@@ -53,4 +54,27 @@ extension ProgressPoint {
         
         return description
     }
+    
+    func delete(from context: NSManagedObjectContext) {
+        deleteProgressPointImageFromDisk()
+        context.delete(self)
+        do {
+            try context.save()
+        } catch {}
+    }
+    
+    private func deleteProgressPointImageFromDisk() {
+        let fileManager = FileManager.default
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        
+        let fullPath = documentsDirectory.appendingPathComponent(imageName!)
+
+        do {
+            try fileManager.removeItem(atPath: fullPath.path)
+        } catch {
+            print("failed to delete image for progress point")
+        }
+    }
+        
 }

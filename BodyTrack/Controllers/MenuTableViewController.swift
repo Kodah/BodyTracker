@@ -38,7 +38,7 @@ class MenuTableViewController: UITableViewController {
     var selectedProgressCollection: ProgressCollection?
 
     var slidingVC = slidingViewController
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -121,7 +121,6 @@ class MenuTableViewController: UITableViewController {
             )
 
             slidingViewController().resetTopView(animated: true)
-            
             selectedProgressCollection = progressCollections[indexPath.row]
             delegate.setProgressCollection(progressCollection: selectedProgressCollection!)
 

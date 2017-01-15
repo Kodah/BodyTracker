@@ -36,11 +36,11 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
 
     var progressCollection = ProgressCollection() {
+
         didSet {
             updateViewForProgressCollection()
-            
             DispatchQueue.main.async {
-                self.progressPoints = self.progressCollection.progressPoints?.sortedArray(using:
+                self.progressPoints =  self.progressCollection.progressPoints?.sortedArray(using:
                     [NSSortDescriptor(key: "date",
                                       ascending: true)]) as! [ProgressPoint]
             }
@@ -53,8 +53,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     var selectMode: Bool = false
     var buttonForRightBarButton: UIButton?
     var progressPointsToCompare: ProgressPointsToCompare?
-    
-    // from extension 
+
     var progressPoints = [ProgressPoint]() {
         didSet {
             syncImages()
@@ -63,15 +62,12 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     }
     var selectedProgressPoints = [ProgressPoint]()
     var imageCache = [String: UIImage]()
-    // end
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadInitialProgressCollection()
-
-        // something here init
-        
+       
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         navigationController?.navigationBar.tintColor = UIColor.white
@@ -281,12 +277,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
                 self.progressPoints.append(newProgressPoint)
             } catch let error {
                 print("error \(error.localizedDescription)")
-            }
-
-            // TODO: Reload collection view?
-//            let copyProgressCollection: ProgressCollection = progressCollection
-//            loadProgressPointsForProgressCollection(copyProgressCollection)
-        
+            }        
         }
     }
 

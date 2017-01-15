@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
         
         self.setupContext()
 
@@ -65,7 +64,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         do {
             if let progressCollections = try managedObjectContext?.fetch(request) {
-                
                 
                 if progressCollections.count > 0 {
                     print("ProgressCollection \'\(progressCollections.first!.name)\' found")

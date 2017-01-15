@@ -123,8 +123,13 @@ UIAlertViewDelegate, DatePickerViewControllerDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         if indexPath.row == TableViewCell.delete.rawValue {
-            // TODO delete progress point
-
+            if let progressPoint = progressPoint {
+                progressPoint.delete(from: context!)
+                
+            }
+            if let navController = self.navigationController {
+                navController.popViewController(animated: true)
+            }
             return
         }
 

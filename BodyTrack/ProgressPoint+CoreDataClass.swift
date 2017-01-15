@@ -11,5 +11,6 @@ import CoreData
 
 @objc(ProgressPoint)
 public class ProgressPoint: NSManagedObject {
-
+    
+    
 }
