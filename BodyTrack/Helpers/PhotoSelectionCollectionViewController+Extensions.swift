@@ -60,8 +60,6 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
             cell.progressPicImageView.layer.shouldRasterize = true
             cell.progressPicImageView.layer.rasterizationScale = UIScreen.main.scale
 
-            cell.selectedBackgroundView = UIView(frame: cell.bounds)
-            cell.selectedBackgroundView?.backgroundColor = UIColor.blue
             cell.progressPicImageView.image = nil
 
             if let image = imageCache[progressPoint.imageName!] {
@@ -125,9 +123,12 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == progressPoints.count {
+        
+        let lastCell = indexPath.row == progressPoints.count
+        
+        if lastCell && !selectMode {
             showActionSheet()
-        } else if selectMode {
+        } else if selectMode && !lastCell {
             selectedProgressPoints.append(progressPoints[indexPath.row])
 
             if selectedProgressPoints.count == 2 {
@@ -142,7 +143,7 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
                 rightBarButtonTapped()
                 
             }
-        } else {
+        } else if !lastCell {
             if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
                 cell.isSelected = false
             }
