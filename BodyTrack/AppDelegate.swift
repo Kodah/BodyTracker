@@ -38,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationController.view.layer.shadowRadius = 10.0
         navigationController.view.layer.shadowColor = UIColor.black.cgColor
 
-        underLeftViewController.context = self.managedObjectContext
-        topViewController.context = self.managedObjectContext
+//        underLeftViewController.context = self.managedObjectContext
+//        topViewController.context = self.managedObjectContext
 
         underLeftViewController.edgesForExtendedLayout = [.top, .bottom, .left]
 

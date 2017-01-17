@@ -17,7 +17,12 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
-            photoSelectionCollectionViewController.createNewProgressPoint(image)
+            do {
+                try photoSelectionCollectionViewController.createNewProgressPoint(image)
+
+            } catch let err {
+                print(err)
+            }
             picker.dismiss(animated: true, completion: nil)
         }
     }

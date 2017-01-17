@@ -15,6 +15,8 @@
 		0F8569841E28530800410414 /* SegwayHandlerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8569831E28530800410414 /* SegwayHandlerExtension.swift */; };
 		0F9B9FB61E25616C0059F66E /* BodyTrackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9B9FB51E25616C0059F66E /* BodyTrackUITests.swift */; };
 		0FD5628A1E08448300158935 /* CustomCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD562891E08448300158935 /* CustomCameraViewController.swift */; };
+		0FF41E2D1E2E61BD00C4B611 /* ProgressPointsToCompare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF41E2C1E2E61BD00C4B611 /* ProgressPointsToCompare.swift */; };
+		0FF41E321E2E678700C4B611 /* ProgressPointBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FF41E311E2E678700C4B611 /* ProgressPointBuilder.swift */; };
 		7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F171B2CECD4002F443A /* AppDelegate.swift */; };
 		7E115F1B1B2CECD4002F443A /* BodyTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7E115F191B2CECD4002F443A /* BodyTrack.xcdatamodeld */; };
 		7E115F221B2CECD4002F443A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E115F211B2CECD4002F443A /* Images.xcassets */; };
@@ -70,6 +72,8 @@
 		0F9B9FB51E25616C0059F66E /* BodyTrackUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTrackUITests.swift; sourceTree = "<group>"; };
 		0F9B9FB71E25616E0059F66E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FD562891E08448300158935 /* CustomCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomCameraViewController.swift; path = Controllers/CustomCameraViewController.swift; sourceTree = "<group>"; };
+		0FF41E2C1E2E61BD00C4B611 /* ProgressPointsToCompare.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressPointsToCompare.swift; path = model/ProgressPointsToCompare.swift; sourceTree = "<group>"; };
+		0FF41E311E2E678700C4B611 /* ProgressPointBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPointBuilder.swift; sourceTree = "<group>"; };
 		100609A9B35BBD2469AE48F6 /* Pods-BodyTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyTrack.release.xcconfig"; path = "Pods/Target Support Files/Pods-BodyTrack/Pods-BodyTrack.release.xcconfig"; sourceTree = "<group>"; };
 		32397F3FA5C983B9FC7B98C9 /* Pods-BodyTrackUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyTrackUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BodyTrackUITests/Pods-BodyTrackUITests.release.xcconfig"; sourceTree = "<group>"; };
 		46BCBE4DC225C80526E26BB3 /* Pods-BodyTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BodyTrack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BodyTrack/Pods-BodyTrack.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +147,14 @@
 			path = BodyTrackUITests;
 			sourceTree = "<group>";
 		};
+		0FF41E2E1E2E633000C4B611 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0FF41E311E2E678700C4B611 /* ProgressPointBuilder.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		114A54D295CFF9FBA0759231 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +209,7 @@
 				7EC64C231B2DB183001B2CBE /* View */,
 				7EC64C221B2DB17D001B2CBE /* Model */,
 				7E2ECF5D1B3357AC004F2033 /* Extensions */,
+				0FF41E2E1E2E633000C4B611 /* Helpers */,
 				7E115F151B2CECD4002F443A /* Supporting Files */,
 			);
 			path = BodyTrack;
@@ -251,6 +264,7 @@
 				0F4087191E2823AC00DEFF75 /* ProgressPoint+CoreDataClass.swift */,
 				0F40871A1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift */,
 				7E115F191B2CECD4002F443A /* BodyTrack.xcdatamodeld */,
+				0FF41E2C1E2E61BD00C4B611 /* ProgressPointsToCompare.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -607,10 +621,12 @@
 				88DF6C081B347BEB00E07033 /* UIColor+Extensions.swift in Sources */,
 				7E115F181B2CECD4002F443A /* AppDelegate.swift in Sources */,
 				7EC64C281B2DB9D3001B2CBE /* PhotoSelectionCollectionViewController.swift in Sources */,
+				0FF41E2D1E2E61BD00C4B611 /* ProgressPointsToCompare.swift in Sources */,
 				7E2ECF611B335CE1004F2033 /* PhotoSelectionCollectionViewController+Extensions.swift in Sources */,
 				0F40871E1E2823AC00DEFF75 /* ProgressPoint+CoreDataProperties.swift in Sources */,
 				7E115F1B1B2CECD4002F443A /* BodyTrack.xcdatamodeld in Sources */,
 				0F40871B1E2823AC00DEFF75 /* ProgressCollection+CoreDataClass.swift in Sources */,
+				0FF41E321E2E678700C4B611 /* ProgressPointBuilder.swift in Sources */,
 				88DF6C061B345D2400E07033 /* ProgressPoint+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

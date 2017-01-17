@@ -33,7 +33,6 @@ class MenuTableViewController: UITableViewController {
 
     weak var delegate: MenuTableViewControllerDelegate! = nil
     let cellIdentifier = "MenuCellId"
-    var context: NSManagedObjectContext?
     var progressCollections = [ProgressCollection]()
     var selectedProgressCollection: ProgressCollection?
 
@@ -47,24 +46,31 @@ class MenuTableViewController: UITableViewController {
     }
 
     func loadProgressCollections() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressCollection")
+    
+        if let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressCollection")
+            do {
+                progressCollections = try (context.fetch(fetchRequest) as? [ProgressCollection])!
+            } catch {}
+            
+            selectedProgressCollection = progressCollections.first
+            
+            clearsSelectionOnViewWillAppear = false
+        }
 
-        do {
-            progressCollections = try (context!.fetch(fetchRequest) as? [ProgressCollection])!
-        } catch {}
-
-        selectedProgressCollection = progressCollections.first
-
-        clearsSelectionOnViewWillAppear = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressCollection")
-        do {
-        progressCollections = try (context!.fetch(fetchRequest) as? [ProgressCollection])!
-        } catch {}
-        tableView.reloadData()
+        
+        if let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProgressCollection")
+            do {
+                progressCollections = try (context.fetch(fetchRequest) as? [ProgressCollection])!
+            } catch {}
+            tableView.reloadData()
+        }
+
     }
 
     // MARK: - Table view data source
@@ -178,9 +184,14 @@ class MenuTableViewController: UITableViewController {
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
             let okAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.destructive, handler: {(_) in
                 let progressCollectionToDelete = self.progressCollections[indexPath.row]
-                self.context?.delete(progressCollectionToDelete)
-
-                do { try self.context?.save() } catch {}
+                
+                (UIApplication.shared.delegate as! AppDelegate).managedObjectContext?.delete(progressCollectionToDelete)
+                
+                do {
+                    try (UIApplication.shared.delegate as! AppDelegate).managedObjectContext?.save()
+                } catch let err {
+                    print(err)
+                }
 
                 self.loadProgressCollections()
                 tableView.reloadData()

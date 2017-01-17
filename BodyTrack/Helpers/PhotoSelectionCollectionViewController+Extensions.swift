@@ -27,29 +27,34 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
         case segueToEditCollection = "EditProgressCollectionSegue"
         case segueToCustomCamera = "ShowCustomCamera"
     }
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(progressPoints.count)
-        return progressPoints.count + 1
+        
+        if let count = fetchResultsController.fetchedObjects?.count {
+            
+            return count + 1
+        }
+        return 1
+//        return progressPoints.count + 1
     }
 
     override func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        if indexPath.row == progressPoints.count {
+        if indexPath.row == fetchResultsController.fetchedObjects?.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: addReuseIdentifier,
                                                           for: indexPath)
-
                 cell.layer.borderColor = UIColor.black.cgColor
                 cell.layer.borderWidth = 1.0
 
                 return cell
         } else {
-            let progressPoint: ProgressPoint = progressPoints[indexPath.row]
+
+            let progressPoint = fetchResultsController.object(at: indexPath)
             let progressCollection = progressPoint.progressCollection! as ProgressCollection
 
             let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: bodyReuseIdentifier,
@@ -87,11 +92,14 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
     func syncImages() {
         imageCache.removeAll(keepingCapacity: false)
         
-        DispatchQueue.global(qos: .background).async {
-            for point in self.progressPoints {
-                print("populated cache with \(point.imageName)")
-                self.imageCache[point.imageName!] = point.getImage(.high)
+        DispatchQueue.main.async {
+            if let fetchedObjects = self.fetchResultsController.fetchedObjects {
+                for point in fetchedObjects {
+                    print("populated cache with \(point.imageName)")
+                    self.imageCache[point.imageName!] = point.getImage(.high)
+                }
             }
+
         }
     }
 
@@ -124,12 +132,13 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let lastCell = indexPath.row == progressPoints.count
+//        let lastCell = indexPath.row == progressPoints.count
+        let lastCell = indexPath.row == fetchResultsController.fetchedObjects?.count
         
         if lastCell && !selectMode {
             showActionSheet()
         } else if selectMode && !lastCell {
-            selectedProgressPoints.append(progressPoints[indexPath.row])
+            selectedProgressPoints.append(fetchResultsController.object(at: indexPath))
 
             if selectedProgressPoints.count == 2 {
                 progressPointsToCompare =
@@ -147,7 +156,7 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
             if let cell = collectionView.cellForItem(at: indexPath) as? ProgressPointCollectionViewCell {
                 cell.isSelected = false
             }
-            selectedProgressPoint = progressPoints[indexPath.row]
+            selectedProgressPoint = fetchResultsController.object(at: indexPath)
             deselectAllCellsInCollectionView()
             performSegue(withIdentifier: SegueIdentifier.segueToProgressPoint,
                                                                 sender: self)
@@ -155,8 +164,8 @@ extension PhotoSelectionCollectionViewController: UICollectionViewDelegateFlowLa
     }
 
     override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if indexPath.row != progressPoints.count {
-            let progressPoint = progressPoints[indexPath.row]
+        if indexPath.row != fetchResultsController.fetchedObjects?.count {
+            let progressPoint = fetchResultsController.object(at: indexPath)
 
             let index = selectedProgressPoints.index(of: progressPoint)
 

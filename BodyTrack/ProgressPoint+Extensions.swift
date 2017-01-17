@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 import CoreData
 
+enum ProgressPointError: Error {
+    case failedToSafeImage
+    case failedToInitialise
+}
+
 extension ProgressPoint {
     
     enum JPEGQuality: CGFloat {
@@ -18,6 +23,45 @@ extension ProgressPoint {
         case medium  = 0.5
         case high    = 0.75
         case highest = 1
+    }
+    
+    convenience init?(builder: ProgressPointBuilder, context: NSManagedObjectContext) {
+        
+        let entity = NSEntityDescription.entity(forEntityName: "ProgressPoint", in: context)!
+        
+        self.init(entity: entity, insertInto: context )
+
+        if let
+            image = builder.image,
+            let date = builder.date,
+            let fileName = builder.fileName,
+            let identifier = builder.identifier,
+            let progressCollection = builder.progressCollection,
+            let filePath = builder.filePathToWrite {
+            
+            do {
+                try save(image: image, toDiskAt: filePath)
+                self.date = date as NSDate?
+                self.imageName = fileName
+                self.identifier = identifier
+                self.progressCollection = progressCollection
+                
+            } catch let err {
+                print(err)
+                return nil
+            }
+        } else {
+            return nil
+        }
+    }
+    
+    func save(image: UIImage, toDiskAt filePath: String) throws {
+        
+        let fileManager = FileManager.default
+        let imageData: Data = UIImagePNGRepresentation(image)!
+        guard fileManager.createFile(atPath: filePath, contents: imageData, attributes: nil) else {
+            throw ProgressPointError.failedToSafeImage
+        }
     }
     
     func getImage(_ quality: JPEGQuality = .highest) -> UIImage? {
@@ -76,5 +120,4 @@ extension ProgressPoint {
             print("failed to delete image for progress point")
         }
     }
-        
 }

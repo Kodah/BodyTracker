@@ -15,23 +15,9 @@ enum ActionSheetButton: Int {
     case photoLibrary
 }
 
-struct ProgressPointsToCompare {
-    let firstProgressPoint: ProgressPoint
-    let secondProgressPoint: ProgressPoint
-
-    init(firstProgressPoint: ProgressPoint, secondProgressPoint: ProgressPoint) {
-        if firstProgressPoint.date?.compare(secondProgressPoint.date as! Date) == ComparisonResult.orderedAscending {
-            self.firstProgressPoint = firstProgressPoint
-            self.secondProgressPoint = secondProgressPoint
-        } else {
-            self.firstProgressPoint = secondProgressPoint
-            self.secondProgressPoint = firstProgressPoint
-        }
-    }
-}
-
 class PhotoSelectionCollectionViewController: UICollectionViewController, MenuTableViewControllerDelegate,
-UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
+UITextFieldDelegate, UIActionSheetDelegate,
+CustomCameraViewControllerDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
 
@@ -39,27 +25,49 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
 
         didSet {
             updateViewForProgressCollection()
-            DispatchQueue.main.async {
-                self.progressPoints =  self.progressCollection.progressPoints?.sortedArray(using:
-                    [NSSortDescriptor(key: "date",
-                                      ascending: true)]) as! [ProgressPoint]
+            fetchResultsController.fetchRequest.predicate = NSPredicate(format: "progressCollection == %@",
+                                                                        progressCollection)
+            do {
+                try fetchResultsController.performFetch()
+                collectionView?.reloadData()
+                syncImages()
+            } catch let err {
+                print(err)
             }
         }
     }
     
-    var context: NSManagedObjectContext?
     var selectedProgressPoint: ProgressPoint?
     var alertController: UIAlertController?
     var selectMode: Bool = false
     var buttonForRightBarButton: UIButton?
     var progressPointsToCompare: ProgressPointsToCompare?
 
-    var progressPoints = [ProgressPoint]() {
-        didSet {
-            syncImages()
-            collectionView?.reloadData()
-        }
+    lazy var fetchResultsController: NSFetchedResultsController<ProgressPoint> = {
+        let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+        let fetchRequest = NSFetchRequest<ProgressPoint>(entityName: "ProgressPoint")
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        var frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                             managedObjectContext: context!,
+                                             sectionNameKeyPath: nil,
+                                             cacheName: nil)
+        frc.delegate = self
+        return frc
+    }()
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        collectionView?.reloadData()
     }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        collectionView?.reloadData()
+    }
+    
     var selectedProgressPoints = [ProgressPoint]()
     var imageCache = [String: UIImage]()
 
@@ -68,6 +76,13 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
         
         loadInitialProgressCollection()
        
+        do {
+            try fetchResultsController.performFetch()
+            syncImages()
+        } catch let err {
+            print(err)
+        }
+        
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         navigationController?.navigationBar.tintColor = UIColor.white
@@ -106,7 +121,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     }
     
     func loadInitialProgressCollection() {
-        if let context = context {
+        if let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext {
             ProgressCollection.getFirstProgressCollectionIn(context) {progressCollection in
                 self.progressCollection = progressCollection
             }
@@ -123,9 +138,12 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
 
         selectedProgressPoint = nil
         progressPointsToCompare = nil
-//        collectionView?.performBatchUpdates({ () -> Void in
-//            self.collectionView?.reloadData()
-//            }, completion: { (_) -> Void in })
+        do {
+            try fetchResultsController.performFetch()
+            syncImages()
+        } catch let err {
+            print(err)
+        }
     }
     
     func navBarTapped() {
@@ -244,49 +262,33 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
         }
     }
 
-    func createNewProgressPoint(_ image: UIImage) {
-
-        let date: Date = Date()
-
-        let fileManager = FileManager.default
-
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let uuid = UUID().uuidString
-
-        let fileName = "\(uuid).png"
-
-        let filePathToWrite = "\(paths)/\(fileName)"
-
-        let imageData: Data = UIImagePNGRepresentation(image)!
-
-        fileManager.createFile(atPath: filePathToWrite, contents: imageData, attributes: nil)
-
-        if let newProgressPoint: ProgressPoint = NSEntityDescription.insertNewObject(forEntityName: "ProgressPoint",
-                                                                                     into: context!) as? ProgressPoint {
-            newProgressPoint.progressCollection = progressCollection
-            newProgressPoint.imageName = fileName
-            newProgressPoint.date = date as NSDate?
-            newProgressPoint.identifier = uuid
-            
-            if let progressCollection = newProgressPoint.progressCollection {
-                NotificationFactory().scheduleNotificationForProgressCollection(progressCollection)
-            }
-
-            do {
-                try context?.save()
-                self.progressPoints.append(newProgressPoint)
-            } catch let error {
-                print("error \(error.localizedDescription)")
-            }        
+    func createNewProgressPoint(_ image: UIImage) throws {
+        let progressPointBuilder = ProgressPointBuilder { builder in
+            builder.progressCollection = progressCollection
+            builder.image = image
+        }
+        let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
+        
+        guard ProgressPoint(builder: progressPointBuilder, context: context!) != nil else {
+            throw ProgressPointError.failedToInitialise
+        }
+        do {
+            try context?.save()
+        } catch let err {
+            print(err)
         }
     }
-
+    
     func customCameraDidFinishTakingPicture(image: UIImage) {
-        createNewProgressPoint(image)
+        do {
+            try createNewProgressPoint(image)
+        } catch let err {
+            print(err)
+        }
+        
     }
 
     //menu delegate
-
     func showActionSheet() {
         let actionSheet = UIActionSheet(title: "New photo",
                                         delegate: self,
@@ -298,7 +300,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
     }
 
     func createNewProgressCollectionWithName(_ name: String) {
-        if let context = context {
+        if let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext {
             if let newProgressCollection: ProgressCollection =
                 NSEntityDescription.insertNewObject(forEntityName: "ProgressCollection", into: context)
                     as? ProgressCollection {
@@ -323,7 +325,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
             if let viewController = segue.destination as? ProgressPointDetailTableViewController {
                 viewController.progressPoint = selectedProgressPoint
 
-                if let context = context {
+                if let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext {
                     viewController.context = context
                 }
             }
@@ -331,7 +333,7 @@ UITextFieldDelegate, UIActionSheetDelegate, CustomCameraViewControllerDelegate {
         case .segueToEditCollection :
             if let viewController = segue.destination.childViewControllers.first
                 as? EditProgressCollectionViewController,
-                let context = context {
+                let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext {
                 viewController.context = context
                 viewController.progressCollection = progressCollection
             }
