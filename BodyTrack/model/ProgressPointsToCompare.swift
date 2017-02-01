@@ -13,12 +13,9 @@ struct ProgressPointsToCompare {
     let secondProgressPoint: ProgressPoint
     
     init(firstProgressPoint: ProgressPoint, secondProgressPoint: ProgressPoint) {
-        if firstProgressPoint.date?.compare(secondProgressPoint.date as! Date) == ComparisonResult.orderedAscending {
-            self.firstProgressPoint = firstProgressPoint
-            self.secondProgressPoint = secondProgressPoint
-        } else {
-            self.firstProgressPoint = secondProgressPoint
-            self.secondProgressPoint = firstProgressPoint
-        }
+
+        self.firstProgressPoint = firstProgressPoint
+        self.secondProgressPoint = secondProgressPoint
+
     }
 }
