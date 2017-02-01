@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var photoSelectionCollectionViewController: PhotoSelectionCollectionViewController!
@@ -16,9 +17,13 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            
+            let orientedImage = image.fixedOrientation()
+            let imageUrl = info["UIImagePickerControllerReferenceURL"]
+            let asset = PHAsset.fetchAssets(withALAssetURLs: [imageUrl as! URL], options: nil).firstObject
+
             do {
-                try photoSelectionCollectionViewController.createNewProgressPoint(image)
+                try photoSelectionCollectionViewController.createNewProgressPoint(orientedImage,
+                                                                                  date: asset?.creationDate)
 
             } catch let err {
                 print(err)
@@ -26,6 +31,7 @@ class ImagePickerControllerHelper: NSObject, UIImagePickerControllerDelegate, UI
             picker.dismiss(animated: true, completion: nil)
         }
     }
+    
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)

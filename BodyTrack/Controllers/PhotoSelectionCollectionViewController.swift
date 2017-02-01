@@ -20,17 +20,16 @@ UITextFieldDelegate, UIActionSheetDelegate,
 CustomCameraViewControllerDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet var imagePickerControllerHelper: ImagePickerControllerHelper!
-
-    var progressCollection = ProgressCollection() {
-
+    
+    
+    var progressCollection: ProgressCollection? {
         didSet {
             updateViewForProgressCollection()
             fetchResultsController.fetchRequest.predicate = NSPredicate(format: "progressCollection == %@",
-                                                                        progressCollection)
+                                                                        progressCollection!)
             do {
                 try fetchResultsController.performFetch()
                 collectionView?.reloadData()
-                syncImages()
             } catch let err {
                 print(err)
             }
@@ -119,7 +118,7 @@ CustomCameraViewControllerDelegate, NSFetchedResultsControllerDelegate {
         
         clearsSelectionOnViewWillAppear = true
     }
-    
+        
     func loadInitialProgressCollection() {
         if let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext {
             ProgressCollection.getFirstProgressCollectionIn(context) {progressCollection in
@@ -129,21 +128,24 @@ CustomCameraViewControllerDelegate, NSFetchedResultsControllerDelegate {
     }
     
     func updateViewForProgressCollection() {
-        title = progressCollection.name
-        navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour!)
+        if let progressCollection = progressCollection {
+            title = progressCollection.name
+            navigationController?.navigationBar.barTintColor = UIColor(rgba: progressCollection.colour!)
+        }
+        collectionView?.reloadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        updateViewForProgressCollection()
         selectedProgressPoint = nil
         progressPointsToCompare = nil
-        do {
-            try fetchResultsController.performFetch()
-            syncImages()
-        } catch let err {
-            print(err)
-        }
+//        do {
+//            try fetchResultsController.performFetch()
+//        } catch let err {
+//            print(err)
+//        }
     }
     
     func navBarTapped() {
@@ -163,7 +165,7 @@ CustomCameraViewControllerDelegate, NSFetchedResultsControllerDelegate {
     func rightBarButtonTapped() {
         if selectMode {
             selectMode = false
-            navigationItem.title = progressCollection.name
+            navigationItem.title = progressCollection?.name
             buttonForRightBarButton?.imageView?.tintColor = UIColor.white
             //deselect all cells
             selectedProgressPoints.removeAll()
@@ -262,10 +264,13 @@ CustomCameraViewControllerDelegate, NSFetchedResultsControllerDelegate {
         }
     }
 
-    func createNewProgressPoint(_ image: UIImage) throws {
+    func createNewProgressPoint(_ image: UIImage, date: Date? = nil) throws {
         let progressPointBuilder = ProgressPointBuilder { builder in
             builder.progressCollection = progressCollection
             builder.image = image
+            if let date = date {
+                builder.date = date
+            }
         }
         let context = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
         
@@ -345,7 +350,7 @@ CustomCameraViewControllerDelegate, NSFetchedResultsControllerDelegate {
 
         case .segueToCustomCamera:
             if let customCameraViewController = segue.destination as? CustomCameraViewController {
-                customCameraViewController.overlayImage = progressCollection.latestProgressPoint()?.getImage()
+                customCameraViewController.overlayImage = progressCollection?.latestProgressPoint()?.getImage()
                 customCameraViewController.delegate = self
             }
         }
